@@ -49,7 +49,7 @@
         .press-logo {
             display: block;
             margin: 0 auto 1rem;
-            width: clamp(160px, 28vw, 260px);
+            width: clamp(80px, 14vw, 130px);
             height: auto;
         }
 
@@ -107,6 +107,18 @@
             padding: 3.5rem 0 1.5rem;
             border-bottom: 1px solid var(--border);
             margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .author-photo {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 2px solid var(--border);
         }
 
         .author-bio {
@@ -315,8 +327,10 @@
     <!-- Mark Nicholls -->
     <section>
         <div class="section-heading">
-            Mark Nicholls
-            <div class="author-bio">Playwright &mdash; The Unconventional Women Series</div>
+            <img class="author-photo" src="images/mark-nicholls.jpg" alt="Mark Nicholls">
+            <div>Mark Nicholls
+                <div class="author-bio">Playwright &mdash; The Unconventional Women Series</div>
+            </div>
         </div>
 
         <p class="series-note">Mark Nicholls has been writing and first performing his own work since 2008, premiering each play through R4, his Melbourne theatre production company. His Unconventional Women series follows a recurring world of women navigating theatre, love, and the complicated terrain between the two.</p>
@@ -452,12 +466,14 @@
     <!-- Masoud Shakarami -->
     <section>
         <div class="section-heading">
-            Masoud Shakarami
-            <div class="author-bio">Playwright &mdash; Award-winning actor, playwright, and translator</div>
+            <img class="author-photo" src="images/masoud-shakarami.jpg" alt="Masoud Shakarami">
+            <div>Masoud Shakarami
+                <div class="author-bio">Playwright &mdash; Award-winning actor, playwright, and translator</div>
+            </div>
         </div>
 
         <div class="book-featured">
-            <img class="book-cover" src="images/have-colourful-dreams.jpg" alt="Have Colourful Dreams, Sir" loading="lazy">
+            <img class="book-cover" src="images/have-colourful-dreams.jpg" alt="Have Colourful Dreams, Sir" loading="lazy" style="object-fit: contain; background: var(--cream);">
             <div class="book-info">
                 <div class="book-title">Have Colourful Dreams, Sir</div>
                 <p class="book-description">The revered Persian poets of the 13th and 14th century wrote Ghazals — lyrical poems that recounted tales of love in all its splendour and tragedy. Unlike western notions of love, Ghazals spoke of separation and pain that demanded complete surrender and total sacrifice.</p>
