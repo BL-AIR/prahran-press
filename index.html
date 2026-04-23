@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prahran Publishing</title>
+    <meta name="description" content="Prahran Publishing — an independent literary press based in Melbourne, Victoria, publishing plays, novels, and poetry in translation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #F7F4EF;
+            --bg-card: #FFFFFF;
+            --text: #1C1C1C;
+            --text-muted: #6B6255;
+            --accent: #2A4232;
+            --accent-light: #3D5A47;
+            --border: #DDD8CE;
+            --cream: #EDE9E1;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Header ── */
+        header {
+            text-align: center;
+            padding: 5rem 2rem 4rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .press-name {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text);
+            line-height: 1.1;
+        }
+
+        .press-location {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.05rem;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-top: 0.75rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* ── Main container ── */
+        main {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ── About ── */
+        .about {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border);
+            max-width: 680px;
+        }
+
+        .about p {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.2rem;
+            line-height: 1.85;
+            color: var(--text);
+        }
+
+        .about p + p {
+            margin-top: 1rem;
+        }
+
+        /* ── Section headings ── */
+        .section-heading {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: clamp(1.4rem, 3vw, 1.9rem);
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            color: var(--text);
+            padding: 3.5rem 0 1.5rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2.5rem;
+        }
+
+        .author-bio {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.35rem;
+            font-style: italic;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-weight: 300;
+        }
+
+        .series-note {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 620px;
+            line-height: 1.75;
+        }
+
+        /* ── Book grid (plays) ── */
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .book-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-cover {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+            display: block;
+            background: var(--cream);
+        }
+
+        .book-info {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-title {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.15rem;
+            font-weight: 500;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+
+        .book-description {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+            flex: 1;
+            margin-bottom: 1.25rem;
+        }
+
+        .book-formats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: auto;
+        }
+
+        /* ── Buttons ── */
+        .buy-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            text-decoration: none;
+            transition: background 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .buy-btn:hover {
+            background: var(--accent-light);
+        }
+
+        .buy-btn.secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+
+        .buy-btn.secondary:hover {
+            background: var(--cream);
+        }
+
+        .coming-soon-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 0.35rem 0.85rem;
+        }
+
+        /* ── Featured book (2-col) ── */
+        .book-featured {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            margin-bottom: 2.5rem;
+        }
+
+        .book-featured .book-cover {
+            width: 200px;
+            height: 100%;
+            min-height: 260px;
+            object-fit: cover;
+            aspect-ratio: unset;
+        }
+
+        .book-featured .book-info {
+            padding: 2rem;
+        }
+
+        .book-featured .book-title {
+            font-size: 1.4rem;
+        }
+
+        .book-featured .book-description {
+            font-size: 0.9375rem;
+        }
+
+        @media (max-width: 580px) {
+            .book-featured {
+                grid-template-columns: 1fr;
+            }
+            .book-featured .book-cover {
+                width: 100%;
+                height: 280px;
+                min-height: unset;
+            }
+        }
+
+        /* ── Footer ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 5rem;
+        }
+
+        .footer-name {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .footer-contact {
+            margin-top: 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .footer-contact a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .footer-contact a:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            color: var(--border);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="press-name">Prahran Publishing</div>
+    <div class="press-location">Melbourne, Victoria &mdash; Australia</div>
+</header>
+
+<main>
+
+    <!-- About -->
+    <section class="about">
+        <p>Prahran Publishing is an independent literary press dedicated to work that earns its place on the page — plays written for intimate stages and quiet reading, novels that resist easy resolution, and poetry in translation that crosses centuries and continents.</p>
+        <p>We are small by design and deliberate in our choices. Every title we publish is one we believe in.</p>
+    </section>
+
+    <!-- Mark Nicholls -->
+    <section>
+        <div class="section-heading">
+            Mark Nicholls
+            <div class="author-bio">Playwright &mdash; The Unconventional Women Series</div>
+        </div>
+
+        <p class="series-note">Mark Nicholls has been writing and first performing his own work since 2008, premiering each play through R4, his Melbourne theatre production company. His Unconventional Women series follows a recurring world of women navigating theatre, love, and the complicated terrain between the two.</p>
+
+        <div class="book-grid">
+
+            <div class="book-card">
+                <img class="book-cover" src="https://prahran-publishing.square.site/uploads/1/5/1/4/151427243/s448224856602610197_p12_i1_w2400.jpeg" alt="Somewhere Between Three Rehearsals and the Performance" loading="lazy">
+                <div class="book-info">
+                    <div class="book-title">Somewhere Between Three Rehearsals and the Performance</div>
+                    <p class="book-description">Ellen hasn't done a show since well before she had kids. By the end of the first rehearsal she is floundering; by the end of the second, she is in love — or at least, she has a thing for Lana, an utterly relaxed actor with no apparent responsibilities. With one rehearsal to go, Ellen can't fathom her own heart, or Lana's.</p>
+                    <div class="book-formats">
+                        <a class="buy-btn" href="https://prahran-publishing.square.site/product/somewhere-between-three-rehearsals-and-the-performance-pb-/12" target="_blank" rel="noopener">Paperback $15.95</a>
+                        <a class="buy-btn secondary" href="https://prahran-publishing.square.site" target="_blank" rel="noopener">Ebook $3.99</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <img class="book-cover" src="https://prahran-publishing-r4.square.site/uploads/1/5/1/4/151427243/s448224856602610197_p3_i1_w2400.jpeg" alt="April and May" loading="lazy">
+                <div class="book-info">
+                    <div class="book-title">April and May</div>
+                    <p class="book-description">First performed 17 March 2010 by R4 as part of the Unconventional Women series.</p>
+                    <div class="book-formats">
+                        <a class="buy-btn" href="https://prahran-publishing-r4.square.site/product/april-and-may-pb-/3" target="_blank" rel="noopener">Paperback $15.95</a>
+                        <a class="buy-btn secondary" href="https://prahran-publishing.square.site" target="_blank" rel="noopener">Ebook $3.99</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <img class="book-cover" src="https://prahran-publishing.square.site/uploads/1/5/1/4/151427243/s448224856602610197_p5_i1_w2400.jpeg" alt="The Reason Why We Can't Be Friends" loading="lazy">
+                <div class="book-info">
+                    <div class="book-title">The Reason Why We Can't Be Friends</div>
+                    <p class="book-description">The new play is up and running but Ellen's problems are just beginning. Imogen, her daughter and primary theatrical asset, is tiring of the spotlight. Then on opening night, Lana appears — and ten years of questions demand an answer.</p>
+                    <div class="book-formats">
+                        <a class="buy-btn" href="https://prahran-publishing.square.site/product/the-reason-why-we-can-t-be-friends-pb-/5" target="_blank" rel="noopener">Paperback $15.95</a>
+                        <a class="buy-btn secondary" href="https://prahran-publishing.square.site" target="_blank" rel="noopener">Ebook $3.99</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <img class="book-cover" src="https://prahran-publishing.square.site/uploads/1/5/1/4/151427243/s448224856602610197_p17_i1_w2400.jpeg" alt="Suit Yourself" loading="lazy">
+                <div class="book-info">
+                    <div class="book-title">Suit Yourself</div>
+                    <p class="book-description">First performed 8 November 2012 by R4 as part of the Unconventional Women series.</p>
+                    <div class="book-formats">
+                        <a class="buy-btn" href="https://prahran-publishing.square.site/product/suit-yourself-pb-/17" target="_blank" rel="noopener">Paperback $15.95</a>
+                        <a class="buy-btn secondary" href="https://prahran-publishing.square.site" target="_blank" rel="noopener">Ebook $3.99</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <img class="book-cover" src="https://prahran-publishing.square.site/uploads/1/5/1/4/151427243/s448224856602610197_p10_i1_w2400.jpeg" alt="A Limited Season" loading="lazy">
+                <div class="book-info">
+                    <div class="book-title">A Limited Season</div>
+                    <p class="book-description">Showfolk duo Joan and Peter anxiously await their bright new director. As they review their career highlights, this promising project threatens to expose everything they have ignored about the world backstage — and off it.</p>
+                    <div class="book-formats">
+                        <a class="buy-btn" href="https://prahran-publishing.square.site/product/a-limited-season-pb-/10" target="_blank" rel="noopener">Paperback $15.95</a>
+                        <a class="buy-btn secondary" href="https://prahran-publishing.square.site" target="_blank" rel="noopener">Ebook $3.99</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <img class="book-cover" src="https://prahran-publishing.square.site/uploads/1/5/1/4/151427243/s448224856602610197_p20_i1_w2400.jpeg" alt="Where Seagulls Go To Be Lonely" loading="lazy">
+                <div class="book-info">
+                    <div class="book-title">Where Seagulls Go To Be Lonely</div>
+                    <p class="book-description">The latest from the Unconventional Women series.</p>
+                    <div class="book-formats">
+                        <a class="buy-btn" href="https://prahran-publishing.square.site/product/where-seagulls-go-to-be-lonely-pb-/20" target="_blank" rel="noopener">Paperback $15.95</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <img class="book-cover" src="https://prahran-publishing.square.site/uploads/1/5/1/4/151427243/s448224856602610197_p19_i1_w1621.jpeg" alt="Watch for the Longest Day" loading="lazy">
+                <div class="book-info">
+                    <div class="book-title">Watch for the Longest Day</div>
+                    <p class="book-description">The latest from the Unconventional Women series.</p>
+                    <div class="book-formats">
+                        <a class="buy-btn" href="https://prahran-publishing.square.site/product/watch-for-the-longest-day-pb-/19" target="_blank" rel="noopener">Paperback $15.95</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <img class="book-cover" src="https://prahran-publishing.square.site/uploads/1/5/1/4/151427243/s448224856602610197_p21_i1_w2400.jpeg" alt="It's a Wonderful Mid-Life Crisis" loading="lazy">
+                <div class="book-info">
+                    <div class="book-title">It's a Wonderful Mid-Life Crisis</div>
+                    <p class="book-description">A new play in the Unconventional Women series.</p>
+                    <div class="book-formats">
+                        <span class="coming-soon-label">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Masoud Shakarami -->
+    <section>
+        <div class="section-heading">
+            Masoud Shakarami
+            <div class="author-bio">Playwright &mdash; Award-winning actor, playwright, and translator</div>
+        </div>
+
+        <div class="book-featured">
+            <img class="book-cover" src="https://344383955856333505.square.site/uploads/1/5/1/4/151427243/s448224856602610197_p8_i1_w1556.jpeg" alt="Have Colourful Dreams, Sir" loading="lazy">
+            <div class="book-info">
+                <div class="book-title">Have Colourful Dreams, Sir</div>
+                <p class="book-description">The revered Persian poets of the 13th and 14th century wrote Ghazals — lyrical poems that recounted tales of love in all its splendour and tragedy. Unlike western notions of love, Ghazals spoke of separation and pain that demanded complete surrender and total sacrifice.</p>
+                <p class="book-description" style="margin-top: 0.85rem;">A contemporary adaptation set on an island where a magical shaman, a hapless yet mysterious cripple, a beautiful maiden and a baker of enchanted cookies face a dilemma with no easy resolution. Shakarami's first English translation of the play, which won first prize at the Fajr International Theatre Festival, is thought-provoking and remarkably simple in its telling.</p>
+                <p class="book-description" style="margin-top: 0.85rem; font-style: italic; font-family: 'EB Garamond', Georgia, serif; font-size: 1rem;">"To understand a Ghazal, you only have to drink wine and fall in love."</p>
+                <div class="book-formats" style="margin-top: 1.5rem;">
+                    <a class="buy-btn" href="https://344383955856333505.square.site/product/have-colourful-dreams-sir-eb-/8" target="_blank" rel="noopener">Ebook $3.99</a>
+                    <a class="buy-btn secondary" href="https://prahran-publishing.square.site" target="_blank" rel="noopener">Paperback $15.95 &nbsp;·&nbsp; Softcover $21.95</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- David Valsorda -->
+    <section>
+        <div class="section-heading">
+            David Valsorda
+            <div class="author-bio">Novelist</div>
+        </div>
+
+        <div class="book-featured">
+            <img class="book-cover" src="https://344383955856333505.square.site/uploads/1/5/1/4/151427243/s448224856602610197_p4_i1_w2400.jpeg" alt="Quantum Ridge" loading="lazy">
+            <div class="book-info">
+                <div class="book-title">Quantum Ridge</div>
+                <p class="book-description">A novel from David Valsorda. Available in paperback, hardcover and ebook.</p>
+                <div class="book-formats" style="margin-top: 1.5rem;">
+                    <a class="buy-btn" href="https://prahran-publishing.square.site" target="_blank" rel="noopener">Buy — from $5.99</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon -->
+    <section>
+        <div class="section-heading">Coming Soon</div>
+
+        <div class="book-featured">
+            <img class="book-cover" src="https://344383955856333505.square.site/uploads/1/5/1/4/151427243/s448224856602610197_p6_i1_w1605.jpeg" alt="Born from Mauritanian Sands" loading="lazy">
+            <div class="book-info">
+                <div class="book-title">Born from Mauritanian Sands</div>
+                <p class="book-description" style="font-style: italic; font-family: 'EB Garamond', Georgia, serif; font-size: 1rem;">Blair Purvis</p>
+                <p class="book-description" style="margin-top: 0.85rem;">Forthcoming from Prahran Publishing.</p>
+                <div class="book-formats" style="margin-top: 1.5rem;">
+                    <span class="coming-soon-label">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <div class="footer-name">Prahran Publishing</div>
+    <div class="footer-contact">
+        P.O. Box 2041, Prahran VIC 3181 &nbsp;&middot;&nbsp;
+        <a href="mailto:blair@prahran.press">blair@prahran.press</a>
+    </div>
+    <p class="copyright">&copy; 2026 Prahran Publishing. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
