@@ -42,8 +42,15 @@
         /* ── Header ── */
         header {
             text-align: center;
-            padding: 5rem 2rem 4rem;
+            padding: 4rem 2rem 3.5rem;
             border-bottom: 1px solid var(--border);
+        }
+
+        .press-logo {
+            display: block;
+            margin: 0 auto 1rem;
+            width: clamp(160px, 28vw, 260px);
+            height: auto;
         }
 
         .press-name {
@@ -292,6 +299,7 @@
 <body>
 
 <header>
+    <img class="press-logo" src="logo.png" alt="Prahran Publishing">
     <div class="press-name">Prahran Publishing</div>
     <div class="press-location">Melbourne, Victoria &mdash; Australia</div>
 </header>
@@ -398,17 +406,52 @@
             </div>
 
             <div class="book-card">
+                <img class="book-cover" src="https://prahran-publishing.square.site/uploads/1/5/1/4/151427243/s448224856602610197_p23_i1_w2400.jpeg" alt="The Gentle Rain from Heaven" loading="lazy">
+                <div class="book-info">
+                    <div class="book-title">The Gentle Rain from Heaven</div>
+                    <p class="book-description">Athena, an Australian nurse working overseas, is raped and murdered. Her father, John, must decide whether to grant clemency to her murderer, who is facing execution by beheading.</p>
+                    <div class="book-formats">
+                        <a class="buy-btn" href="https://prahran-publishing.square.site/product/the-gentle-rain-from-heaven-pb-/23" target="_blank" rel="noopener">Paperback $15.95</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <img class="book-cover" src="https://prahran-publishing.square.site/uploads/1/5/1/4/151427243/s448224856602610197_p22_i1_w2400.jpeg" alt="Patronage" loading="lazy">
+                <div class="book-info">
+                    <div class="book-title">Patronage</div>
+                    <p class="book-description">The latest play in the Unconventional Women series.</p>
+                    <div class="book-formats">
+                        <a class="buy-btn" href="https://prahran-publishing.square.site/product/patronage-pb-/22" target="_blank" rel="noopener">Paperback $15.95</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card">
                 <img class="book-cover" src="https://prahran-publishing.square.site/uploads/1/5/1/4/151427243/s448224856602610197_p21_i1_w2400.jpeg" alt="It's a Wonderful Mid-Life Crisis" loading="lazy">
                 <div class="book-info">
                     <div class="book-title">It's a Wonderful Mid-Life Crisis</div>
                     <p class="book-description">A new play in the Unconventional Women series.</p>
                     <div class="book-formats">
-                        <span class="coming-soon-label">Coming Soon</span>
+                        <a class="buy-btn" href="https://prahran-publishing.square.site/product/it-s-a-wonderful-mid-life-crisis-pb-/21" target="_blank" rel="noopener">Paperback $15.95</a>
                     </div>
                 </div>
             </div>
 
         </div>
+
+        <!-- Box Set -->
+        <div class="book-featured" style="margin-top: 1rem;">
+            <img class="book-cover" src="https://prahran-publishing-r4.square.site/uploads/1/5/1/4/151427243/s448224856602610197_p24_i1_w2400.jpeg" alt="Unconventional Women — Box Set" loading="lazy">
+            <div class="book-info">
+                <div class="book-title">Unconventional Women — The Complete Collection</div>
+                <p class="book-description">All ten plays of the Unconventional Women series in a single volume: <em>April &amp; May</em>, <em>Somewhere Between Three Rehearsals and the Performance</em>, <em>The Reason Why We Can't Be Friends</em>, <em>Suit Yourself</em>, <em>A Limited Season</em>, <em>Patronage</em>, <em>Where Seagulls Go To Be Lonely</em>, <em>The Gentle Rain from Heaven</em>, <em>It's a Wonderful Mid-Life Crisis</em>, and <em>Watch for the Longest Day</em>.</p>
+                <div class="book-formats" style="margin-top: 1.5rem;">
+                    <a class="buy-btn" href="https://prahran-publishing-r4.square.site/product/unconventional-women/24" target="_blank" rel="noopener">Box Set $99.95</a>
+                </div>
+            </div>
+        </div>
+
     </section>
 
     <!-- Masoud Shakarami -->
@@ -433,41 +476,7 @@
         </div>
     </section>
 
-    <!-- David Valsorda -->
-    <section>
-        <div class="section-heading">
-            David Valsorda
-            <div class="author-bio">Novelist</div>
-        </div>
 
-        <div class="book-featured">
-            <img class="book-cover" src="https://344383955856333505.square.site/uploads/1/5/1/4/151427243/s448224856602610197_p4_i1_w2400.jpeg" alt="Quantum Ridge" loading="lazy">
-            <div class="book-info">
-                <div class="book-title">Quantum Ridge</div>
-                <p class="book-description">A novel from David Valsorda. Available in paperback, hardcover and ebook.</p>
-                <div class="book-formats" style="margin-top: 1.5rem;">
-                    <a class="buy-btn" href="https://prahran-publishing.square.site" target="_blank" rel="noopener">Buy — from $5.99</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Coming Soon -->
-    <section>
-        <div class="section-heading">Coming Soon</div>
-
-        <div class="book-featured">
-            <img class="book-cover" src="https://344383955856333505.square.site/uploads/1/5/1/4/151427243/s448224856602610197_p6_i1_w1605.jpeg" alt="Born from Mauritanian Sands" loading="lazy">
-            <div class="book-info">
-                <div class="book-title">Born from Mauritanian Sands</div>
-                <p class="book-description" style="font-style: italic; font-family: 'EB Garamond', Georgia, serif; font-size: 1rem;">Blair Purvis</p>
-                <p class="book-description" style="margin-top: 0.85rem;">Forthcoming from Prahran Publishing.</p>
-                <div class="book-formats" style="margin-top: 1.5rem;">
-                    <span class="coming-soon-label">Coming Soon</span>
-                </div>
-            </div>
-        </div>
-    </section>
 
 </main>
 
@@ -477,6 +486,7 @@
         P.O. Box 2041, Prahran VIC 3181 &nbsp;&middot;&nbsp;
         <a href="mailto:blair@prahran.press">blair@prahran.press</a>
     </div>
+    <div class="footer-contact" style="margin-top: 0.4rem;">ABN: 19 018 340 643</div>
     <p class="copyright">&copy; 2026 Prahran Publishing. All rights reserved.</p>
 </footer>
 
