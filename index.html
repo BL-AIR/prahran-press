@@ -332,6 +332,22 @@
             margin: 0 auto 2rem;
             line-height: 1.75;
         }
+
+        .gift-card-image-link {
+            display: inline-block;
+        }
+
+        .gift-card-image-link img {
+            max-width: 360px;
+            width: 100%;
+            border: 1px solid var(--border);
+            display: block;
+            transition: opacity 0.2s ease;
+        }
+
+        .gift-card-image-link:hover img {
+            opacity: 0.85;
+        }
     </style>
 </head>
 <body>
@@ -531,7 +547,9 @@
     <section class="gift-card-section">
         <h2>Gift Cards</h2>
         <p>Give the gift of a good read — Prahran Publishing gift cards are redeemable on any title in our catalogue.</p>
-        <a class="buy-btn" href="https://app.squareup.com/gift/KBGSR90KKG0EK/order" target="_blank" rel="noopener">Purchase a Gift Card</a>
+        <a class="gift-card-image-link" href="https://app.squareup.com/gift/KBGSR90KKG0EK/order" target="_blank" rel="noopener">
+            <img src="images/PrahranPublishingGiftCard.png" alt="Purchase a Prahran Publishing Gift Card">
+        </a>
     </section>
 
 </main>
