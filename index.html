@@ -232,6 +232,26 @@
             padding: 0.35rem 0.85rem;
         }
 
+        .limited-edition-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.3rem;
+        }
+
+        .limited-edition-label {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #7A3B1E;
+            border: 1px solid #C8956A;
+            background: #FDF6F0;
+            padding: 0.25rem 0.65rem;
+            white-space: nowrap;
+        }
+
         /* ── Featured book (2-col) ── */
         .book-featured {
             background: var(--bg-card);
@@ -541,9 +561,13 @@
                 <p class="book-description">The revered Persian poets and philosophers of the 13th and 14th century — such as Saadi and Hafez — wrote lyrical poems called Ghazals that recounted tales of love in all its splendour and tragedy. Unlike western notions of love, Ghazals spoke of separation and pain that demanded complete surrender and total sacrifice.</p>
                 <p class="book-description" style="margin-top: 0.85rem;">A contemporary adaptation set on an island where a magical shaman, a hapless yet mysterious cripple, a beautiful maiden and a baker of enchanted cookies face a dilemma that demands a solution. Award-winning actor and playwright Masoud Shakarami's first English translation of the play, which won first prize at the Fajr International Theatre Festival, is thought-provoking and remarkably simple in its telling.</p>
                 <p class="book-description" style="margin-top: 0.85rem; font-style: italic; font-family: 'EB Garamond', Georgia, serif; font-size: 1rem;">"To understand a Ghazal, you only have to drink wine and fall in love."</p>
+                <p class="book-description" style="margin-top: 0.85rem; font-size: 0.8rem; color: var(--text-muted); border-left: 2px solid #C8956A; padding-left: 0.75rem;">The script edition is a final printing and will not be reprinted. Once stock is exhausted, it will not be available again.</p>
                 <div class="book-formats" style="margin-top: 1.5rem;">
                     <a class="buy-btn" href="https://prahran-publishing.square.site/product/have-colourful-dreams-sir-pb-/1" target="_blank" rel="noopener">Paperback $15.95</a>
-                    <a class="buy-btn secondary" href="https://prahran-publishing.square.site/product/have-colourful-dreams-sir-sc-/E3UDTISC4Z6RQ7NYJ3JIEEWX" target="_blank" rel="noopener">Script $21.95</a>
+                    <div class="limited-edition-wrap">
+                        <span class="limited-edition-label">Limited Edition</span>
+                        <a class="buy-btn secondary" href="https://prahran-publishing.square.site/product/have-colourful-dreams-sir-sc-/E3UDTISC4Z6RQ7NYJ3JIEEWX" target="_blank" rel="noopener">Script $21.95</a>
+                    </div>
                 </div>
             </div>
         </div>
