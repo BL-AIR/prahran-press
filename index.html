@@ -591,23 +591,10 @@
 
 <script>
 (async function () {
-    const TOKEN = 'EAAAl7Uw8UQMGZO96_exyT1G8oVrzaCxkfXdLj-CtCL7MN881vZZDy6sDrS90Qe3';
-    const ON_SALE_CATEGORY = 'QL2LYFQD6ZAXCDJ7VTN3OK3I';
-
     try {
-        const res = await fetch('https://connect.squareup.com/v2/catalog/search-items', {
-            method: 'POST',
-            headers: {
-                'Authorization': 'Bearer ' + TOKEN,
-                'Content-Type': 'application/json',
-                'Square-Version': '2025-01-23'
-            },
-            body: JSON.stringify({ category_ids: [ON_SALE_CATEGORY] })
-        });
-
+        const res = await fetch('/on-sale.json');
         if (!res.ok) return;
-        const data = await res.json();
-        const onSaleIds = new Set((data.items || []).map(function (i) { return i.id; }));
+        const onSaleIds = new Set(await res.json());
 
         document.querySelectorAll('[data-square-id]').forEach(function (card) {
             if (onSaleIds.has(card.dataset.squareId)) {
@@ -618,7 +605,7 @@
             }
         });
     } catch (e) {
-        // Silent fail — badges simply won't appear if Square is unreachable
+        // Silent fail
     }
 })();
 </script>
