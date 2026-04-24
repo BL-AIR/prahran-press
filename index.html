@@ -153,6 +153,7 @@
             border: 1px solid var(--border);
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         .book-cover {
@@ -238,6 +239,7 @@
             display: grid;
             grid-template-columns: 200px 1fr;
             margin-bottom: 2.5rem;
+            position: relative;
         }
 
         .book-featured .book-cover {
@@ -305,6 +307,23 @@
             margin-top: 1.5rem;
             font-size: 0.8rem;
             color: var(--border);
+        }
+
+        /* ── Overlays ── */
+        .book-badge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #B01C2E;
+            color: #fff;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            padding: 0.4rem 0.9rem;
+            z-index: 2;
+            white-space: nowrap;
         }
 
         /* ── Gift Card ── */
@@ -380,6 +399,7 @@
         <div class="book-grid">
 
             <div class="book-card">
+                <div class="book-badge">On Sale &mdash; 10% Off</div>
                 <img class="book-cover" src="images/somewhere-between.jpg" alt="Somewhere Between Three Rehearsals and the Performance" loading="lazy">
                 <div class="book-info">
                     <div class="book-title">Somewhere Between Three Rehearsals and the Performance</div>
@@ -493,6 +513,7 @@
 
         <!-- Box Set -->
         <div class="book-featured" style="margin-top: 1rem;">
+            <div class="book-badge">Limited Edition</div>
             <img class="book-cover" src="images/unconventional-women.jpg" alt="Unconventional Women — Box Set" loading="lazy">
             <div class="book-info">
                 <div class="book-title">Unconventional Women — The Complete Collection</div>
