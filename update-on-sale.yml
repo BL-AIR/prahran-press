@@ -1,0 +1,59 @@
+name: Update On Sale Items
+
+on:
+  schedule:
+    - cron: '0 * * * *'   # runs every hour on the hour
+  workflow_dispatch:        # also allows manual trigger from GitHub Actions tab
+
+jobs:
+  update-on-sale:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Query Square On Sale category
+        env:
+          SQUARE_ACCESS_TOKEN: ${{ secrets.SQUARE_ACCESS_TOKEN }}
+        run: |
+          python3 - <<'EOF'
+          import json
+          import urllib.request
+          import os
+
+          token = os.environ['SQUARE_ACCESS_TOKEN']
+          category_id = 'QL2LYFQD6ZAXCDJ7VTN3OK3I'
+
+          url = 'https://connect.squareup.com/v2/catalog/search-items'
+          payload = json.dumps({'category_ids': [category_id]}).encode()
+          req = urllib.request.Request(
+              url,
+              data=payload,
+              headers={
+                  'Authorization': f'Bearer {token}',
+                  'Content-Type': 'application/json',
+                  'Square-Version': '2024-01-18'
+              }
+          )
+
+          with urllib.request.urlopen(req) as response:
+              data = json.loads(response.read())
+
+          item_ids = [item['id'] for item in data.get('items', [])]
+
+          with open('on-sale.json', 'w') as f:
+              json.dump(item_ids, f)
+
+          print(f"On sale IDs: {item_ids}")
+          EOF
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add on-sale.json
+          git diff --staged --quiet || git commit -m "chore: update on-sale.json"
+          git push
