@@ -1,528 +1,660 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Madeleine at the Movies</title>
-  <meta name="description" content="Film reviews and commentary by Madeleine Swain, as heard on Golden Days Radio." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-  <style>
-    /* ── Reset & base ─────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prahran Publishing</title>
+    <meta name="description" content="Prahran Publishing — an independent literary press based in Melbourne, Victoria, publishing plays, novels, and poetry in translation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    :root {
-      --black:   #0c0c0c;
-      --dark:    #141414;
-      --mid:     #1e1e1e;
-      --border:  #2e2e2e;
-      --gold:    #c9a84c;
-      --gold-lt: #e2c97e;
-      --cream:   #f0ead8;
-      --grey:    #aaaaaa;
-      --white:   #f5f5f5;
-    }
+        :root {
+            --bg: #F7F4EF;
+            --bg-card: #FFFFFF;
+            --text: #1C1C1C;
+            --text-muted: #6B6255;
+            --accent: #2A4232;
+            --accent-light: #3D5A47;
+            --border: #DDD8CE;
+            --cream: #EDE9E1;
+        }
 
-    html { scroll-behavior: smooth; }
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
 
-    body {
-      background-color: var(--black);
-      color: var(--cream);
-      font-family: 'Lato', sans-serif;
-      font-weight: 300;
-      line-height: 1.7;
-    }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
 
-    a { color: var(--gold); text-decoration: none; }
-    a:hover { color: var(--gold-lt); }
+        /* ── Header ── */
+        header {
+            text-align: center;
+            padding: 4rem 2rem 3.5rem;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            background-image: url('images/BookBanner.png');
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
 
-    img { display: block; max-width: 100%; }
+        /* Semi-transparent overlay so text stays legible over the banner */
+        header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 20, 15, 0.52);
+            z-index: 0;
+        }
 
-    /* ── Film-strip divider ───────────────────────────── */
-    .filmstrip {
-      width: 100%;
-      height: 32px;
-      background-color: var(--border);
-      background-image:
-        repeating-linear-gradient(
-          90deg,
-          transparent 0px,
-          transparent 12px,
-          var(--black) 12px,
-          var(--black) 20px
-        );
-      background-size: auto 100%;
-      border-top: 4px solid var(--border);
-      border-bottom: 4px solid var(--border);
-    }
+        /* Lift all direct header children above the overlay */
+        header > * {
+            position: relative;
+            z-index: 1;
+        }
 
-    /* ── Navigation ───────────────────────────────────── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(12, 12, 12, 0.92);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
-    }
+        .press-logo {
+            display: block;
+            margin: 0 auto 1rem;
+            width: clamp(80px, 14vw, 130px);
+            height: auto;
+            filter: brightness(1.1) drop-shadow(0 1px 4px rgba(0,0,0,0.5));
+        }
 
-    .nav-brand {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      letter-spacing: 0.05em;
-      color: var(--gold);
-    }
+        .press-name {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #F7F2EA;
+            line-height: 1.1;
+            text-shadow: 0 1px 6px rgba(0,0,0,0.45);
+        }
 
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 2rem;
-    }
+        .press-location {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.05rem;
+            font-style: italic;
+            color: #C8BFA8;
+            margin-top: 0.75rem;
+            letter-spacing: 0.03em;
+        }
 
-    .nav-links a {
-      font-size: 0.8rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--grey);
-      transition: color 0.2s;
-    }
+        /* ── Main container ── */
+        main {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
 
-    .nav-links a:hover { color: var(--gold); }
+        /* ── About ── */
+        .about {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border);
+            max-width: 680px;
+        }
 
-    /* ── Hero ─────────────────────────────────────────── */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 6rem 2rem 4rem;
-      background:
-        radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 70%),
-        var(--black);
-      position: relative;
-      overflow: hidden;
-    }
+        .about p {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.2rem;
+            line-height: 1.85;
+            color: var(--text);
+        }
 
-    #hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-    }
+        .about p + p {
+            margin-top: 1rem;
+        }
 
-    .hero-eyebrow {
-      font-size: 0.72rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.2rem;
-    }
+        /* ── Section headings ── */
+        .section-heading {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: clamp(1.4rem, 3vw, 1.9rem);
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            color: var(--text);
+            padding: 3.5rem 0 1.5rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
 
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 8vw, 6.5rem);
-      font-weight: 700;
-      line-height: 1.05;
-      color: var(--cream);
-      margin-bottom: 0.3em;
-    }
+        .author-photo {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 2px solid var(--border);
+        }
 
-    .hero-title em {
-      font-style: italic;
-      color: var(--gold);
-    }
+        .author-bio {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.35rem;
+            font-style: italic;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-weight: 300;
+        }
 
-    .hero-subtitle {
-      font-size: 0.85rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--grey);
-      margin-bottom: 2.5rem;
-    }
+        .series-note {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 620px;
+            line-height: 1.75;
+        }
 
-    .hero-rule {
-      width: 60px;
-      height: 1px;
-      background: var(--gold);
-      margin: 0 auto 2.5rem;
-    }
+        /* ── Book grid (plays) ── */
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
 
-    .hero-lead {
-      max-width: 560px;
-      font-size: 1.05rem;
-      color: var(--grey);
-      line-height: 1.8;
-    }
+        .book-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
 
-    .hero-cta {
-      margin-top: 3rem;
-      display: inline-block;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      padding: 0.75rem 2.2rem;
-      font-size: 0.78rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      transition: background 0.2s, color 0.2s;
-    }
+        .book-cover {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+            display: block;
+            background: var(--cream);
+        }
 
-    .hero-cta:hover {
-      background: var(--gold);
-      color: var(--black);
-    }
+        .book-info {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
 
-    /* ── Section shells ───────────────────────────────── */
-    section {
-      padding: 6rem 2rem;
-      max-width: 960px;
-      margin: 0 auto;
-    }
+        .book-title {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.15rem;
+            font-weight: 500;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
 
-    .section-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.6rem;
-    }
+        .book-description {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+            flex: 1;
+            margin-bottom: 1.25rem;
+        }
 
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 600;
-      color: var(--cream);
-      margin-bottom: 1.5rem;
-    }
+        .book-formats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: auto;
+        }
 
-    .section-rule {
-      width: 40px;
-      height: 1px;
-      background: var(--gold);
-      margin-bottom: 2.5rem;
-    }
+        /* ── Buttons ── */
+        .buy-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            text-decoration: none;
+            transition: background 0.2s ease;
+            white-space: nowrap;
+        }
 
-    /* ── About ────────────────────────────────────────── */
-    #about .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.6fr;
-      gap: 4rem;
-      align-items: start;
-    }
+        .buy-btn:hover {
+            background: var(--accent-light);
+        }
 
-    .about-portrait {
-      aspect-ratio: 3 / 4;
-      background: var(--mid);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--border);
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      position: relative;
-      overflow: hidden;
-    }
+        .buy-btn.secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
 
-    .about-portrait::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(201,168,76,0.04) 0%, transparent 60%);
-    }
+        .buy-btn.secondary:hover {
+            background: var(--cream);
+        }
 
-    .about-text p {
-      color: var(--grey);
-      margin-bottom: 1.2rem;
-      font-size: 1.0rem;
-    }
+        .coming-soon-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 0.35rem 0.85rem;
+        }
 
-    .about-text p:first-of-type {
-      font-size: 1.15rem;
-      color: var(--cream);
-    }
+        .limited-edition-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.3rem;
+        }
 
-    .station-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      margin-top: 1.5rem;
-      border: 1px solid var(--border);
-      padding: 0.6rem 1rem;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      color: var(--grey);
-    }
+        .limited-edition-label {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #7A3B1E;
+            border: 1px solid #C8956A;
+            background: #FDF6F0;
+            padding: 0.25rem 0.65rem;
+            white-space: nowrap;
+        }
 
-    .station-badge span {
-      color: var(--gold);
-      font-weight: 700;
-    }
+        /* ── Featured book (2-col) ── */
+        .book-featured {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
 
-    /* ── Reviews ──────────────────────────────────────── */
-    #reviews { background: none; }
+        .book-featured .book-cover {
+            width: 200px;
+            height: 100%;
+            min-height: 260px;
+            object-fit: cover;
+            aspect-ratio: unset;
+        }
 
-    #reviews .reviews-intro {
-      max-width: 600px;
-      color: var(--grey);
-      margin-bottom: 3.5rem;
-    }
+        .book-featured .book-info {
+            padding: 2rem;
+        }
 
-    .reviews-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5px;
-      background: var(--border);
-      border: 1px solid var(--border);
-    }
+        .book-featured .book-title {
+            font-size: 1.4rem;
+        }
 
-    .review-card {
-      background: var(--dark);
-      padding: 2rem;
-      transition: background 0.2s;
-    }
+        .book-featured .book-description {
+            font-size: 0.9375rem;
+        }
 
-    .review-card:hover { background: var(--mid); }
+        @media (max-width: 580px) {
+            .book-featured {
+                grid-template-columns: 1fr;
+            }
+            .book-featured .book-cover {
+                width: 100%;
+                height: 280px;
+                min-height: unset;
+            }
+        }
 
-    .review-year {
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.4rem;
-    }
+        /* ── Footer ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 5rem;
+        }
 
-    .review-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: var(--cream);
-      margin-bottom: 0.2rem;
-      line-height: 1.3;
-    }
+        .footer-name {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
 
-    .review-director {
-      font-size: 0.78rem;
-      color: var(--grey);
-      letter-spacing: 0.05em;
-      margin-bottom: 1rem;
-    }
+        .footer-contact {
+            margin-top: 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
 
-    .review-stars {
-      color: var(--gold);
-      font-size: 0.85rem;
-      letter-spacing: 0.15em;
-      margin-bottom: 1rem;
-    }
+        .footer-contact a {
+            color: var(--accent);
+            text-decoration: none;
+        }
 
-    .review-excerpt {
-      font-size: 0.92rem;
-      color: var(--grey);
-      line-height: 1.75;
-    }
+        .footer-contact a:hover {
+            text-decoration: underline;
+        }
 
-    .review-read-more {
-      display: inline-block;
-      margin-top: 1.2rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s;
-    }
+        .copyright {
+            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            color: var(--border);
+        }
 
-    .review-read-more:hover { border-color: var(--gold); }
+        /* ── Overlays ── */
+        .book-badge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #B01C2E;
+            color: #fff;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            padding: 0.4rem 0.9rem;
+            z-index: 2;
+            white-space: nowrap;
+        }
 
-    /* ── On the radio ─────────────────────────────────── */
-    #on-air {
-      text-align: center;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 5rem 2rem;
-      background: var(--dark);
-    }
+        /* ── Gift Card ── */
+        .gift-card-section {
+            border-top: 1px solid var(--border);
+            padding: 4rem 0;
+            text-align: center;
+        }
 
-    #on-air .section-rule { margin: 0 auto 2.5rem; }
+        .gift-card-section h2 {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: clamp(1.4rem, 3vw, 1.9rem);
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
 
-    #on-air p {
-      max-width: 520px;
-      margin: 0 auto;
-      color: var(--grey);
-    }
+        .gift-card-section p {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-muted);
+            max-width: 480px;
+            margin: 0 auto 2rem;
+            line-height: 1.75;
+        }
 
-    .radio-dial {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      color: var(--gold);
-      margin: 1.5rem 0 0.5rem;
-      font-style: italic;
-    }
+        .gift-card-image-link {
+            display: inline-block;
+        }
 
-    /* ── Footer ───────────────────────────────────────── */
-    footer {
-      padding: 3rem 2rem;
-      text-align: center;
-      border-top: 1px solid var(--border);
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      color: var(--border);
-    }
+        .gift-card-image-link img {
+            max-width: 360px;
+            width: 100%;
+            border: 1px solid var(--border);
+            display: block;
+            transition: opacity 0.2s ease;
+        }
 
-    footer a { color: var(--border); }
-    footer a:hover { color: var(--gold); }
-
-    /* ── Responsive ───────────────────────────────────── */
-    @media (max-width: 640px) {
-      #about .about-grid {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-      }
-      .about-portrait { aspect-ratio: 4 / 3; }
-      .nav-links { display: none; }
-    }
-  </style>
+        .gift-card-image-link:hover img {
+            opacity: 0.85;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav>
-    <span class="nav-brand">MatM</span>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#reviews">Reviews</a></li>
-      <li><a href="#on-air">On Air</a></li>
-    </ul>
-  </nav>
+<header>
+    <img class="press-logo" src="logo.png" alt="Prahran Publishing">
+    <div class="press-name">Prahran Publishing</div>
+    <div class="press-location">Melbourne, Victoria &mdash; Australia</div>
+</header>
 
-  <!-- Hero -->
-  <section id="hero">
-    <p class="hero-eyebrow">Golden Days Radio</p>
-    <h1 class="hero-title">Madeleine<br><em>at the Movies</em></h1>
-    <p class="hero-subtitle">With Madeleine Swain</p>
-    <div class="hero-rule"></div>
-    <p class="hero-lead">Film criticism with warmth, wit, and a love for the pictures — old and new, foreign and familiar.</p>
-    <a href="#reviews" class="hero-cta">Listen to the Reviews</a>
-  </section>
+<main>
 
-  <div class="filmstrip"></div>
+    <!-- About -->
+    <section class="about">
+        <p>Prahran Publishing is an independent literary press dedicated to work that earns its place on the page — plays written for intimate stages and quiet reading, novels that resist easy resolution, and poetry in translation that crosses centuries and continents.</p>
+        <p>We are small by design and deliberate in our choices. Every title we publish is one we believe in.</p>
+    </section>
 
-  <!-- About -->
-  <section id="about">
-    <p class="section-label">About</p>
-    <h2 class="section-title">The Woman Behind the Microphone</h2>
-    <div class="section-rule"></div>
-    <div class="about-grid">
-      <div class="about-portrait">
-        <img src="Madeleine-Swain.jpg" alt="Madeleine Swain" style="width:100%; height:100%; object-fit:cover;" />
-      </div>
-      <div class="about-text">
-        <p>Madeleine Swain has been watching films all her life and talking about them for nearly as long. She brings to the screen a lifetime of reading, a sharp eye for performance, and a genuine love for the medium in all its forms.</p>
-        <p>Each week on Golden Days Radio, Madeleine reviews new releases and revisits the classics — holding them up to the light, turning them over, and asking what they mean to us now.</p>
-        <p>Her reviews are guided by a simple conviction: that cinema, at its best, tells us something true about what it is to be alive.</p>
-        <div class="station-badge">
-          Heard on &nbsp;<span>GDR 95.7fm</span>&nbsp; · Tuesdays &amp; Fridays, 12:10pm
+    <!-- Mark Nicholls -->
+    <section>
+        <div class="section-heading">
+            <img class="author-photo" src="images/mark-nicholls.jpg" alt="Mark Nicholls">
+            <div>Mark Nicholls
+                <div class="author-bio">Playwright &mdash; The Unconventional Women Series</div>
+            </div>
         </div>
-      </div>
+
+        <p class="series-note">Mark Nicholls has been writing and first performing his own work since 2008, premiering each play through R4, his Melbourne theatre production company. His Unconventional Women series follows a recurring world of women navigating theatre, love, and the complicated terrain between the two.</p>
+
+        <div class="book-grid">
+
+            <div class="book-card" data-square-id="4XIX2A62EJPYXKC7UY4IU62X">
+                <img class="book-cover" src="images/somewhere-between.jpg" alt="Somewhere Between Three Rehearsals and the Performance" loading="lazy">
+                <div class="book-info">
+                    <div class="book-title">Somewhere Between Three Rehearsals and the Performance</div>
+                    <p class="book-description">Ellen hasn't done a show since well before she had kids. Why she allowed herself to be roped in at the last minute to sing, play the cello and lead in Glenn's one-night-stand production of Shakespeare's As You Like It is a mystery. By the end of the first rehearsal she is floundering; by the end of the second she is in love — or at least, she has a crazy thing for Lana, an utterly relaxed actor with no apparent responsibilities. With one rehearsal to go, Ellen can't fathom her own heart, or Lana's.</p>
+                    <div class="book-formats">
+                        <a class="buy-btn" href="https://prahran-publishing.square.site/product/somewhere-between-three-rehearsals-and-the-performance-pb-/12" target="_blank" rel="noopener">Paperback $15.95</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card" data-square-id="ALQFFX2SI6O6KSMA3NPL7P2V">
+                <img class="book-cover" src="images/april-and-may.jpg" alt="April and May" loading="lazy">
+                <div class="book-info">
+                    <div class="book-title">April and May</div>
+                    <p class="book-description">Every weekday April has the 4WD waiting at the school gate well before 3:30 PM and a raft of after-school activities in hand to keep them all occupied. But seven years of long lunches with her single friend Louis and two half-days a week at the gallery have left this doctor's wife wondering if there is anything else. When Jeremy the private tutor comes into her life, and her foster daughter May comes of age, April begins to feel like a hothouse orchid, although she really longs to be a wildflower.</p>
+                    <div class="book-formats">
+                        <a class="buy-btn" href="https://prahran-publishing.square.site/product/april-and-may-pb-/3" target="_blank" rel="noopener">Paperback $15.95</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card" data-square-id="MLZQVZOW3A5TRWPGCARKBEHW">
+                <img class="book-cover" src="images/reason-why.jpg" alt="The Reason Why We Can't Be Friends" loading="lazy">
+                <div class="book-info">
+                    <div class="book-title">The Reason Why We Can't Be Friends</div>
+                    <p class="book-description">Finally, the new play is up and running but Ellen's problems are just beginning. Imogen, her daughter and primary theatrical asset, is tiring of the spotlight. Glenn, her co-producer with privileges, is demanding something more. Then on opening night, Lana appears. Ten years ago, she walked into Ellen's life, changed it and left. Ever since Ellen has been wondering why. Now she is also wondering what Lana wants with Imogen.</p>
+                    <div class="book-formats">
+                        <a class="buy-btn" href="https://prahran-publishing.square.site/product/the-reason-why-we-can-t-be-friends-pb-/5" target="_blank" rel="noopener">Paperback $15.95</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card" data-square-id="Y2EAI7UHFSKXJRXYRZHZWHHI">
+                <img class="book-cover" src="images/suit-yourself.jpg" alt="Suit Yourself" loading="lazy">
+                <div class="book-info">
+                    <div class="book-title">Suit Yourself</div>
+                    <p class="book-description">A hillside with an ocean view seems an ideal spot to spend a lonely Christmas Eve. When Jessica, a journalism major, and Beth, a high-profile politician, discover they both have the same idea, they exchange the sort of explosive little gifts that are usually left wrapped. Although barely acquainted, over the course of the day they discover that through their mutual relationship with Jeff, a Government Minister, their lives are intimately connected — a connection that leaves their shared past looking like a nightmare.</p>
+                    <div class="book-formats">
+                        <a class="buy-btn" href="https://prahran-publishing.square.site/product/suit-yourself-pb-/17" target="_blank" rel="noopener">Paperback $15.95</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card" data-square-id="AO4DM2U3PQUC4CBEORUZ2OUM">
+                <img class="book-cover" src="images/a-limited-season.jpg" alt="A Limited Season" loading="lazy">
+                <div class="book-info">
+                    <div class="book-title">A Limited Season</div>
+                    <p class="book-description">Showfolk duo Joan and Peter defer the usual pre-lunch cocktail and anxiously await their bright new young director. As they review their career high and lowlights, this exciting new project promises them a big break in the face of their comically fast-maturing professional viability. Married less to their respective spouses than to the spotlight, Joan and Peter are about to discover they have been paying no attention to what has been going on in the real world backstage.</p>
+                    <div class="book-formats">
+                        <a class="buy-btn" href="https://prahran-publishing.square.site/product/a-limited-season-pb-/10" target="_blank" rel="noopener">Paperback $15.95</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card" data-square-id="CFYBUKH5BTLSQKMFGZ4UI7U6">
+                <img class="book-cover" src="images/where-seagulls.jpg" alt="Where Seagulls Go To Be Lonely" loading="lazy">
+                <div class="book-info">
+                    <div class="book-title">Where Seagulls Go To Be Lonely</div>
+                    <p class="book-description">Helena, grand dame of the Melbourne and Sydney theatre scene, thinks she has settled nicely into a restful performance regime of comedy classics in judiciously subsidised spaces. When her somewhat intense undergraduate daughter hurls an asylum seeker drama at her, Helena's professional certainties are shaken not so much by the play's contents as by its lead actor, Violet — a student who has chosen Helena as her mentor and sets about procuring her idol with disturbing intensity.</p>
+                    <div class="book-formats">
+                        <a class="buy-btn" href="https://prahran-publishing.square.site/product/where-seagulls-go-to-be-lonely-pb-/20" target="_blank" rel="noopener">Paperback $15.95</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card" data-square-id="J7AA2R6LNJ6WDKJ5GCL7GOSM">
+                <img class="book-cover" src="images/watch-longest-day.jpg" alt="Watch for the Longest Day" loading="lazy">
+                <div class="book-info">
+                    <div class="book-title">Watch for the Longest Day</div>
+                    <p class="book-description">It is December 1948. While their husbands self-sacrificingly remain at work in town, Sarah and her sister-in-law Jennifer spend yet another summer by the sea, watching the children in the deep water and trying to avoid the annual judgement-by-mother-in-law at the hands of the indomitable Alice. When Henry — a man who listens — is discovered to be at the centre of this family's business, the daughters-in-law must stand firm and defy Alice, who guards their tragedy with all the calmness of the self-justified.</p>
+                    <div class="book-formats">
+                        <a class="buy-btn" href="https://prahran-publishing.square.site/product/watch-for-the-longest-day-pb-/19" target="_blank" rel="noopener">Paperback $15.95</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card" data-square-id="YA6UIJQGXWF3NW23XTGKHXLH">
+                <img class="book-cover" src="images/gentle-rain.jpg" alt="The Gentle Rain from Heaven" loading="lazy">
+                <div class="book-info">
+                    <div class="book-title">The Gentle Rain from Heaven</div>
+                    <p class="book-description">Athena, an Australian nurse working overseas, is raped and murdered. Her father, John, must decide whether to grant clemency to her murderer, who is facing execution by beheading. Margaret, an ex-school teacher on a career change as a junior Australian Government official, is sent in to counsel and assist the grieving man. When the situation proves predictably challenging, Margaret's daughter Nina provides a clarity of counsel so irresistibly logical it may well prove to be the most practical solution.</p>
+                    <div class="book-formats">
+                        <a class="buy-btn" href="https://prahran-publishing.square.site/product/the-gentle-rain-from-heaven-pb-/23" target="_blank" rel="noopener">Paperback $15.95</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card" data-square-id="OMSCCZUG3WTJKMDVKPB6ICBW">
+                <img class="book-cover" src="images/patronage.jpg" alt="Patronage" loading="lazy">
+                <div class="book-info">
+                    <div class="book-title">Patronage</div>
+                    <p class="book-description">When internationally renowned and self-confessed soloist Rachael Marlin comes to live with Holly and James in their Salon d'Art, everyone falls madly in love with her. Only Joy, a young doctor, sounds a note of caution when she sees Rachael's effect on her fiancé Matthew, and her potential to turn their little Salon d'Art into a larger theatre of the absurd.</p>
+                    <div class="book-formats">
+                        <a class="buy-btn" href="https://prahran-publishing.square.site/product/patronage-pb-/22" target="_blank" rel="noopener">Paperback $15.95</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card" data-square-id="MGQVBAE5TFQ6D4MRA2WQQQOF">
+                <img class="book-cover" src="images/wonderful-midlife-crisis.jpg" alt="It's a Wonderful Mid-Life Crisis" loading="lazy">
+                <div class="book-info">
+                    <div class="book-title">It's a Wonderful Mid-Life Crisis</div>
+                    <p class="book-description">Max and Marion are usually the sort of friends who can go for a year without seeing each other and catch up on everything in a second once they do. In these four strange and amusing encounters, however, something new seems to be happening. Max finds himself increasingly flummoxed by his interesting friend, as Marion plays about with various scenarios in which she side-steps work, suspends the kids and liberates her life partner while making a long overdue approach towards more time under the Me Tree.</p>
+                    <div class="book-formats">
+                        <a class="buy-btn" href="https://prahran-publishing.square.site/product/it-s-a-wonderful-mid-life-crisis-pb-/21" target="_blank" rel="noopener">Paperback $15.95</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Box Set -->
+        <div class="book-featured" data-square-id="CMBDIPBKI7VZLTFL24QBYQG5" style="margin-top: 1rem;">
+            <div class="book-badge">Limited Edition</div>
+            <img class="book-cover" src="images/unconventional-women.jpg" alt="Unconventional Women — Box Set" loading="lazy">
+            <div class="book-info">
+                <div class="book-title">Unconventional Women — The Complete Collection</div>
+                <p class="book-description">All ten plays of the Unconventional Women series in a single volume: <em>April &amp; May</em>, <em>Somewhere Between Three Rehearsals and the Performance</em>, <em>The Reason Why We Can't Be Friends</em>, <em>Suit Yourself</em>, <em>A Limited Season</em>, <em>Patronage</em>, <em>Where Seagulls Go To Be Lonely</em>, <em>The Gentle Rain from Heaven</em>, <em>It's a Wonderful Mid-Life Crisis</em>, and <em>Watch for the Longest Day</em>.</p>
+                <div class="book-formats" style="margin-top: 1.5rem;">
+                    <a class="buy-btn" href="https://prahran-publishing.square.site/product/unconventional-women/24" target="_blank" rel="noopener">Box Set $99.95</a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Masoud Shakarami -->
+    <section>
+        <div class="section-heading">
+            <img class="author-photo" src="images/masoud-shakarami.jpg" alt="Masoud Shakarami">
+            <div>Masoud Shakarami
+                <div class="author-bio">Playwright &mdash; Award-winning actor, playwright, and translator</div>
+            </div>
+        </div>
+
+        <div class="book-featured" data-square-id="7TH356AUF6WKZ67DW3E6AC3O">
+            <img class="book-cover" src="images/have-colourful-dreams.jpg" alt="Have Colourful Dreams, Sir" loading="lazy" style="object-fit: contain; background: var(--cream);">
+            <div class="book-info">
+                <div class="book-title">Have Colourful Dreams, Sir</div>
+                <p class="book-description">The revered Persian poets and philosophers of the 13th and 14th century — such as Saadi and Hafez — wrote lyrical poems called Ghazals that recounted tales of love in all its splendour and tragedy. Unlike western notions of love, Ghazals spoke of separation and pain that demanded complete surrender and total sacrifice.</p>
+                <p class="book-description" style="margin-top: 0.85rem;">A contemporary adaptation set on an island where a magical shaman, a hapless yet mysterious cripple, a beautiful maiden and a baker of enchanted cookies face a dilemma that demands a solution. Award-winning actor and playwright Masoud Shakarami's first English translation of the play, which won first prize at the Fajr International Theatre Festival, is thought-provoking and remarkably simple in its telling.</p>
+                <p class="book-description" style="margin-top: 0.85rem; font-style: italic; font-family: 'EB Garamond', Georgia, serif; font-size: 1rem;">"To understand a Ghazal, you only have to drink wine and fall in love."</p>
+                <p class="book-description" style="margin-top: 0.85rem; font-size: 0.8rem; color: var(--text-muted); border-left: 2px solid #C8956A; padding-left: 0.75rem;">The script edition is a final printing and will not be reprinted. Once stock is exhausted, it will not be available again.</p>
+                <div class="book-formats" style="margin-top: 1.5rem;">
+                    <a class="buy-btn" href="https://prahran-publishing.square.site/product/have-colourful-dreams-sir-pb-/1" target="_blank" rel="noopener">Paperback $15.95</a>
+                    <div class="limited-edition-wrap">
+                        <span class="limited-edition-label">Limited Edition</span>
+                        <a class="buy-btn secondary" href="https://prahran-publishing.square.site/product/have-colourful-dreams-sir-sc-/E3UDTISC4Z6RQ7NYJ3JIEEWX" target="_blank" rel="noopener">Script $21.95</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-featured" data-square-id="UMCSD6GJDRPHGBB7CXKF2FT7" style="margin-top: 2rem;">
+            <img class="book-cover" src="images/Felices-y-Coloridos-Suenos-Senor.jpg" alt="Felices y Coloridos Sueños, Señor" loading="lazy" style="object-fit: contain; background: var(--cream);">
+            <div class="book-info">
+                <div class="book-title">Felices y Coloridos Sueños, Señor</div>
+                <p class="book-description" style="font-style: italic; font-family: 'EB Garamond', Georgia, serif; font-size: 0.95rem; margin-bottom: 0.75rem;">Spanish edition</p>
+                <p class="book-description">Felices y Coloridos Sueños, Señor es una adaptación contemporánea de los poemas líricos de antaño. Es una obra llena de metáforas y simbolismo. Nos lleva hasta una isla donde un mágico chamán, un desafortunado pero misterioso incapacitado, una hermosa joven y una cocinera de galletas encantadas se enfrentan a un dilema que requiere una solución.</p>
+                <div class="book-formats" style="margin-top: 1.5rem;">
+                    <a class="buy-btn" href="https://prahran-publishing.square.site/product/felices-y-coloridos-sue-os-se-or-pb-/25" target="_blank" rel="noopener">Paperback $15.95</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Gift Cards -->
+    <section class="gift-card-section">
+        <h2>Gift Cards</h2>
+        <p>Give the gift of a good read — Prahran Publishing gift cards are redeemable on any title in our catalogue.</p>
+        <a class="gift-card-image-link" href="https://app.squareup.com/gift/KBGSR90KKG0EK/order" target="_blank" rel="noopener">
+            <img src="images/PrahranPublishingGiftCard.png" alt="Purchase a Prahran Publishing Gift Card">
+        </a>
+    </section>
+
+</main>
+
+<footer>
+    <div class="footer-name">Prahran Publishing</div>
+    <div class="footer-contact">
+        P.O. Box 2041, Prahran VIC 3181
     </div>
-  </section>
-
-  <div class="filmstrip"></div>
-
-  <!-- Reviews -->
-  <section id="reviews" style="max-width:100%; padding: 6rem 4rem;">
-    <div style="max-width:960px; margin: 0 auto;">
-      <p class="section-label">Reviews</p>
-      <h2 class="section-title">From the Notebook</h2>
-      <div class="section-rule"></div>
-      <p class="reviews-intro">Madeleine's written reviews — the full text of what she thinks, beyond what three minutes on air allows.</p>
+    <div class="footer-contact" style="margin-top: 0.4rem;">
+        General Enquiries: <a href="mailto:info@prahran.press">info@prahran.press</a>
     </div>
-    <div class="reviews-grid" style="max-width:960px; margin: 0 auto;">
-
-      <div class="review-card">
-        <p class="review-year">2024</p>
-        <h3 class="review-title">Anora</h3>
-        <p class="review-director">dir. Sean Baker</p>
-        <p class="review-stars">★★★★★</p>
-        <p class="review-excerpt">A film that shouldn't work as well as it does — and then, in its final minutes, becomes something you won't forget easily. Baker's great subject has always been the economy of desire, and here he finds his masterpiece.</p>
-        <a href="#" class="review-read-more">Read more →</a>
-      </div>
-
-      <div class="review-card">
-        <p class="review-year">2024</p>
-        <h3 class="review-title">The Substance</h3>
-        <p class="review-director">dir. Coralie Fargeat</p>
-        <p class="review-stars">★★★★</p>
-        <p class="review-excerpt">Fargeat takes the body horror genre and uses it like a scalpel — not on her characters, but on an industry and a culture that has always consumed women from the outside in. Messy, deliberate, and unmissable.</p>
-        <a href="#" class="review-read-more">Read more →</a>
-      </div>
-
-      <div class="review-card">
-        <p class="review-year">1950</p>
-        <h3 class="review-title">All About Eve</h3>
-        <p class="review-director">dir. Joseph L. Mankiewicz</p>
-        <p class="review-stars">★★★★★</p>
-        <p class="review-excerpt">The wittiest film ever made about ambition, performance, and the theatre of everyday life. Every line is a small perfect knife. Bette Davis has never been better, which is saying a great deal.</p>
-        <a href="#" class="review-read-more">Read more →</a>
-      </div>
-
-      <div class="review-card">
-        <p class="review-year">1963</p>
-        <h3 class="review-title">8½</h3>
-        <p class="review-director">dir. Federico Fellini</p>
-        <p class="review-stars">★★★★★</p>
-        <p class="review-excerpt">I return to this film every few years and find something new — or perhaps it is I who have changed, and the film simply holds its ground. An act of cinema that has never aged because it was never really about its moment.</p>
-        <a href="#" class="review-read-more">Read more →</a>
-      </div>
-
-      <div class="review-card">
-        <p class="review-year">2023</p>
-        <h3 class="review-title">Past Lives</h3>
-        <p class="review-director">dir. Celine Song</p>
-        <p class="review-stars">★★★★★</p>
-        <p class="review-excerpt">A film about what we leave behind when we leave — countries, languages, versions of ourselves. Song's debut is so quiet and so precise that it sneaks up on you entirely. The last scene is one of the great endings in recent cinema.</p>
-        <a href="#" class="review-read-more">Read more →</a>
-      </div>
-
-      <div class="review-card">
-        <p class="review-year">1941</p>
-        <h3 class="review-title">The Maltese Falcon</h3>
-        <p class="review-director">dir. John Huston</p>
-        <p class="review-stars">★★★★</p>
-        <p class="review-excerpt">A film in love with its own shadows. Huston and Bogart make cynicism feel like a moral position — and perhaps, in 1941, it was. The falcon is a MacGuffin, yes, but it is also a perfect emblem of all that glitters.</p>
-        <a href="#" class="review-read-more">Read more →</a>
-      </div>
-
+    <div class="footer-contact" style="margin-top: 0.25rem;">
+        Sales Enquiries: <a href="mailto:sales@prahran.press">sales@prahran.press</a>
     </div>
-  </section>
+    <div class="footer-contact" style="margin-top: 0.4rem;">ABN: 19 018 340 643</div>
+    <p class="copyright">&copy; 2026 Prahran Publishing. All rights reserved.</p>
+</footer>
 
-  <div class="filmstrip"></div>
+<script>
+(async function () {
+    try {
+        const res = await fetch('/on-sale.json');
+        if (!res.ok) return;
+        const onSaleIds = new Set(await res.json());
 
-  <!-- On Air -->
-  <section id="on-air" style="max-width:100%; padding: 5rem 2rem; text-align:center; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--dark);">
-    <p class="section-label" style="text-align:center;">On the Radio</p>
-    <div class="section-rule" style="margin: 0 auto 1rem;"></div>
-    <div class="radio-dial">Golden Days Radio</div>
-    <p style="max-width:520px; margin: 0 auto; color: var(--grey);">
-      Madeleine at the Movies airs on <strong style="color:var(--cream)">GDR 95.7fm</strong> every Tuesday and Friday at 12:10pm. Tune in for new reviews, conversations, and the occasional argument about whether <em>Vertigo</em> is really the best film ever made.
-    </p>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 Madeleine at the Movies &nbsp;·&nbsp; <a href="https://matm.com.au">matm.com.au</a> &nbsp;·&nbsp; Golden Days Radio</p>
-  </footer>
+        document.querySelectorAll('[data-square-id]').forEach(function (card) {
+            if (onSaleIds.has(card.dataset.squareId)) {
+                const badge = document.createElement('div');
+                badge.className = 'book-badge';
+                badge.innerHTML = 'On Sale &mdash; 10% Off';
+                card.prepend(badge);
+            }
+        });
+    } catch (e) {
+        // Silent fail
+    }
+})();
+</script>
 
 </body>
 </html>
