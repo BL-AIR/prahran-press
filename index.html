@@ -44,6 +44,26 @@
             text-align: center;
             padding: 4rem 2rem 3.5rem;
             border-bottom: 1px solid var(--border);
+            position: relative;
+            background-image: url('images/BookBanner.png');
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        /* Semi-transparent overlay so text stays legible over the banner */
+        header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 20, 15, 0.52);
+            z-index: 0;
+        }
+
+        /* Lift all direct header children above the overlay */
+        header > * {
+            position: relative;
+            z-index: 1;
         }
 
         .press-logo {
@@ -51,6 +71,7 @@
             margin: 0 auto 1rem;
             width: clamp(80px, 14vw, 130px);
             height: auto;
+            filter: brightness(1.1) drop-shadow(0 1px 4px rgba(0,0,0,0.5));
         }
 
         .press-name {
@@ -59,15 +80,16 @@
             font-weight: 400;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: var(--text);
+            color: #F7F2EA;
             line-height: 1.1;
+            text-shadow: 0 1px 6px rgba(0,0,0,0.45);
         }
 
         .press-location {
             font-family: 'EB Garamond', Georgia, serif;
             font-size: 1.05rem;
             font-style: italic;
-            color: var(--text-muted);
+            color: #C8BFA8;
             margin-top: 0.75rem;
             letter-spacing: 0.03em;
         }
