@@ -705,6 +705,51 @@
 </footer>
 
 <script>
+// ── GA4 eCommerce: track buy button clicks ─────────────────────────────────
+document.addEventListener('DOMContentLoaded', function () {
+
+    // Buy buttons
+    document.querySelectorAll('a.buy-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var card = btn.closest('[data-square-id]');
+            var titleEl = card ? card.querySelector('.book-title') : null;
+            var title = titleEl ? titleEl.textContent.trim() : 'Unknown';
+
+            var text = btn.textContent.trim();
+            var priceMatch = text.match(/\$([\d.]+)/);
+            var price = priceMatch ? parseFloat(priceMatch[1]) : 0;
+
+            var variant = 'Paperback';
+            if (/script/i.test(text))    variant = 'Script Edition';
+            else if (/box set/i.test(text)) variant = 'Box Set';
+
+            if (typeof gtag === 'function') {
+                gtag('event', 'select_item', {
+                    currency: 'AUD',
+                    value: price,
+                    items: [{ item_name: title, item_variant: variant, price: price, quantity: 1 }]
+                });
+            }
+        });
+    });
+
+    // Gift card
+    var giftLink = document.querySelector('a.gift-card-image-link');
+    if (giftLink) {
+        giftLink.addEventListener('click', function () {
+            if (typeof gtag === 'function') {
+                gtag('event', 'select_item', {
+                    currency: 'AUD',
+                    value: 0,
+                    items: [{ item_name: 'Prahran Publishing Gift Card', item_variant: 'Gift Card', price: 0, quantity: 1 }]
+                });
+            }
+        });
+    }
+});
+</script>
+
+<script>
 (async function () {
     try {
         const res = await fetch('/on-sale.json');
