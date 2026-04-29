@@ -228,6 +228,17 @@
             display: flex; flex-wrap: wrap; gap: 0.75rem;
             align-items: center;
         }
+        /* ── Store icon buttons ── */
+        .store-btn {
+            display: inline-block;
+            transition: opacity 0.2s ease;
+        }
+        .store-btn:hover { opacity: 0.72; }
+        .store-btn img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
 
         .book-meta {
             border-top: 1px solid var(--border);
@@ -296,19 +307,23 @@
                     <span class="buy-format-label">Paperback</span>
                     <a class="buy-btn" href="https://prahran-publishing.square.site/product/patronage-pb-/22" target="_blank" rel="noopener">$15.95 &mdash; Prahran Publishing</a>
                 </div>
-
-                <!-- eBook links — add when available -->
-                <!--
                 <div class="buy-row">
                     <span class="buy-format-label">eBook</span>
                     <div class="ebook-row">
-                        <a class="buy-btn secondary" href="" target="_blank" rel="noopener">Kindle</a>
-                        <a class="buy-btn secondary" href="" target="_blank" rel="noopener">Apple Books</a>
-                        <a class="buy-btn secondary" href="" target="_blank" rel="noopener">Google Play</a>
-                        <a class="buy-btn secondary" href="" target="_blank" rel="noopener">Kobo</a>
+                        <a class="store-btn" href="https://www.amazon.com.au/Patronage-Unconventional-Women-Mark-Nicholls-ebook/dp/B07Q7TH6MB/" target="_blank" rel="noopener" title="Buy on Kindle">
+                            <img src="../images/store-kindle.png" alt="Buy on Kindle">
+                        </a>
+                        <a class="store-btn" href="https://books.apple.com/au/book/patronage/id1458273821" target="_blank" rel="noopener" title="Buy on Apple Books">
+                            <img src="../images/store-apple-books.png" alt="Buy on Apple Books">
+                        </a>
+                        <a class="store-btn" href="https://play.google.com/store/books/details/Mark_Nicholls_Patronage?id=EbSPDwAAQBAJ" target="_blank" rel="noopener" title="Buy on Google Play">
+                            <img src="../images/store-google-play.png" alt="Buy on Google Play">
+                        </a>
+                        <a class="store-btn" href="https://www.kobo.com/au/en/ebook/patronage-28" target="_blank" rel="noopener" title="Buy on Kobo">
+                            <img src="../images/store-kobo.png" alt="Buy on Kobo">
+                        </a>
                     </div>
                 </div>
-                -->
             </div>
 
             <div class="book-meta">
