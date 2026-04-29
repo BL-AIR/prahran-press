@@ -231,14 +231,21 @@
 
         /* ── Store icon buttons ── */
         .store-btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
             transition: opacity 0.2s ease;
         }
         .store-btn:hover { opacity: 0.72; }
         .store-btn img {
-            height: 40px;
+            max-width: 48px;
+            max-height: 48px;
             width: auto;
+            height: auto;
             display: block;
+            object-fit: contain;
         }
 
         .book-meta {
