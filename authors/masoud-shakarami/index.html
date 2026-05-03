@@ -367,6 +367,64 @@
             white-space: nowrap;
         }
 
+        /* ── Awards ── */
+        .awards-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .award-item {
+            display: grid;
+            grid-template-columns: 3.5rem 1fr;
+            gap: 0 1.5rem;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--border);
+            align-items: start;
+        }
+
+        .award-year {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+            padding-top: 0.2rem;
+        }
+
+        .award-body {}
+
+        .award-title {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        .award-play {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+        }
+
+        .award-role {
+            display: inline-block;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--cream);
+            border: 1px solid var(--border);
+            padding: 0.15rem 0.55rem;
+            margin-top: 0.5rem;
+        }
+
         /* ── Footer ── */
         footer {
             border-top: 1px solid var(--border);
@@ -473,6 +531,59 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </a>
             </div>
         </div>
+    </section>
+
+    <!-- Awards -->
+    <section style="margin-bottom: 4rem;">
+        <h2 class="section-heading">Awards &amp; Recognition</h2>
+        <ul class="awards-list">
+
+            <li class="award-item">
+                <div class="award-year">2016</div>
+                <div class="award-body">
+                    <div class="award-title">1st Prize — Fajr International Theatre Festival</div>
+                    <div class="award-play">Have Colourful Dreams, Sir</div>
+                    <span class="award-role">Playwright</span>
+                </div>
+            </li>
+
+            <li class="award-item">
+                <div class="award-year">2014</div>
+                <div class="award-body">
+                    <div class="award-title">Nominated — Best Iranian Actor of the Year</div>
+                    <div class="award-play">1000 Whips</div>
+                    <span class="award-role">Actor</span>
+                </div>
+            </li>
+
+            <li class="award-item">
+                <div class="award-year">2013</div>
+                <div class="award-body">
+                    <div class="award-title">Award-Winning Play — International Theatre Festival for Children &amp; Young Adults</div>
+                    <div class="award-play">Hamlet and the Magic Bean-Stalk</div>
+                    <span class="award-role">Playwright</span>
+                </div>
+            </li>
+
+            <li class="award-item">
+                <div class="award-year">2011</div>
+                <div class="award-body">
+                    <div class="award-title">Award-Winning Play — International Theatre Festival for Children &amp; Young Adults</div>
+                    <div class="award-play">The Adventures of Huckleberry Finn</div>
+                    <span class="award-role">Playwright</span>
+                </div>
+            </li>
+
+            <li class="award-item">
+                <div class="award-year">2010</div>
+                <div class="award-body">
+                    <div class="award-title">Award-Winning Performance — Theatre Festival of Youth</div>
+                    <div class="award-play">To Be or Not to Be…</div>
+                    <span class="award-role">Actor</span>
+                </div>
+            </li>
+
+        </ul>
     </section>
 
     <!-- Prahran Publishing Books -->
