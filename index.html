@@ -196,6 +196,23 @@
             object-fit: cover;
             flex-shrink: 0;
             border: 2px solid var(--border);
+            transition: opacity 0.2s ease;
+        }
+
+        .author-profile-link {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            text-decoration: none;
+            color: inherit;
+        }
+        .author-profile-link:hover .author-photo {
+            opacity: 0.8;
+        }
+        .author-profile-link:hover .author-name-text {
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
         }
 
         .author-bio {
@@ -508,10 +525,12 @@
 <!-- Mark Nicholls -->
 <section>
 <div class="section-heading">
+<a class="author-profile-link" href="/authors/mark-nicholls/">
 <img alt="Mark Nicholls" class="author-photo" src="images/mark-nicholls.jpg"/>
-<div>Mark Nicholls
+<div><span class="author-name-text">Mark Nicholls</span>
                 <div class="author-bio">Playwright — The Unconventional Women Series</div>
 </div>
+</a>
 </div>
 <p class="series-note">Mark Nicholls has been writing and first performing his own work since 2008, premiering each play through R4, his Melbourne theatre production company. His Unconventional Women series follows a recurring world of women navigating theatre, love, and the complicated terrain between the two.</p>
 <div class="book-grid">
@@ -632,10 +651,12 @@
 <!-- Masoud Shakarami -->
 <section>
 <div class="section-heading">
+<a class="author-profile-link" href="/authors/masoud-shakarami/">
 <img alt="Masoud Shakarami" class="author-photo" src="images/masoud-shakarami.jpg"/>
-<div>Masoud Shakarami
+<div><span class="author-name-text">Masoud Shakarami</span>
                 <div class="author-bio">Playwright — Award-winning actor, playwright, and translator</div>
 </div>
+</a>
 </div>
 <div class="book-featured" data-square-id="7TH356AUF6WKZ67DW3E6AC3O">
 <a href="/books/9780992506995" style="display:block"><img alt="Have Colourful Dreams, Sir" class="book-cover" loading="lazy" src="images/have-colourful-dreams.jpg" style="object-fit: contain; background: var(--cream);"/></a>
