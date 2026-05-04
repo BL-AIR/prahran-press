@@ -27,7 +27,7 @@ jobs:
           token = os.environ['SQUARE_ACCESS_TOKEN']
           category_id = 'QL2LYFQD6ZAXCDJ7VTN3OK3I'
 
-          url = 'https://connect.squareup.com/v2/catalog/search-items'
+          url = 'https://connect.squareup.com/v2/catalog/search-catalog-items'
           payload = json.dumps({'category_ids': [category_id]}).encode()
           req = urllib.request.Request(
               url,
@@ -35,7 +35,7 @@ jobs:
               headers={
                   'Authorization': f'Bearer {token}',
                   'Content-Type': 'application/json',
-                  'Square-Version': '2025-05-15'
+                  'Square-Version': '2026-01-22'
               }
           )
 
