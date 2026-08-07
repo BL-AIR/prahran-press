@@ -33,11 +33,18 @@
       "image": "https://prahran.press/images/the-art-of-surrender.jpg",
       "url": "https://prahran.press/books/9781922263988",
       "datePublished": "2026-10-15",
-      "offers": {
-        "@type": "Offer",
-        "availability": "https://schema.org/PreOrder",
-        "url": "https://prahran-publishing.square.site/product/the-art-of-surrender/O4XWYVSEJQCMGW22SDDLY5D7"
-      }
+      "offers": [
+        {
+          "@type": "Offer",
+          "availability": "https://schema.org/PreOrder",
+          "url": "https://prahran-publishing.square.site/product/the-art-of-surrender/O4XWYVSEJQCMGW22SDDLY5D7"
+        },
+        {
+          "@type": "Offer",
+          "availability": "https://schema.org/PreOrder",
+          "url": "https://www.amazon.com.au/dp/B0HD6HJQ9Q"
+        }
+      ]
     }
     </script>
 
@@ -275,6 +282,10 @@
                     <span class="buy-format-label">Paperback</span>
                     <a class="buy-btn" href="https://prahran-publishing.square.site/product/the-art-of-surrender/O4XWYVSEJQCMGW22SDDLY5D7" target="_blank" rel="noopener">Pre-order &mdash; Prahran Publishing</a>
                 </div>
+                <div class="buy-row">
+                    <span class="buy-format-label">Kindle</span>
+                    <a class="buy-btn" id="kindle-link" data-asin="B0HD6HJQ9Q" href="https://www.amazon.com.au/dp/B0HD6HJQ9Q" target="_blank" rel="noopener">Pre-order &mdash; Amazon Kindle</a>
+                </div>
                 <p class="release-note">Available 15 October 2026.</p>
             </div>
 
@@ -302,6 +313,46 @@
     <div class="footer-contact" style="margin-top:0.75rem; font-size:0.8rem;"><a href="/privacy.html">Privacy Policy</a></div>
     <p class="copyright">&copy; 2026 Prahran Publishing. All rights reserved.</p>
 </footer>
+
+<!-- Send Kindle shoppers to their local Amazon store. Falls back to amazon.com.au. -->
+<script>
+(function () {
+    var el = document.getElementById('kindle-link');
+    if (!el) return;
+
+    var stores = {
+        AU: 'amazon.com.au', NZ: 'amazon.com.au',
+        US: 'amazon.com',    CA: 'amazon.ca',
+        GB: 'amazon.co.uk',  IE: 'amazon.co.uk',
+        DE: 'amazon.de',     AT: 'amazon.de',
+        FR: 'amazon.fr',     BE: 'amazon.com.be',
+        ES: 'amazon.es',     IT: 'amazon.it',
+        NL: 'amazon.nl',     SE: 'amazon.se',
+        PL: 'amazon.pl',     JP: 'amazon.co.jp',
+        IN: 'amazon.in',     BR: 'amazon.com.br',
+        MX: 'amazon.com.mx', SG: 'amazon.sg',
+        AE: 'amazon.ae',     SA: 'amazon.sa',
+        ZA: 'amazon.co.za',  TR: 'amazon.com.tr'
+    };
+
+    var region = null;
+    var lang = navigator.language || '';
+
+    try {
+        if (window.Intl && Intl.Locale && lang) {
+            region = new Intl.Locale(lang).region || null;
+        }
+    } catch (e) { /* older browser — fall through */ }
+
+    if (!region && lang.indexOf('-') > -1) {
+        region = lang.split('-').pop().toUpperCase();
+    }
+
+    if (region && stores[region]) {
+        el.href = 'https://www.' + stores[region] + '/dp/' + el.getAttribute('data-asin');
+    }
+})();
+</script>
 
 </body>
 </html>
