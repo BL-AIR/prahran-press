@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page not found — Prahran Publishing</title>
+    <meta name="robots" content="noindex, follow">
+
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M64RTG88Y3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-M64RTG88Y3', { page_title: '404 — ' + location.pathname });
+      // Report the path that failed, so dead printed QR codes and stale links
+      // announce themselves instead of waiting to be noticed by accident.
+      gtag('event', 'page_not_found', {
+        broken_path: location.pathname + location.search,
+        arrived_from: document.referrer || '(direct or QR scan)'
+      });
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-T4FVHTD');</script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #F7F4EF; --bg-card: #FFFFFF; --text: #1C1C1C;
+            --text-muted: #6B6255; --accent: #2A4232; --accent-light: #3D5A47;
+            --border: #DDD8CE; --cream: #EDE9E1;
+        }
+
+        html { font-size: 16px; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--bg); color: var(--text);
+            line-height: 1.7; -webkit-font-smoothing: antialiased;
+        }
+
+        header {
+            text-align: center; padding: 4rem 2rem 3.5rem;
+            border-bottom: 1px solid var(--border); position: relative;
+            background-image: url('/images/BookBanner.png');
+            background-size: cover; background-position: center; overflow: hidden;
+        }
+        header::before {
+            content: ''; position: absolute; inset: 0;
+            background: rgba(15,20,15,0.52); z-index: 0;
+        }
+        header > * { position: relative; z-index: 1; }
+        header a { text-decoration: none; }
+
+        .press-logo {
+            display: block; margin: 0 auto 1rem;
+            width: clamp(80px,14vw,130px); height: auto;
+            filter: brightness(1.1) drop-shadow(0 1px 4px rgba(0,0,0,0.5));
+        }
+        .press-name {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: clamp(2.5rem,6vw,4.5rem); font-weight: 400;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: #F7F2EA; line-height: 1.1;
+            text-shadow: 0 1px 6px rgba(0,0,0,0.45);
+        }
+        .press-location {
+            font-family: 'EB Garamond', Georgia, serif; font-size: 1.05rem;
+            font-style: italic; color: #C8BFA8; margin-top: 0.75rem;
+            letter-spacing: 0.03em;
+        }
+
+        main { max-width: 680px; margin: 0 auto; padding: 4rem 2rem 6rem; text-align: center; }
+
+        h1 {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: clamp(2rem,5vw,2.9rem); font-weight: 400;
+            line-height: 1.2; margin-bottom: 1.25rem;
+        }
+
+        .lede {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.2rem; font-style: italic;
+            color: var(--text-muted); margin-bottom: 2.5rem;
+        }
+
+        .requested {
+            display: inline-block; max-width: 100%;
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 0.82rem; color: var(--text-muted);
+            background: var(--cream); border: 1px solid var(--border);
+            padding: 0.6rem 1rem; margin-bottom: 2.5rem;
+            word-break: break-all; text-align: left;
+        }
+
+        .actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+        .btn {
+            display: inline-block; font-size: 0.9rem; letter-spacing: 0.02em;
+            text-decoration: none; padding: 0.75rem 1.6rem;
+            border: 1px solid var(--accent); color: var(--accent);
+            background: transparent; transition: background .15s, color .15s;
+        }
+        .btn:hover { background: var(--accent); color: #F7F2EA; }
+        .btn-solid { background: var(--accent); color: #F7F2EA; }
+        .btn-solid:hover { background: var(--accent-light); }
+
+        .note {
+            margin-top: 3rem; font-size: 0.875rem; color: var(--text-muted);
+        }
+        .note a { color: var(--accent); }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem; text-align: center; margin-top: 0;
+        }
+        .footer-name {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.1rem; letter-spacing: 0.08em; text-transform: uppercase;
+        }
+        .footer-contact { margin-top: 0.75rem; font-size: 0.875rem; color: var(--text-muted); }
+        .footer-contact a { color: var(--accent); text-decoration: none; }
+        .footer-contact a:hover { text-decoration: underline; }
+        .copyright { margin-top: 1.5rem; font-size: 0.8rem; color: var(--border); }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T4FVHTD"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<header>
+    <a href="/">
+        <img class="press-logo" src="/logo.png" alt="Prahran Publishing">
+        <div class="press-name">Prahran Publishing</div>
+        <div class="press-location">Melbourne, Victoria &mdash; Australia</div>
+    </a>
+</header>
+
+<main>
+    <h1>This page has moved on</h1>
+    <p class="lede">The book almost certainly hasn&rsquo;t.</p>
+
+    <div class="requested" id="requested-path">&nbsp;</div>
+
+    <div class="actions">
+        <a class="btn btn-solid" href="/">Browse all books</a>
+        <a class="btn" href="mailto:info@prahran.press?subject=Broken%20link%20on%20prahran.press">Tell us what you were after</a>
+    </div>
+
+    <p class="note">
+        Scanned a QR code from a bookmark or the back of a book? That address is older than
+        this website. Everything we&rsquo;ve published is on the <a href="/">catalogue page</a>.
+    </p>
+</main>
+
+<footer>
+    <div class="footer-name">Prahran Publishing</div>
+    <div class="footer-contact" style="margin-top:0.4rem;">
+        General Enquiries: <a href="mailto:info@prahran.press">info@prahran.press</a>
+    </div>
+    <div class="footer-contact" style="margin-top:0.25rem;">
+        Sales Enquiries: <a href="mailto:sales@prahran.press">sales@prahran.press</a>
+    </div>
+    <div class="footer-contact" style="margin-top:0.4rem;">ABN: 19 018 340 643</div>
+    <div class="footer-contact" style="margin-top:0.75rem; font-size:0.8rem;"><a href="/privacy.html">Privacy Policy</a></div>
+    <p class="copyright">&copy; 2026 Prahran Publishing. All rights reserved.</p>
+</footer>
+
+<script>
+(function () {
+    var path = location.pathname + location.search;
+
+    // Show the visitor exactly what was asked for, so they can quote it to us.
+    document.getElementById('requested-path').textContent = path;
+
+    // Automatic rescue: any legacy URL containing a 13-digit ISBN starting 978
+    // belongs to a book page we already publish. Send them straight there.
+    var isbn = path.match(/(978\d{10})/);
+    if (isbn) {
+        location.replace('/books/' + isbn[1] + '?ref=legacy-url');
+    }
+}());
+</script>
+</body>
+</html>
