@@ -1,0 +1,37 @@
+{
+  "_comment": "Bookmark QR map. Printed URL is /b/<title>/<design>/<location> and never changes. Edit 'to' to change where a batch lands, then run: python3 tools/build-bookmarks.py",
+  "params": { "design": "ref", "location": "loc" },
+  "locations": {
+    "l00": "No fixed location"
+  },
+  "titles": {
+    "t01": {
+      "name": "The Art of Surrender",
+      "isbn": "9781922263988",
+      "default": "https://prahran.press/books/9781922263988",
+      "designs": {
+        "b1": "Design 1",
+        "b2": "Design 2",
+        "b3": "Design 3",
+        "b4": "Design 4"
+      },
+      "batches": {
+        "b1/l00": { "to": null },
+        "b2/l00": { "to": null },
+        "b3/l00": { "to": null },
+        "b4/l00": { "to": null }
+      }
+    },
+    "t02": {
+      "name": "Unconventional Women - The Complete Collection",
+      "isbn": "9781922263995",
+      "default": "https://prahran.press/books/9781922263995",
+      "designs": {
+        "b1": "Design 1 (pre-dates location coding)"
+      },
+      "batches": {
+        "b1/l00": { "to": null }
+      }
+    }
+  }
+}
