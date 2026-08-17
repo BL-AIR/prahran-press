@@ -1,8 +1,13 @@
 {
   "_comment": "Bookmark QR map. Printed URL is /b/<title>/<design>/<location> and never changes. Edit 'to' to change where a batch lands, then run: python3 tools/build-bookmarks.py",
-  "params": { "design": "ref", "location": "loc" },
+  "params": {
+    "design": "ref",
+    "location": "loc"
+  },
   "locations": {
-    "l00": "No fixed location"
+    "l00": "No fixed location",
+    "l01": "Unassigned - allocate in the register",
+    "l02": "Unassigned - allocate in the register"
   },
   "titles": {
     "t01": {
@@ -16,10 +21,42 @@
         "b4": "Design 4"
       },
       "batches": {
-        "b1/l00": { "to": null },
-        "b2/l00": { "to": null },
-        "b3/l00": { "to": null },
-        "b4/l00": { "to": null }
+        "b1/l00": {
+          "to": null
+        },
+        "b1/l01": {
+          "to": null
+        },
+        "b1/l02": {
+          "to": null
+        },
+        "b2/l00": {
+          "to": null
+        },
+        "b2/l01": {
+          "to": null
+        },
+        "b2/l02": {
+          "to": null
+        },
+        "b3/l00": {
+          "to": null
+        },
+        "b3/l01": {
+          "to": null
+        },
+        "b3/l02": {
+          "to": null
+        },
+        "b4/l00": {
+          "to": null
+        },
+        "b4/l01": {
+          "to": null
+        },
+        "b4/l02": {
+          "to": null
+        }
       }
     },
     "t02": {
@@ -30,7 +67,9 @@
         "b1": "Design 1 (pre-dates location coding)"
       },
       "batches": {
-        "b1/l00": { "to": null }
+        "b1/l00": {
+          "to": null
+        }
       }
     }
   }
