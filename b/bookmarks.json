@@ -7,7 +7,8 @@
   "locations": {
     "l00": "No fixed location",
     "l01": "Unassigned - allocate in the register",
-    "l02": "Unassigned - allocate in the register"
+    "l02": "Unassigned - allocate in the register",
+    "l03": "Unassigned - allocate in the register"
   },
   "titles": {
     "t01": {
@@ -39,6 +40,9 @@
         "b2/l02": {
           "to": null
         },
+        "b2/l03": {
+          "to": null
+        },
         "b3/l00": {
           "to": null
         },
@@ -46,6 +50,9 @@
           "to": null
         },
         "b3/l02": {
+          "to": null
+        },
+        "b3/l03": {
           "to": null
         },
         "b4/l00": {
