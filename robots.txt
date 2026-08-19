@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /books/9781922263988/chapter-negative-one/
 
 Sitemap: https://prahran.press/sitemap.xml

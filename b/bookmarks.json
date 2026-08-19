@@ -18,7 +18,7 @@
         "b1": "Design 1",
         "b2": "Design 2",
         "b3": "Design 3",
-        "b4": "Design 4"
+        "b4": "Design 4 - bonus chapters"
       },
       "batches": {
         "b1/l00": {
@@ -49,13 +49,13 @@
           "to": null
         },
         "b4/l00": {
-          "to": null
+          "to": "https://prahran.press/books/9781922263988/bonus/chapters.html"
         },
         "b4/l01": {
-          "to": null
+          "to": "https://prahran.press/books/9781922263988/bonus/chapters.html"
         },
         "b4/l02": {
-          "to": null
+          "to": "https://prahran.press/books/9781922263988/bonus/chapters.html"
         }
       }
     },
