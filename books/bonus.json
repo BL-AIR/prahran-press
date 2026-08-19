@@ -1,0 +1,77 @@
+{
+  "_comment": "Bonus material hub, one per title. Printed/spoken URL is /books/<isbn>/bonus/chapters.html and never changes. Edit this file, then run: python3 tools/build-bonus.py",
+
+  "site": "https://prahran.press",
+  "ga4": "G-M64RTG88Y3",
+  "gtm": "GTM-T4FVHTD",
+
+  "titles": {
+
+    "9781922263988": {
+      "name": "The Art of Surrender",
+      "author": "Blair Purvis",
+      "cover": "/images/the-art-of-surrender.jpg",
+      "book_page": "/books/9781922263988",
+      "live": true,
+      "featured": true,
+
+      "intro": [
+        "There is more of this story than fits between the covers.",
+        "Some of it happens before the novel starts. Some of it happens in the rooms the novel walks past. It gets written here, and you get a say in what gets written next."
+      ],
+
+      "ballot": {
+        "state": "open",
+        "heading": "What gets written next",
+        "blurb": "Four things could happen next. Only one of them is going to. Pick the one you want and I will write it.",
+        "closes": "2026-12-14",
+        "closes_label": "Voting closes 14 December 2026",
+        "zoho_embed": null,
+        "options": [
+          {
+            "id": "a",
+            "title": "Gibraltar",
+            "pitch": "DRAFT — replace. The week before the novel opens, from Lucas's side of it."
+          },
+          {
+            "id": "b",
+            "title": "The Phoenix",
+            "pitch": "DRAFT — replace. A night on the boat that nobody in the novel ever talks about again."
+          },
+          {
+            "id": "c",
+            "title": "Lazarus",
+            "pitch": "DRAFT — replace. How they met, years earlier, told without excuses."
+          },
+          {
+            "id": "d",
+            "title": "Berlin",
+            "pitch": "DRAFT — replace. What Ayman did with the three days he claims he spent alone."
+          }
+        ],
+        "result": {
+          "winner_id": null,
+          "note": ""
+        }
+      },
+
+      "chapters": [
+        {
+          "title": "Chapter Minus One",
+          "status": "available",
+          "href": "/books/9781922263988/chapter-negative-one/s7gy5gg.pdf",
+          "format": "PDF",
+          "note": "The chapter that used to open the book, cut in the second draft.",
+          "spoiler": false
+        }
+      ],
+
+      "signup": {
+        "heading": "Tell me when it's written",
+        "blurb": "No schedule, no newsletter treadmill. An email when the next one goes up, and nothing else.",
+        "zoho_embed": null
+      }
+    }
+
+  }
+}
