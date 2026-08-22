@@ -26,7 +26,15 @@
       "name": "Blair Purvis",
       "jobTitle": "Author",
       "description": "Melbourne-based author of literary fiction",
-      "url": "https://prahran.press/authors/blair-purvis/"
+      "url": "https://prahran.press/authors/blair-purvis/",
+      "email": "me@blairpurvis.com",
+      "sameAs": [
+        "https://blairpurvis.com",
+        "https://www.instagram.com/blairpurvisauthor",
+        "https://www.facebook.com/profile.php?id=61593616701662",
+        "https://www.tiktok.com/@blairpurvis.author",
+        "https://www.youtube.com/channel/UCL0FUyK6clBPpzYIaZLiw4Q"
+      ]
     }
     </script>
 
@@ -209,6 +217,34 @@
             margin-top: 1.1rem;
         }
 
+        /* ── Social icons ── */
+        .author-socials {
+            display: flex;
+            align-items: center;
+            gap: 1.15rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .author-socials a {
+            display: inline-flex;
+            color: var(--text-muted);
+            transition: color 0.18s ease;
+        }
+        .author-socials a:hover,
+        .author-socials a:focus-visible { color: var(--accent); }
+        .author-socials a:focus-visible {
+            outline: 1px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        .author-socials svg {
+            width: 20px;
+            height: 20px;
+            display: block;
+        }
+
         /* ── Section heading ── */
         .section-heading {
             font-family: 'EB Garamond', Georgia, serif;
@@ -368,6 +404,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p>His debut novel, <em>The Art of Surrender</em>, is set across Morocco, Gibraltar, Z&#252;rich, St&#160;Moritz, Berlin, and Sydney. It follows Ayman Saliba and Lucas Pfifer &#8212; two men whose lives collide in the steam and silence of a Moroccan hamm&#257;m and whose relationship unfolds over years, continents, crises, and a reckoning that arrives just in time, or possibly too late. Told in alternating points of view, the novel is about the slow, reluctant, and sometimes devastating process by which two people learn to let themselves be known &#8212; and what it costs to resist that surrender for too long.</p>
                 <p>Blair lives in Melbourne with his family.</p>
             </div>
+
+            <!-- Social icons — see the sameAs array in the JSON-LD above; keep the two in step. -->
+            <nav class="author-socials" aria-label="Blair Purvis on social media">
+
+                <a href="https://www.instagram.com/blairpurvisauthor" target="_blank" rel="me noopener" aria-label="Blair Purvis on Instagram" title="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                        <rect x="2.75" y="2.75" width="18.5" height="18.5" rx="5.25"/>
+                        <circle cx="12" cy="12" r="4.25"/>
+                        <circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/>
+                    </svg>
+                </a>
+
+                <a href="https://www.facebook.com/profile.php?id=61593616701662" target="_blank" rel="me noopener" aria-label="Blair Purvis on Facebook" title="Facebook">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                        <circle cx="12" cy="12" r="9.25"/>
+                        <path d="M14.55 7.05h-1.25c-1.2 0-1.95.75-1.95 1.95V18" stroke-linecap="butt"/>
+                        <path d="M9.5 12.5h4.6" stroke-linecap="butt"/>
+                    </svg>
+                </a>
+
+                <a href="https://www.tiktok.com/@blairpurvis.author" target="_blank" rel="me noopener" aria-label="Blair Purvis on TikTok" title="TikTok">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                        <path d="M14.6 3.2v10.9a3.85 3.85 0 1 1-3.3-3.81"/>
+                        <path d="M14.6 3.2a5.1 5.1 0 0 0 4.9 4.55"/>
+                    </svg>
+                </a>
+
+                <a href="https://www.youtube.com/channel/UCL0FUyK6clBPpzYIaZLiw4Q" target="_blank" rel="me noopener" aria-label="Blair Purvis on YouTube" title="YouTube">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                        <rect x="2.4" y="5.4" width="19.2" height="13.2" rx="4"/>
+                        <path d="M10.3 9.35 15 12l-4.7 2.65z" fill="currentColor" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+
+                <a href="mailto:me@blairpurvis.com" aria-label="Email Blair Purvis" title="me@blairpurvis.com">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                        <rect x="2.4" y="4.9" width="19.2" height="14.2" rx="2.4"/>
+                        <path d="m3.4 6.6 8.6 6.1 8.6-6.1"/>
+                    </svg>
+                </a>
+
+            </nav>
         </div>
     </section>
 
