@@ -19,7 +19,7 @@
         "b1": "Design 1",
         "b2": "Design 2",
         "b3": "Design 3",
-        "b4": "Design 4",
+        "b4": "Design 4 - bonus chapters",
         "bcf": "Backmatter - book club facilitator notes",
         "bcr": "Backmatter - book club reader's notes",
         "bcx": "Backmatter - bonus chapter ballot"
@@ -59,13 +59,13 @@
           "to": null
         },
         "b4/l00": {
-          "to": null
+          "to": "https://prahran.press/books/9781922263988/bonus/chapters.html"
         },
         "b4/l01": {
-          "to": null
+          "to": "https://prahran.press/books/9781922263988/bonus/chapters.html"
         },
         "b4/l02": {
-          "to": null
+          "to": "https://prahran.press/books/9781922263988/bonus/chapters.html"
         },
         "bcf/l00": {
           "to": "https://prahran.press/downloads/the-art-of-surrender-book-club-facilitator-notes.pdf"
