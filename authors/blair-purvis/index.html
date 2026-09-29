@@ -170,13 +170,31 @@
 
         .author-portrait {
             width: 100%;
+            height: auto;
             display: block;
-            border: 1px solid var(--border);
+            /* Soft square vignette instead of a hard border: the outer ~4% of
+               the photo fades into the page on all four sides. */
+            -webkit-mask-image:
+                linear-gradient(to right, transparent, #000 4%, #000 96%, transparent),
+                linear-gradient(to bottom, transparent, #000 4%, #000 96%, transparent);
+            -webkit-mask-composite: source-in;
+                    mask-image:
+                linear-gradient(to right, transparent, #000 4%, #000 96%, transparent),
+                linear-gradient(to bottom, transparent, #000 4%, #000 96%, transparent);
+                    mask-composite: intersect;
             aspect-ratio: 3 / 4;
             object-fit: cover;
             object-position: top;
             background: var(--cream);
         }
+
+        .author-portrait-credit {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+        .author-portrait-credit a { color: inherit; }
 
         .author-details {}
 
@@ -440,7 +458,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- Author Hero -->
     <section class="author-hero">
         <div class="author-portrait-wrap">
-            <img class="author-portrait" src="../../images/blair-purvis-portrait.jpg" alt="Blair Purvis">
+            <img class="author-portrait" src="../../images/blair-purvis-portrait-138.jpg" alt="Blair Purvis, a man in his sixties with short grey hair, in a tan jacket with a brown corduroy collar." width="900" height="1200">
+            <p class="author-portrait-credit">Photograph by <a href="https://headshotphotographer.com.au/">Julian Dolman</a></p>
         </div>
 
         <div class="author-details">
