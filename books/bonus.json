@@ -114,7 +114,8 @@
           "list_owner": "Blair Purvis",
           "list_name": "Blair Purvis",
           "zoho_form": "Author list signup - website (50364000000028028)",
-          "vote_field_label": "Bonus Chapter Vote"
+          "vote_field_label": "Bonus Chapter Vote",
+          "delivery_note": "Bonus chapters are delivered by email, to mailing list members only."
         }
       },
       "chapters_hidden_until_written": [
@@ -128,7 +129,15 @@
         }
       ],
       "chapters": [],
-      "qr_only": true
+      "qr_only": true,
+      "name_html": "The Art <em>of</em> Surrender"
+    }
+  },
+  "lists": {
+    "blair-purvis": {
+      "owner": "Blair Purvis",
+      "path": "/authors/blair-purvis/newsletter/",
+      "home": "/authors/blair-purvis/"
     }
   }
 }

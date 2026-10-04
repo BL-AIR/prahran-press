@@ -42,7 +42,11 @@ on different books or rounds never overwrite each other on a shared subscriber.
   3. Add the title under "titles" in books/bonus.json with ballot.form filled in
      (action, hidden, vote_field, list_owner, list_name). Leave vote_field null
      and the form stays inert until it is set.
-  4. Build, preview, push. The site-wide /bonus/ shortcut follows "featured".
+  4. Add the author's list under "lists" in books/bonus.json (owner, path, home)
+     so its thank-you pages are built, then in Campaigns > the form > Edit
+     Response, redirect new contacts to <path>thanks.html and existing contacts
+     to <path>already.html.
+  5. Build, preview, push. The site-wide /bonus/ shortcut follows "featured".
 
 Signups that do not come through a ballot (the newsletter pages) never send the
 vote field, so it stays empty on those subscribers. Tally a ballot by filtering
@@ -354,6 +358,10 @@ HEAD = """<!DOCTYPE html>
             letter-spacing: 0.04em; border: none; cursor: pointer; margin-top: 0.5rem;
         }}
         .submit-btn:hover {{ background: var(--accent-light); }}
+        .delivery-note {{
+            font-family: 'EB Garamond', Georgia, serif; font-size: 1rem; font-style: italic;
+            color: var(--text); text-align: center; margin-top: 0.75rem;
+        }}
         .fine-print {{ font-size: 0.78rem; line-height: 1.65; color: var(--text-muted); margin-top: 1.1rem; }}
         .fine-print a {{ color: var(--accent); }}
         .form-notice {{
@@ -466,6 +474,14 @@ FOOT = """
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ event: 'newsletter_signup', list_name: form.getAttribute('data-list') || '',
                                 form_location: 'bonus-ballot/__ISBN__' });
+        /* Tell the list's thank-you page (where Zoho sends the reader next) that this
+           signup was a vote. Expires after 15 minutes so a later newsletter signup on
+           the same device doesn't get vote wording. */
+        try {
+            localStorage.setItem('prahran-last-vote', JSON.stringify({
+                title: title, book: document.title.split(' — ')[0], at: Date.now()
+            }));
+        } catch (err) {}
         var t = document.getElementById('vote-thanks-title');
         if (t) t.textContent = 'Your vote for ' + title + ' is in.';
         setTimeout(function () {
@@ -526,7 +542,7 @@ def render_vote_form(b):
     opts = b.get("options", [])
 
     out = [f'        <form class="vote-form" id="vote-form" method="POST" action="{esc(action)}"'
-           f' target="_blank" accept-charset="UTF-8" data-wired="{"1" if wired else "0"}"'
+           f' accept-charset="UTF-8" data-wired="{"1" if wired else "0"}"'
            f' data-list="{esc(f.get("list_name",""))}">']
     for k, v in (f.get("hidden") or {}).items():
         out.append(f'            <input type="hidden" name="{esc(k)}" value="{esc(v)}">')
@@ -571,6 +587,8 @@ def render_vote_form(b):
     out.append('                <div class="hp-field" aria-hidden="true"><label for="v-website">Leave this field empty</label>'
                '<input type="text" id="v-website" name="zc_website" tabindex="-1" autocomplete="off"></div>')
     out.append('                <button type="submit" class="submit-btn">Cast my vote</button>')
+    if f.get("delivery_note"):
+        out.append(f'                <p class="delivery-note">{esc(f["delivery_note"])}</p>')
     out.append(f'                <p class="fine-print">Sending this adds you to {esc(who)}\'s mailing list. '
                'A confirmation email follows; if it hasn\'t arrived within a few minutes, check your spam or junk folder. '
                'Unsubscribe from the bottom of any letter. Your address is used to send you these letters and nothing else. '
@@ -684,10 +702,11 @@ def render_hub(isbn, t, cfg):
         canonical=esc(canonical), og_image=og_image,
         ga4=cfg["ga4"], gtm=cfg["gtm"])
 
+    shown = t.get("name_html") or esc(t["name"])   # name_html: our own markup, e.g. an italic "of"
     body = [f'<main>\n    <a class="back-link" href="{esc(t["book_page"])}">'
-            f'{esc(t["name"])}</a>\n',
+            f'{shown}</a>\n',
             '    <div class="eyebrow">Bonus chapters</div>',
-            f'    <h1 class="page-title">{esc(t["name"])}</h1>',
+            f'    <h1 class="page-title">{shown}</h1>',
             f'    <div class="page-sub">by {esc(t["author"])}</div>']
 
     if t.get("intro"):
@@ -706,6 +725,68 @@ def render_hub(isbn, t, cfg):
     foot = (FOOT.replace("__ISBN__", isbn)
                 .replace("__BALLOT_STATE__", (t.get("ballot") or {}).get("state", "none")))
     return head + "\n".join(body) + foot
+
+
+
+THANKS = {
+    "thanks": {
+        "title": "One more step",
+        "lead": "Thank you — you have asked to join the mailing list. You are not on it yet.",
+        "body": ["We have just sent you a confirmation email. Click the link in it and you are on the list. "
+                 "If it is not in your inbox in a few minutes, please check your spam or junk folder — and if "
+                 "you find it there, marking it “not spam” will help future letters reach you."],
+        "vote": "Your vote for {title} is in. It counts now, whether or not you confirm.",
+    },
+    "already": {
+        "title": "You're already on the list",
+        "lead": "This email address is already signed up, so there is nothing more to do.",
+        "body": ["Letters will keep coming to the same address. If you would rather not receive them, "
+                 "there is an unsubscribe link at the bottom of every one."],
+        "vote": "Your vote for {title} is in.",
+    },
+}
+
+
+def render_thanks(kind, lst, cfg):
+    """Pages Zoho redirects to after the list's signup form. The same form serves the
+    newsletter page and every ballot, so the vote line only appears when this
+    device voted in the last 15 minutes (a note left by the ballot page)."""
+    c = THANKS[kind]
+    site = cfg["site"].rstrip("/")
+    url = f"{site}{lst['path']}{kind}.html"
+    head = HEAD.format(title=esc(f"{c['title']} | {lst['owner']}"), description=esc(c["lead"]),
+                       robots="noindex, nofollow", canonical=esc(url), og_image="",
+                       ga4=cfg["ga4"], gtm=cfg["gtm"])
+    body = ['<main>',
+            f'    <a class="back-link" href="{esc(lst.get("home", "/"))}">{esc(lst["owner"])}</a>',
+            f'    <h1 class="page-title">{esc(c["title"])}</h1>',
+            '    <div class="intro" style="margin-top:1.5rem">',
+            '        <p id="vote-line" style="display:none;font-weight:500"></p>',
+            f'        <p>{esc(c["lead"])}</p>']
+    body += [f'        <p>{esc(b)}</p>' for b in c["body"]]
+    body += ['    </div>', '</main>']
+    js = """
+<footer>
+    <div class="footer-name">Prahran Publishing</div>
+    <div class="copyright">&copy; Prahran Publishing</div>
+</footer>
+<script>
+(function () {
+    var v = null;
+    try { v = JSON.parse(localStorage.getItem('prahran-last-vote') || 'null'); } catch (e) {}
+    if (v && v.title && Date.now() - v.at < 15 * 60 * 1000) {
+        var el = document.getElementById('vote-line');
+        el.textContent = __VOTE__.replace('{title}', v.title);
+        el.style.display = 'block';
+        try { localStorage.removeItem('prahran-last-vote'); } catch (e) {}
+        if (typeof gtag === 'function') gtag('event', 'bonus_vote_landed', { kind: '__KIND__', chapter_title: v.title });
+    }
+})();
+</script>
+</body>
+</html>
+""".replace("__VOTE__", json.dumps(c["vote"])).replace("__KIND__", kind)
+    return head + "\n".join(body) + js
 
 
 REDIRECT = """<!DOCTYPE html>
@@ -788,6 +869,13 @@ def main():
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(render_hub(isbn, t, cfg))
         written.append((out, f"{t['name']} — {(t.get('ballot') or {}).get('state','no ballot')}"))
+
+    for slug, lst in (cfg.get("lists") or {}).items():
+        for kind in ("thanks", "already"):
+            out = ROOT / lst["path"].strip("/") / f"{kind}.html"
+            out.parent.mkdir(parents=True, exist_ok=True)
+            out.write_text(render_thanks(kind, lst, cfg))
+            written.append((out, f"{lst['owner']} list — Zoho {'new' if kind == 'thanks' else 'existing'}-contact redirect"))
 
     page, kind = render_index(live, cfg)
     idx = ROOT / "bonus" / "index.html"
