@@ -268,6 +268,35 @@
             display: block;
         }
 
+        /* ── Order through Bookstores ── */
+        .bookstore-block {
+            margin-top: 1.25rem; margin-bottom: 0.75rem;
+        }
+        .bookstore-heading {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1rem; font-weight: 400;
+            color: var(--text-muted); margin-bottom: 0.75rem;
+        }
+        .bookstore-list {
+            list-style: none; padding: 0; margin: 0;
+            display: flex; flex-wrap: wrap; gap: 0.6rem;
+        }
+        .bookstore-link {
+            display: inline-flex; align-items: baseline; gap: 0.45rem;
+            padding: 0.5rem 0.95rem;
+            border: 1px solid var(--accent); color: var(--accent);
+            font-size: 0.82rem; font-weight: 500;
+            letter-spacing: 0.03em; text-decoration: none;
+            transition: background 0.2s ease, color 0.2s ease;
+            white-space: nowrap;
+        }
+        .bookstore-link:hover { background: var(--accent); color: #fff; }
+        .bookstore-region {
+            font-size: 0.68rem; font-weight: 500;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            opacity: 0.7;
+        }
+
         .release-note {
             font-family: 'EB Garamond', Georgia, serif;
             font-size: 0.95rem; color: var(--text-muted);
@@ -359,11 +388,11 @@
             </div>
 
             <div class="buy-section">
-                <h2 class="buy-section-heading">Pre-order</h2>
+                <h2 class="buy-section-heading" id="buy-heading">Pre-order</h2>
 
                 <div class="buy-row">
                     <span class="buy-format-label">Paperback</span>
-                    <a class="buy-btn" href="https://prahran-publishing.square.site/product/the-art-of-surrender/O4XWYVSEJQCMGW22SDDLY5D7" target="_blank" rel="noopener">Pre-order &mdash; Prahran Publishing</a>
+                    <a class="buy-btn" id="direct-order" href="https://prahran-publishing.square.site/product/the-art-of-surrender/O4XWYVSEJQCMGW22SDDLY5D7" target="_blank" rel="noopener">Pre-order &mdash; Prahran Publishing</a>
                 </div>
                 <div class="buy-row">
                     <span class="buy-format-label">eBook</span>
@@ -385,7 +414,18 @@
                         </a>
                     </div>
                 </div>
-                <p class="release-note">Available 15 October 2026.</p>
+                <div class="bookstore-block">
+                    <h3 class="bookstore-heading">Order through your Favourite Bookstore</h3>
+                    <ul class="bookstore-list">
+                        <li><a class="bookstore-link" href="https://www.readings.com.au/product/9781922263988/the-art-of-surrender--blair-purvis--2026--9781922263988" target="_blank" rel="noopener">Readings <span class="bookstore-region">AU</span></a></li>
+                        <li><a class="bookstore-link" href="https://www.booktopia.com.au/the-art-of-surrender-blair-purvis/book/9781922263988.html" target="_blank" rel="noopener">Booktopia <span class="bookstore-region">AU</span></a></li>
+                        <li><a class="bookstore-link" href="https://www.fishpond.com.au/Books/Art-of-Surrender-Blair-Purvis/9781922263988" target="_blank" rel="noopener">Fishpond <span class="bookstore-region">AU</span></a></li>
+                        <li><a class="bookstore-link" href="https://www.wheelersbooks.com.au/product/The-Art-of-Surrender-Blair-Purvis/9781922263988" target="_blank" rel="noopener">Wheelers Books <span class="bookstore-region">AU</span></a></li>
+                        <li><a class="bookstore-link" href="https://www.barnesandnoble.com/w/the-art-of-surrender-blair-purvis/1151029581?ean=9781922263988" target="_blank" rel="noopener">Barnes &amp; Noble <span class="bookstore-region">US</span></a></li>
+                        <li><a class="bookstore-link" href="https://shop.bookvault.app/product/the-art-of-surrender/" target="_blank" rel="noopener">Bookvault <span class="bookstore-region">UK &middot; Special Edition</span></a></li>
+                    </ul>
+                </div>
+                <p class="release-note" id="release-note">Available 15 October 2026.</p>
             </div>
 
             <div class="book-meta">
@@ -461,6 +501,25 @@
     if (region && stores[region]) {
         el.href = 'https://www.' + stores[region] + '/dp/' + el.getAttribute('data-asin');
     }
+})();
+</script>
+
+<!-- Launch-day switch: from 15 Oct 2026 (Melbourne) "Pre-order" wording becomes "Order"/"Buy".
+     Remove once the static text has been updated after launch. -->
+<script>
+(function () {
+    if (Date.now() < Date.parse('2026-10-15T00:00:00+11:00')) return;
+    var h = document.getElementById('buy-heading');
+    if (h) h.textContent = 'Order';
+    var d = document.getElementById('direct-order');
+    if (d) d.innerHTML = d.innerHTML.replace('Pre-order', 'Order');
+    var n = document.getElementById('release-note');
+    if (n) n.textContent = 'Available now.';
+    document.querySelectorAll('.store-btn').forEach(function (a) {
+        a.title = a.title.replace('Pre-order on', 'Buy on');
+        var img = a.querySelector('img');
+        if (img) img.alt = img.alt.replace('Pre-order on', 'Buy on');
+    });
 })();
 </script>
 
