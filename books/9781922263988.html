@@ -275,34 +275,40 @@
             display: block;
         }
 
-        /* ── Order through Bookstores ── */
+        /* ── Order through your Favourite Bookstore ── */
         .bookstore-block {
-            margin-top: 1.25rem; margin-bottom: 0.75rem;
+            margin-top: 1.5rem; margin-bottom: 0.75rem;
         }
         .bookstore-heading {
             font-family: 'EB Garamond', Georgia, serif;
             font-size: 1rem; font-weight: 400;
-            color: var(--text-muted); margin-bottom: 0.75rem;
+            color: var(--text-muted); margin-bottom: 0.6rem;
         }
         .bookstore-list {
             list-style: none; padding: 0; margin: 0;
-            display: flex; flex-wrap: wrap; gap: 0.6rem;
         }
-        .bookstore-link {
-            display: inline-flex; align-items: baseline; gap: 0.45rem;
-            padding: 0.5rem 0.95rem;
-            border: 1px solid var(--accent); color: var(--accent);
-            font-size: 0.82rem; font-weight: 500;
-            letter-spacing: 0.03em; text-decoration: none;
-            transition: background 0.2s ease, color 0.2s ease;
+        .bookstore-list li {
+            display: flex; flex-wrap: wrap; align-items: baseline;
+            column-gap: 0.75rem; row-gap: 0.15rem;
+            margin-bottom: 0.4rem;
+            font-family: 'EB Garamond', Georgia, serif; font-size: 1.05rem;
+        }
+        .bookstore-country {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.7rem; font-weight: 500;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--text-muted); min-width: 8.5rem;
+        }
+        .bookstore-list a {
+            color: var(--accent); text-decoration: underline;
+            text-decoration-color: var(--border);
+            text-underline-offset: 3px;
             white-space: nowrap;
+            transition: text-decoration-color 0.2s ease;
         }
-        .bookstore-link:hover { background: var(--accent); color: #fff; }
-        .bookstore-region {
-            font-size: 0.68rem; font-weight: 500;
-            letter-spacing: 0.08em; text-transform: uppercase;
-            opacity: 0.7;
-        }
+        .bookstore-list a:hover { text-decoration-color: var(--accent); }
+        .bookstore-sep { color: var(--border); }
+        .bookstore-note { color: var(--text-muted); font-style: italic; font-size: 0.95rem; }
 
         .release-note {
             font-family: 'EB Garamond', Georgia, serif;
@@ -398,8 +404,8 @@
                 <h2 class="buy-section-heading" id="buy-heading">Pre-order</h2>
 
                 <div class="buy-row">
-                    <span class="buy-format-label">Paperback</span>
-                    <a class="buy-btn" id="direct-order" href="https://prahran-publishing.square.site/product/the-art-of-surrender/O4XWYVSEJQCMGW22SDDLY5D7" target="_blank" rel="noopener">Pre-order &mdash; Prahran Publishing</a>
+                    <span class="buy-format-label">Print</span>
+                    <a class="buy-btn" id="direct-order" href="https://prahran-publishing.square.site/product/the-art-of-surrender/O4XWYVSEJQCMGW22SDDLY5D7" target="_blank" rel="noopener">Pre-order Direct</a>
                 </div>
                 <div class="buy-row">
                     <span class="buy-format-label">eBook</span>
@@ -424,14 +430,9 @@
                 <div class="bookstore-block">
                     <h3 class="bookstore-heading">Order through your Favourite Bookstore</h3>
                     <ul class="bookstore-list">
-                        <li><a class="bookstore-link" href="https://www.readings.com.au/product/9781922263988/the-art-of-surrender--blair-purvis--2026--9781922263988" target="_blank" rel="noopener">Readings <span class="bookstore-region">AU</span></a></li>
-                        <li><a class="bookstore-link" href="https://www.booktopia.com.au/the-art-of-surrender-blair-purvis/book/9781922263988.html" target="_blank" rel="noopener">Booktopia <span class="bookstore-region">AU</span></a></li>
-                        <li><a class="bookstore-link" href="https://www.fishpond.com.au/Books/Art-of-Surrender-Blair-Purvis/9781922263988" target="_blank" rel="noopener">Fishpond <span class="bookstore-region">AU</span></a></li>
-                        <li><a class="bookstore-link" href="https://www.wheelersbooks.com.au/product/The-Art-of-Surrender-Blair-Purvis/9781922263988" target="_blank" rel="noopener">Wheelers Books <span class="bookstore-region">AU</span></a></li>
-                        <li><a class="bookstore-link" href="https://www.amazon.com.au/dp/1922263982" target="_blank" rel="noopener">Amazon <span class="bookstore-region">AU</span></a></li>
-                        <li><a class="bookstore-link" href="https://www.barnesandnoble.com/w/the-art-of-surrender-blair-purvis/1151029581?ean=9781922263988" target="_blank" rel="noopener">Barnes &amp; Noble <span class="bookstore-region">US</span></a></li>
-                        <li><a class="bookstore-link" href="https://bookshop.org/p/books/the-art-of-surrender/49471b0e9e3bea2a?ean=9781922263988" target="_blank" rel="noopener">Bookshop.org <span class="bookstore-region">US</span></a></li>
-                        <li><a class="bookstore-link" href="https://shop.bookvault.app/product/the-art-of-surrender/" target="_blank" rel="noopener">Bookvault <span class="bookstore-region">UK &middot; Special Edition</span></a></li>
+                        <li><span class="bookstore-country">Australia</span><span><a href="https://www.readings.com.au/product/9781922263988/the-art-of-surrender--blair-purvis--2026--9781922263988" target="_blank" rel="noopener">Readings</a> <span class="bookstore-sep" aria-hidden="true">&middot;</span> <a href="https://www.booktopia.com.au/the-art-of-surrender-blair-purvis/book/9781922263988.html" target="_blank" rel="noopener">Booktopia</a> <span class="bookstore-sep" aria-hidden="true">&middot;</span> <a href="https://www.fishpond.com.au/Books/Art-of-Surrender-Blair-Purvis/9781922263988" target="_blank" rel="noopener">Fishpond</a> <span class="bookstore-sep" aria-hidden="true">&middot;</span> <a href="https://www.wheelersbooks.com.au/product/The-Art-of-Surrender-Blair-Purvis/9781922263988" target="_blank" rel="noopener">Wheelers Books</a> <span class="bookstore-sep" aria-hidden="true">&middot;</span> <a href="https://www.amazon.com.au/dp/1922263982" target="_blank" rel="noopener">Amazon</a></span></li>
+                        <li><span class="bookstore-country">United States</span><span><a href="https://www.barnesandnoble.com/w/the-art-of-surrender-blair-purvis/1151029581?ean=9781922263988" target="_blank" rel="noopener">Barnes &amp; Noble</a> <span class="bookstore-sep" aria-hidden="true">&middot;</span> <a href="https://bookshop.org/p/books/the-art-of-surrender/49471b0e9e3bea2a?ean=9781922263988" target="_blank" rel="noopener">Bookshop.org</a></span></li>
+                        <li><span class="bookstore-country">United Kingdom</span><span><a href="https://shop.bookvault.app/product/the-art-of-surrender/" target="_blank" rel="noopener">Bookvault</a> <span class="bookstore-note">&mdash; Special Edition hardcover</span></span></li>
                     </ul>
                 </div>
                 <p class="release-note" id="release-note">Available 15 October 2026.</p>
