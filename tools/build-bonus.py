@@ -579,8 +579,8 @@ def render_vote_form(b):
     out.append('                <div class="fields">')
     out.append('                    <div class="field"><label for="v-first">First name</label>'
                '<input type="text" id="v-first" name="FIRSTNAME" required autocomplete="given-name"></div>')
-    out.append('                    <div class="field"><label for="v-last">Last name <span class="opt">(optional)</span></label>'
-               '<input type="text" id="v-last" name="LASTNAME" autocomplete="family-name"></div>')
+    out.append('                    <div class="field"><label for="v-last">Last name</label>'
+               '<input type="text" id="v-last" name="LASTNAME" required autocomplete="family-name"></div>')
     out.append('                    <div class="field wide"><label for="v-email">Email address</label>'
                '<input type="email" id="v-email" name="CONTACT_EMAIL" required autocomplete="email"></div>')
     out.append('                </div>')
