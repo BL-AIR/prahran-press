@@ -26,58 +26,49 @@
             "id": "a",
             "group": "lucas",
             "title": "The Crop",
-            "draft": true,
-            "pitch": "Lucas at eighteen: a mountain, pack horses and a superior officer. Lessons in discipline."
+            "pitch": "Lucas at eighteen: a mountain, pack horses and a cruel superior officer."
           },
           {
             "id": "b",
             "group": "lucas",
-            "title": "The Regatta",
-            "draft": true,
-            "pitch": "A school trip, 2011. Lucas is fourteen, and someone takes the photograph of happiness that will hang on his wall."
+            "title": "Regatta",
+            "pitch": "Lucas is fourteen on a school trip in 2011. Someone takes the photograph of Lucas in his happiest moment. He kept that picture on his wall for sixteen years."
           },
           {
             "id": "c",
             "group": "lucas",
             "title": "Sochi",
-            "title_is_working": true,
-            "draft": true,
-            "pitch": "Lucas is seventeen. Yasmin makes the Olympic team and Lucas doesn't. A friendship under the hardest test."
+            "pitch": "Lucas is seventeen. Yasmin makes the Sochi Winter Olympic team and Lucas doesn't. A friendship under the hardest test."
           },
           {
             "id": "d",
             "group": "lucas",
             "title": "Can the Cannes",
-            "draft": true,
             "pitch": "Lazarus, Judy and the Phoenix at Cannes. By the end of the week Judy is ready to throw him overboard."
-          },
-          {
-            "id": "e",
-            "group": "ayman",
-            "title": "The Lost Brother",
-            "draft": false,
-            "pitch": "Beirut, 1979. Two half-brothers, two faiths, and a war that split them."
           },
           {
             "id": "f",
             "group": "ayman",
-            "title": "I'll Cut Your Throat and Cook Rice in It",
-            "draft": false,
-            "pitch": "Beirut. Two boys, a summer with a grandmother who frightens them, and the one thing she says that they'll never forget."
-          },
-          {
-            "id": "g",
-            "group": "ayman",
-            "title": "Rugby Scrums at the Rock",
-            "draft": true,
-            "pitch": "Gibraltar. A girlfriend called Zoe, a rugby changing room, and a feeling Ayman can't yet name."
+            "title": "I’ll Cut Your Throat and Cook Rice in It",
+            "pitch": "Beirut 2007. Two boys, a summer with a grandmother who frightens them, and the one thing she says that they'll never forget."
           },
           {
             "id": "h",
             "group": "ayman",
             "title": "Serrano Spies in the Saliba Shop",
-            "draft": true,
             "pitch": "Two boys minding the family shop decide the stranger at the counter is a spy from Serrano Marine. Is he?"
+          },
+          {
+            "id": "g",
+            "group": "ayman",
+            "title": "Rugby Scrums at the Rock",
+            "pitch": "Gibraltar. A girlfriend called Zoe, a rugby changing room, and a feeling Ayman can't yet name."
+          },
+          {
+            "id": "e",
+            "group": "ayman",
+            "title": "The Lost Brother",
+            "pitch": "Beirut, 1979. Two half-brothers - Samir and Ayman, two faiths, and a war that split them."
           }
         ],
         "result": {
