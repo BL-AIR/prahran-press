@@ -1,61 +1,123 @@
 {
   "_comment": "Bonus material hub, one per title. Printed/spoken URL is /books/<isbn>/bonus/chapters.html and never changes. Edit this file, then run: python3 tools/build-bonus.py",
-
   "site": "https://prahran.press",
   "ga4": "G-M64RTG88Y3",
   "gtm": "GTM-T4FVHTD",
-
   "titles": {
-
     "9781922263988": {
       "name": "The Art of Surrender",
       "author": "Blair Purvis",
       "cover": "/images/the-art-of-surrender.jpg",
       "book_page": "/books/9781922263988",
       "live": true,
-      "featured": true,
-
+      "featured": false,
       "intro": [
         "There is more of this story than fits between the covers.",
         "Some of it happens before the novel starts. Some of it happens in the rooms the novel walks past. It gets written here, and you get a say in what gets written next."
       ],
-
       "ballot": {
         "state": "open",
         "heading": "What gets written next",
-        "blurb": "Four things could happen next. Only one of them is going to. Pick the one you want and I will write it.",
-        "closes": "2026-12-14",
-        "closes_label": "Voting closes 14 December 2026",
-        "zoho_embed": null,
+        "blurb": "Eight chapters could come before the novel begins. Four belong to Lucas, four to Ayman. Only one of them is going to be written. Pick the one you want and I will write it.",
+        "closes": "2027-02-01",
+        "closes_label": "Voting closes 1 February 2027",
         "options": [
           {
             "id": "a",
-            "title": "Gibraltar",
-            "pitch": "DRAFT — replace. The week before the novel opens, from Lucas's side of it."
+            "group": "lucas",
+            "title": "The Crop",
+            "draft": true,
+            "pitch": "Lucas at eighteen: a mountain, pack horses and a superior officer. Lessons in discipline."
           },
           {
             "id": "b",
-            "title": "The Phoenix",
-            "pitch": "DRAFT — replace. A night on the boat that nobody in the novel ever talks about again."
+            "group": "lucas",
+            "title": "The Regatta",
+            "draft": true,
+            "pitch": "A school trip, 2011. Lucas is fourteen, and someone takes the photograph of happiness that will hang on his wall."
           },
           {
             "id": "c",
-            "title": "Lazarus",
-            "pitch": "DRAFT — replace. How they met, years earlier, told without excuses."
+            "group": "lucas",
+            "title": "Sochi",
+            "title_is_working": true,
+            "draft": true,
+            "pitch": "Lucas is seventeen. Yasmin makes the Olympic team and Lucas doesn't. A friendship under the hardest test."
           },
           {
             "id": "d",
-            "title": "Berlin",
-            "pitch": "DRAFT — replace. What Ayman did with the three days he claims he spent alone."
+            "group": "lucas",
+            "title": "Can the Cannes",
+            "draft": true,
+            "pitch": "Lazarus, Judy and the Phoenix at Cannes. By the end of the week Judy is ready to throw him overboard."
+          },
+          {
+            "id": "e",
+            "group": "ayman",
+            "title": "The Lost Brother",
+            "draft": false,
+            "pitch": "Beirut, 1979. Two half-brothers, two faiths, and a war that split them."
+          },
+          {
+            "id": "f",
+            "group": "ayman",
+            "title": "I'll Cut Your Throat and Cook Rice in It",
+            "draft": false,
+            "pitch": "Beirut. Two boys, a summer with a grandmother who frightens them, and the one thing she says that they'll never forget."
+          },
+          {
+            "id": "g",
+            "group": "ayman",
+            "title": "Rugby Scrums at the Rock",
+            "draft": true,
+            "pitch": "Gibraltar. A girlfriend called Zoe, a rugby changing room, and a feeling Ayman can't yet name."
+          },
+          {
+            "id": "h",
+            "group": "ayman",
+            "title": "Serrano Spies in the Saliba Shop",
+            "draft": true,
+            "pitch": "Two boys minding the family shop decide the stranger at the counter is a spy from Serrano Marine. Is he?"
           }
         ],
         "result": {
           "winner_id": null,
           "note": ""
+        },
+        "groups": [
+          {
+            "id": "lucas",
+            "label": "Lucas"
+          },
+          {
+            "id": "ayman",
+            "label": "Ayman"
+          }
+        ],
+        "form": {
+          "_comment": "Hand-built form posting to the Zoho Campaigns author-list signup form. vote_field is the Campaigns custom field's form name; set it once the field exists. Until then the form is inert.",
+          "action": "https://zcmp-user.maillist-manage.com.au/weboptin.zc",
+          "vote_field": "CONTACT_CF1",
+          "hidden": {
+            "zc_trackCode": "ZCFORMVIEW",
+            "viewFrom": "URL_ACTION",
+            "submitType": "optinCustomView",
+            "lD": "1b2edca89780269",
+            "zx": "11a1a2060d",
+            "zcvers": "2.0",
+            "oldListIds": "",
+            "mode": "OptinCreateView",
+            "zcld": "1b2edca89780269",
+            "zctd": "1b2edca8977f6b9",
+            "zc_formIx": "3zb056748e942a3c9af7c65fa1efe394553698a2d84095c61843ac01549c5149ef"
+          },
+          "list_owner": "Blair Purvis",
+          "list_name": "Blair Purvis",
+          "zoho_form": "Author list signup - website (50364000000028028)",
+          "vote_field_label": "Bonus Chapter Vote"
         }
       },
-
-      "chapters": [
+      "chapters_hidden_until_written": [
         {
           "title": "Chapter Minus One",
           "status": "available",
@@ -65,13 +127,8 @@
           "spoiler": false
         }
       ],
-
-      "signup": {
-        "heading": "Tell me when it's written",
-        "blurb": "No schedule, no newsletter treadmill. An email when the next one goes up, and nothing else.",
-        "zoho_embed": null
-      }
+      "chapters": [],
+      "qr_only": true
     }
-
   }
 }
