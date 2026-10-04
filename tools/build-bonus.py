@@ -443,8 +443,8 @@ FOOT = """
             ballot_state: '__BALLOT_STATE__'
         });
     }
-    /* Every submission is a vote, confirmed or not, so record it here as well
-       as in Zoho: GA4 gets bonus_vote with the chapter, before the form leaves. */
+    /* The official count is Zoho (confirmed subscribers only). GA4 bonus_vote logs
+       every submission as a cross-check, confirmed or not. */
     var form = document.getElementById('vote-form');
     if (!form) return;
     var box = document.getElementById('ballot-box');
@@ -483,7 +483,7 @@ FOOT = """
             }));
         } catch (err) {}
         var t = document.getElementById('vote-thanks-title');
-        if (t) t.textContent = 'Your vote for ' + title + ' is in.';
+        if (t) t.textContent = 'Your vote for ' + title + ' is recorded.';
         setTimeout(function () {
             box.classList.add('is-voted');
             box.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -574,8 +574,7 @@ def render_vote_form(b):
     out.append('            <div class="vote-step">')
     out.append('                <div class="vote-step-title">Then tell me who you are</div>')
     out.append('                <p class="vote-step-sub">Voting is for people on the list. '
-               'Your vote counts as soon as you send it; the email that follows just confirms '
-               'you want the letters.</p>')
+               'Your vote counts once you click the link in the confirmation email that follows.</p>')
     out.append('                <div class="fields">')
     out.append('                    <div class="field"><label for="v-first">First name</label>'
                '<input type="text" id="v-first" name="FIRSTNAME" required autocomplete="given-name"></div>')
@@ -599,7 +598,7 @@ def render_vote_form(b):
     out.append('        </form>')
 
     out.append('        <div class="vote-thanks" id="vote-thanks" role="status" aria-live="polite">')
-    out.append('            <p><strong id="vote-thanks-title">Your vote is in.</strong></p>')
+    out.append('            <p><strong id="vote-thanks-title">Your vote is recorded.</strong></p>')
     out.append(f'            <p>A confirmation email is on its way from {esc(who)}. Click the link in it to join the list '
                '&mdash; and if it isn\'t in your inbox within a few minutes, look in spam or junk.</p>')
     out.append('            <p>The result goes up on this page when voting closes.</p>')
@@ -735,7 +734,7 @@ THANKS = {
         "body": ["We have just sent you a confirmation email. Click the link in it and you are on the list. "
                  "If it is not in your inbox in a few minutes, please check your spam or junk folder — and if "
                  "you find it there, marking it “not spam” will help future letters reach you."],
-        "vote": "Your vote for {title} is in. It counts now, whether or not you confirm.",
+        "vote": "Your vote for {title} is recorded. It counts once you confirm your email.",
     },
     "already": {
         "title": "You're already on the list",

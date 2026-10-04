@@ -427,7 +427,7 @@
             </fieldset>
             <div class="vote-step">
                 <div class="vote-step-title">Then tell me who you are</div>
-                <p class="vote-step-sub">Voting is for people on the list. Your vote counts as soon as you send it; the email that follows just confirms you want the letters.</p>
+                <p class="vote-step-sub">Voting is for people on the list. Your vote counts once you click the link in the confirmation email that follows.</p>
                 <div class="fields">
                     <div class="field"><label for="v-first">First name</label><input type="text" id="v-first" name="FIRSTNAME" required autocomplete="given-name"></div>
                     <div class="field"><label for="v-last">Last name</label><input type="text" id="v-last" name="LASTNAME" required autocomplete="family-name"></div>
@@ -441,7 +441,7 @@
             </div>
         </form>
         <div class="vote-thanks" id="vote-thanks" role="status" aria-live="polite">
-            <p><strong id="vote-thanks-title">Your vote is in.</strong></p>
+            <p><strong id="vote-thanks-title">Your vote is recorded.</strong></p>
             <p>A confirmation email is on its way from Blair Purvis. Click the link in it to join the list &mdash; and if it isn't in your inbox within a few minutes, look in spam or junk.</p>
             <p>The result goes up on this page when voting closes.</p>
         </div>
@@ -491,8 +491,8 @@
             ballot_state: 'open'
         });
     }
-    /* Every submission is a vote, confirmed or not, so record it here as well
-       as in Zoho: GA4 gets bonus_vote with the chapter, before the form leaves. */
+    /* The official count is Zoho (confirmed subscribers only). GA4 bonus_vote logs
+       every submission as a cross-check, confirmed or not. */
     var form = document.getElementById('vote-form');
     if (!form) return;
     var box = document.getElementById('ballot-box');
@@ -531,7 +531,7 @@
             }));
         } catch (err) {}
         var t = document.getElementById('vote-thanks-title');
-        if (t) t.textContent = 'Your vote for ' + title + ' is in.';
+        if (t) t.textContent = 'Your vote for ' + title + ' is recorded.';
         setTimeout(function () {
             box.classList.add('is-voted');
             box.scrollIntoView({ behavior: 'smooth', block: 'start' });

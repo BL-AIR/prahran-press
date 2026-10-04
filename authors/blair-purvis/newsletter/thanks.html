@@ -359,7 +359,7 @@
     try { v = JSON.parse(localStorage.getItem('prahran-last-vote') || 'null'); } catch (e) {}
     if (v && v.title && Date.now() - v.at < 15 * 60 * 1000) {
         var el = document.getElementById('vote-line');
-        el.textContent = "Your vote for {title} is in. It counts now, whether or not you confirm.".replace('{title}', v.title);
+        el.textContent = "Your vote for {title} is recorded. It counts once you confirm your email.".replace('{title}', v.title);
         el.style.display = 'block';
         try { localStorage.removeItem('prahran-last-vote'); } catch (e) {}
         if (typeof gtag === 'function') gtag('event', 'bonus_vote_landed', { kind: 'thanks', chapter_title: v.title });
