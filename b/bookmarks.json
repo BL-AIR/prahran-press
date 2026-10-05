@@ -22,7 +22,8 @@
         "b4": "Design 4 - bonus chapters",
         "bcf": "Backmatter - book club facilitator notes",
         "bcr": "Backmatter - book club reader's notes",
-        "bcx": "Backmatter - bonus chapter ballot"
+        "bcx": "Backmatter - bonus chapter ballot",
+        "tsx": "Retail trade sheet - bonus chapter ballot"
       },
       "batches": {
         "b1/l00": {
@@ -74,6 +75,9 @@
           "to": "https://prahran.press/downloads/the-art-of-surrender-book-club-reader-notes.pdf"
         },
         "bcx/l00": {
+          "to": "https://prahran.press/books/9781922263988/bonus/chapters.html"
+        },
+        "tsx/l00": {
           "to": "https://prahran.press/books/9781922263988/bonus/chapters.html"
         }
       }
