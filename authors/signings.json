@@ -1,0 +1,19 @@
+{
+  "_comment": "Author signing pages at /authors/<slug>/signings/ — the printed URL never changes. To open signings for an author: create their 'Author Signing — <Name>' service in Square, make an Advanced widget showing only that service, paste the widget id below, then run: python3 tools/build-signings.py",
+  "square_location": "SA2C62SDFDXJ3",
+  "authors": {
+    "blair-purvis": {
+      "name": "Blair Purvis",
+      "book": "The Art <em>of</em> Surrender",
+      "square_widget": "n3gf9ia6ia2fgq"
+    },
+    "mark-nicholls": {
+      "name": "Mark Nicholls",
+      "square_widget": null
+    },
+    "masoud-shakarami": {
+      "name": "Masoud Shakarami",
+      "square_widget": null
+    }
+  }
+}
