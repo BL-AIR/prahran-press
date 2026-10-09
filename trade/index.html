@@ -164,9 +164,9 @@
       $("total").textContent = ls.reduce((n, l) => n + l.qty, 0);
     } else {
       $("totalLabel").textContent = "Trade total";
-      // Square applies the discount to the whole order, so round once at the end to match the invoice.
+      // Square rounds the order-level discount (half up) and subtracts it, so do the same to match the invoice.
       const rrp = ls.reduce((n, l) => n + l.qty * items.find(i => i.id === l.id).rrp_cents, 0);
-      $("total").textContent = money(Math.round(rrp * (100 - discountPct) / 100));
+      $("total").textContent = money(rrp - Math.round(rrp * discountPct / 100));
     }
   }
 
