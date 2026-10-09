@@ -62,6 +62,9 @@
   .terms { font-size:16px; color:var(--text-muted); }
   .terms li { margin-bottom:6px; }
   .hp { position:absolute; left:-9999px; }
+  .optin { display:grid; grid-template-columns:20px 1fr; gap:10px; align-items:start; font-family:Inter,system-ui,sans-serif; font-size:14px; font-weight:400; margin:0 0 16px; cursor:pointer; }
+  .optin input { width:16px; height:16px; margin:2px 0 0; accent-color:var(--accent); }
+  .optin small { display:block; color:var(--text-muted); font-size:13px; margin-top:2px; }
   details.newshop { border:1px solid var(--border); background:var(--cream); padding:0 16px; margin-bottom:16px; }
   details.newshop summary { cursor:pointer; padding:12px 0; font-family:Inter,system-ui,sans-serif; font-size:14px; font-weight:500; color:var(--accent); }
   details.newshop[open] { padding-bottom:4px; }
@@ -162,6 +165,7 @@
       <div class="total" id="totalRow" hidden><span id="totalLabel">Trade total</span><strong id="total">$0.00</strong></div>
     </div>
 
+    <label class="optin" for="tradeNews"><input type="checkbox" id="tradeNews"><span>Send me Trade News from Prahran Publishing<small>New titles, trade offers and availability. We'll email you to confirm first; unsubscribe any time.</small></span></label>
     <div id="turnstile"></div>
     <button type="submit" id="submit">Place order</button>
     <div class="msg" id="msg" role="status"></div>
@@ -255,6 +259,24 @@
     }
   }
 
+  // Trade News opt-in: submits the shop's email to the Zoho Campaigns "Publisher list signup" form
+  // (double opt-in, so Zoho emails them to confirm). Fire-and-forget; never blocks the order.
+  function joinTradeNews(email) {
+    const s = { name: $("shopName").value.trim(), contact: $("contact").value.trim() };
+    const [first, ...rest] = s.contact.split(/\s+/);
+    const f = new URLSearchParams({
+      zc_trackCode: "ZCFORMVIEW", viewFrom: "URL_ACTION", submitType: "optinCustomView",
+      lD: "1b2edca89782d67", zx: "11a1a2060d", zcvers: "2.0", oldListIds: "", mode: "OptinCreateView",
+      zcld: "1b2edca89782d67", zctd: "1b2edca8977f6b9",
+      zc_formIx: "3zc6e3ff94e1fff4b1d152fc0655eb7203d344f60e288c92aa0590f42e27f228e9",
+      CONTACT_EMAIL: email, FIRSTNAME: first || "", LASTNAME: rest.join(" "), COMPANYNAME: s.name
+    });
+    try {
+      fetch("https://zcmp-user.maillist-manage.com.au/weboptin.zc", { method: "POST", mode: "no-cors", body: f, keepalive: true }).catch(() => {});
+    } catch (e) {}
+    track("trade_newsletter_optin");
+  }
+
   function showDone(message, ls) {
     $("doneMsg").textContent = message;
     const t = $("doneTable"); t.innerHTML = "";
@@ -321,7 +343,9 @@
       const d = await r.json();
       if (d.ok) {
         track("trade_order_placed", { trade_mode: mode(), copies, currency: "AUD", value: mode() === "consignment" ? 0 : tradeValue, first_order: /first order|trade agreement/.test(d.message) ? "yes" : "no" });
-        showDone(d.message, ls);
+        const news = $("tradeNews").checked;
+        if (news) joinTradeNews(email);
+        showDone(d.message + (news ? " Check your inbox for an email asking you to confirm your Trade News subscription." : ""), ls);
       }
       else {
         track("trade_order_error", { reason: d.need_details ? "missing_shop_details" : String(d.error || "").slice(0, 90) });
