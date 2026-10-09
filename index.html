@@ -450,6 +450,14 @@
             text-decoration: underline;
         }
         /* ── Gift Card ── */
+        .trade-section p { max-width: 36rem; margin-left: auto; margin-right: auto; }
+        .trade-btn {
+            display: inline-block; margin-top: 0.5rem; padding: 0.75rem 1.6rem;
+            border: 1px solid var(--accent, #2A4232); color: var(--accent, #2A4232);
+            text-decoration: none; letter-spacing: 0.03em;
+            font-style: normal; font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; font-weight: 500;
+        }
+        .trade-btn:hover { background: var(--accent, #2A4232); color: #fff; }
         .gift-card-section {
             border-top: 1px solid var(--border);
             padding: 4rem 0;
@@ -540,7 +548,7 @@
 <p class="book-description">Ayman Saliba arrives at a Moroccan hamm&#257;m uncertain of everything. Lucas Pfifer is already there &#8212; wealthy, Swiss, composed, and quietly falling apart. What begins in El Jadida unfolds across the Mediterranean, the Alps, and finally Sydney: a novel about power, shame, and the cost of allowing yourself to be truly known.</p>
 <p class="book-description" style="margin-top: 0.85rem; font-style: italic; font-family: 'EB Garamond', Georgia, serif; font-size: 1rem;">Available 15 October 2026.</p>
 <div class="book-formats" style="margin-top: 1.5rem;">
-<a class="buy-btn" href="https://prahran-publishing.square.site/product/the-art-of-surrender/O4XWYVSEJQCMGW22SDDLY5D7" rel="noopener" target="_blank">Pre-order &mdash; $39.99</a>
+<a class="buy-btn" href="https://prahran-publishing.square.site/product/the-art-of-surrender/O4XWYVSEJQCMGW22SDDLY5D7" rel="noopener" target="_blank">Pre-order &mdash; $39.95</a>
 </div>
 </div>
 </div>
@@ -704,6 +712,12 @@
 <img alt="Purchase a Prahran Publishing Gift Card" src="images/PrahranPublishingGiftCard.png"/>
 </a>
 </section>
+<!-- Bookshops & trade -->
+<section class="gift-card-section trade-section">
+<h2>Bookshops &amp; Trade</h2>
+<p>Stock our titles in your shop at 50% off RRP, on invoice with 14-day terms, or on consignment. Prefer to pay by card? Our online shop works for bookshops too.</p>
+<p><a class="trade-btn" href="/trade/" rel="nofollow">Trade terms &amp; ordering</a></p>
+</section>
 </main>
 <footer>
 <div class="footer-name">Prahran Publishing</div>
@@ -714,7 +728,7 @@
         Sales Enquiries: <a href="mailto:sales@prahran.press">sales@prahran.press</a>
 </div>
 <div class="footer-contact" style="margin-top: 0.4rem;">ABN: 19 018 340 643</div>
-    <div class="footer-contact" style="margin-top:0.75rem; font-size:0.8rem;"><a href="/publishing/newsletter/">Trade News</a> &nbsp;&middot;&nbsp; <a href="/privacy.html">Privacy Policy</a></div>
+    <div class="footer-contact" style="margin-top:0.75rem; font-size:0.8rem;"><a href="/trade/" rel="nofollow">Bookshops &amp; Trade</a> &nbsp;&middot;&nbsp; <a href="/publishing/newsletter/">Trade News</a> &nbsp;&middot;&nbsp; <a href="/privacy.html">Privacy Policy</a></div>
     <p class="copyright">© 2026 Prahran Publishing. All rights reserved.</p>
 </footer>
 <script>
@@ -742,6 +756,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     value: price,
                     items: [{ item_name: title, item_variant: variant, price: price, quantity: 1 }]
                 });
+            }
+        });
+    });
+
+    // Trade funnel: clicks through to the trade order page
+    document.querySelectorAll('a[href="/trade/"]').forEach(function (a) {
+        a.addEventListener('click', function () {
+            if (typeof gtag === 'function') {
+                gtag('event', 'trade_link_click', { link_location: a.closest('footer') ? 'footer' : 'home_section' });
             }
         });
     });

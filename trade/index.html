@@ -4,7 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Trade Orders — Prahran Publishing</title>
-<meta name="robots" content="noindex">
+<meta name="robots" content="noindex, nofollow">
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M64RTG88Y3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-M64RTG88Y3');
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
@@ -179,6 +187,9 @@
   const TURNSTILE_SITE_KEY = "0x4AAAAAAFSIChVZl3j-ZPCs";
 
   const $ = id => document.getElementById(id);
+  // Trade funnel events for Google Analytics (no email or shop details are sent).
+  const track = (name, params) => { try { if (typeof gtag === "function") gtag("event", name, params || {}); } catch (e) {} };
+  let started = false, detailsSeen = false;
   const money = c => "$" + (c / 100).toFixed(2);
   let items = [], discountPct = 50;
 
@@ -270,6 +281,8 @@
   function show(text, ok) { const m = $("msg"); m.textContent = text; m.className = "msg " + (ok ? "ok" : "err"); }
 
   document.querySelectorAll('input[name=mode]').forEach(r => r.addEventListener("change", render));
+  $("order").addEventListener("input", () => { if (!started) { started = true; track("trade_form_start"); } });
+  $("newshop").addEventListener("toggle", () => { if ($("newshop").open && !detailsSeen) { detailsSeen = true; track("trade_new_shop_details_open"); } });
 
   fetch(API + "/items").then(r => r.json()).then(d => {
     if (!d.ok) throw new Error();
@@ -293,6 +306,10 @@
     if (!ls.length) return show("Please enter a quantity for at least one edition.", false);
     if (mode() === "consignment" && ls.reduce((n, l) => n + l.qty, 0) < 3) return show("Consignment starts at 3 copies.", false);
 
+    const copies = ls.reduce((n, l) => n + l.qty, 0);
+    const rrp = ls.reduce((n, l) => n + l.qty * items.find(i => i.id === l.id).rrp_cents, 0);
+    const tradeValue = (rrp - Math.round(rrp * discountPct / 100)) / 100;
+    track("trade_order_submit", { trade_mode: mode(), copies });
     const btn = $("submit"); btn.disabled = true; btn.textContent = "Sending…";
     try {
       const tsInput = document.querySelector('[name="cf-turnstile-response"]');
@@ -302,8 +319,12 @@
           shop: { name: $("shopName").value, contact: $("contact").value, phone: $("phone").value, street: $("street").value, suburb: $("suburb").value, state: $("state").value, postcode: $("postcode").value } })
       });
       const d = await r.json();
-      if (d.ok) { showDone(d.message, ls); }
+      if (d.ok) {
+        track("trade_order_placed", { trade_mode: mode(), copies, currency: "AUD", value: mode() === "consignment" ? 0 : tradeValue, first_order: /first order|trade agreement/.test(d.message) ? "yes" : "no" });
+        showDone(d.message, ls);
+      }
       else {
+        track("trade_order_error", { reason: d.need_details ? "missing_shop_details" : String(d.error || "").slice(0, 90) });
         show(d.error, false); btn.disabled = false; btn.textContent = "Place order"; if (window.turnstile && typeof window.turnstile.reset === "function") window.turnstile.reset();
         if (d.need_details) { $("newshop").open = true; const first = ["shopName","street","suburb","state","postcode"].find(id => !$(id).value.trim()) || "shopName"; $(first).focus(); $("newshop").scrollIntoView({ behavior: "smooth", block: "start" }); }
       }
