@@ -59,7 +59,7 @@
 
 <main>
   <h1>Trade Orders</h1>
-  <p class="lede">For bookshops ordering direct from the press.</p>
+  <p class="lede">For bookshops with a Prahran Publishing trade account.</p>
 
   <form id="order" novalidate>
     <div class="card">
@@ -84,7 +84,7 @@
       <h2>How would you like to stock it?</h2>
       <div class="modes ui">
         <label class="mode"><input type="radio" name="mode" value="firm" checked>Direct order
-          <small>50% off RRP · invoice on 30-day terms · returnable within 90 days</small></label>
+          <small>50% off RRP · invoice on 14-day terms · returnable within 90 days</small></label>
         <label class="mode"><input type="radio" name="mode" value="consignment">Consignment
           <small>Minimum 3 copies · settled quarterly · paperbacks only</small></label>
       </div>
@@ -104,11 +104,12 @@
   <div class="card terms">
     <h2>Terms in brief</h2>
     <ul>
+      <li>Ordering on invoice needs a signed trade agreement. New to us? Submit your order and we'll email the agreement first; once it's signed we'll confirm the order.</li>
       <li>Nothing is charged when you submit. We check every order and email your invoice, usually within one business day.</li>
       <li>Pay by card from the invoice, or by bank transfer quoting the invoice number.</li>
       <li>Delivery is free within metropolitan Melbourne, and free elsewhere on 5 or more copies.</li>
       <li>The Deluxe hardback is supplied on direct order only.</li>
-      <li>Not yet trading with us? Submit anyway, or email <a href="mailto:info@prahran.press">info@prahran.press</a>, and we'll set up your account.</li>
+      <li>Prefer to pay by card now? Order from our <a href="/">online shop</a> instead.</li>
     </ul>
   </div>
 </main>
@@ -177,7 +178,7 @@
     if (!d.ok) throw new Error();
     items = d.items; discountPct = d.discount_pct || 50; render();
   }).catch(() => {
-    $("items").innerHTML = '<p class="ui">The order list is unavailable right now. Please email <a href="mailto:info@prahran.press">info@prahran.press</a>.</p>';
+    $("items").innerHTML = '<p class="ui">The order list is unavailable right now. Please email <a href="mailto:trade.sales@prahran.press">trade.sales@prahran.press</a>.</p>';
   });
 
   if (TURNSTILE_SITE_KEY) {
@@ -206,7 +207,7 @@
       if (d.ok) { show(d.message, true); $("order").querySelectorAll("input,button").forEach(x => x.disabled = true); btn.textContent = "Order sent"; }
       else { show(d.error, false); btn.disabled = false; btn.textContent = "Place order"; if (window.turnstile) turnstile.reset(); }
     } catch {
-      show("We couldn't send that just now. Please try again, or email info@prahran.press.", false);
+      show("We couldn't send that just now. Please try again, or email trade.sales@prahran.press.", false);
       btn.disabled = false; btn.textContent = "Place order";
     }
   });
