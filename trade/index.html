@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trade Orders — Prahran Publishing</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#F7F4EF; --bg-card:#FFFFFF; --text:#1C1C1C; --text-muted:#6B6255; --accent:#2A4232; --accent-light:#3D5A47; --border:#DDD8CE; --cream:#EDE9E1; --error:#8A2C1E; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:"EB Garamond",Georgia,serif; font-size:19px; line-height:1.6; }
+  header { text-align:center; padding:40px 16px 8px; }
+  header a { color:inherit; text-decoration:none; }
+  .press-logo { width:64px; height:auto; }
+  .press-name { font-size:15px; letter-spacing:.3em; text-transform:uppercase; margin-top:8px; }
+  main { max-width:680px; margin:0 auto; padding:16px 16px 64px; }
+  h1 { font-weight:400; font-size:34px; text-align:center; margin:16px 0 4px; }
+  .lede { text-align:center; color:var(--text-muted); font-style:italic; margin:0 0 32px; }
+  .card { background:var(--bg-card); border:1px solid var(--border); padding:24px; margin-bottom:24px; }
+  .card h2 { font-weight:500; font-size:22px; margin:0 0 16px; }
+  label, .ui { font-family:Inter,system-ui,sans-serif; font-size:14px; }
+  label { display:block; font-weight:500; margin-bottom:6px; }
+  input[type=email], input[type=text], textarea { width:100%; font:16px Inter,system-ui,sans-serif; padding:10px 12px; border:1px solid var(--border); background:#fff; color:var(--text); }
+  input:focus, textarea:focus { outline:2px solid var(--accent-light); outline-offset:1px; }
+  .field { margin-bottom:16px; }
+  .hint { font-family:Inter,system-ui,sans-serif; font-size:13px; color:var(--text-muted); margin-top:4px; }
+  .modes { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mode { border:1px solid var(--border); padding:12px 14px; cursor:pointer; display:block; }
+  .mode input { margin-right:8px; accent-color:var(--accent); }
+  .mode:has(input:checked) { border-color:var(--accent); background:var(--cream); }
+  .mode small { display:block; font-weight:400; color:var(--text-muted); margin-top:4px; }
+  .item { display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center; padding:14px 0; border-top:1px solid var(--border); }
+  .item:first-of-type { border-top:0; }
+  .item .title { font-size:19px; }
+  .item .meta { font-family:Inter,system-ui,sans-serif; font-size:13px; color:var(--text-muted); }
+  .item input { width:76px; text-align:center; font:16px Inter,system-ui,sans-serif; padding:8px; border:1px solid var(--border); }
+  .item.disabled { opacity:.45; }
+  .total { display:flex; justify-content:space-between; font-family:Inter,system-ui,sans-serif; font-size:15px; border-top:1px solid var(--text); padding-top:12px; margin-top:4px; }
+  button { background:var(--accent); color:#fff; border:0; font:500 16px Inter,system-ui,sans-serif; letter-spacing:.024em; padding:14px 28px; cursor:pointer; width:100%; }
+  button:hover { background:var(--accent-light); }
+  button:disabled { opacity:.6; cursor:wait; }
+  .msg { font-family:Inter,system-ui,sans-serif; font-size:15px; padding:14px 16px; margin-top:16px; display:none; }
+  .msg.ok { display:block; background:var(--cream); border-left:3px solid var(--accent); }
+  .msg.err { display:block; background:#fff; border-left:3px solid var(--error); color:var(--error); }
+  .terms { font-size:16px; color:var(--text-muted); }
+  .terms li { margin-bottom:6px; }
+  .hp { position:absolute; left:-9999px; }
+  form { margin-bottom:32px; }
+  @media (max-width:520px) { .modes { grid-template-columns:1fr; } body { font-size:18px; } }
+</style>
+</head>
+<body>
+<header>
+  <a href="/"><img class="press-logo" src="/logo.png" alt="Prahran Publishing"><div class="press-name">Prahran Publishing</div></a>
+</header>
+
+<main>
+  <h1>Trade Orders</h1>
+  <p class="lede">For bookshops ordering direct from the press.</p>
+
+  <form id="order" novalidate>
+    <div class="card">
+      <h2>Your shop</h2>
+      <div class="field">
+        <label for="email">Ordering email address</label>
+        <input id="email" type="email" autocomplete="email" required>
+        <div class="hint">Use the address registered for your shop — it decides your trade terms and where the books are delivered.</div>
+      </div>
+      <div class="field">
+        <label for="po">Your order reference <span style="font-weight:400">(optional)</span></label>
+        <input id="po" type="text" maxlength="40">
+      </div>
+      <div class="field">
+        <label for="notes">Notes <span style="font-weight:400">(optional)</span></label>
+        <textarea id="notes" rows="2" maxlength="500" placeholder="Delivery instructions, signed copies, an event date…"></textarea>
+      </div>
+      <input class="hp" type="text" id="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    </div>
+
+    <div class="card">
+      <h2>How would you like to stock it?</h2>
+      <div class="modes ui">
+        <label class="mode"><input type="radio" name="mode" value="firm" checked>Direct order
+          <small>50% off RRP · invoice on 30-day terms · returnable within 90 days</small></label>
+        <label class="mode"><input type="radio" name="mode" value="consignment">Consignment
+          <small>Minimum 3 copies · settled quarterly · paperbacks only</small></label>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Books</h2>
+      <div id="items"><p class="ui" style="color:var(--text-muted)">Loading titles…</p></div>
+      <div class="total" id="totalRow" hidden><span id="totalLabel">Trade total</span><strong id="total">$0.00</strong></div>
+    </div>
+
+    <div id="turnstile"></div>
+    <button type="submit" id="submit">Place order</button>
+    <div class="msg" id="msg" role="status"></div>
+  </form>
+
+  <div class="card terms">
+    <h2>Terms in brief</h2>
+    <ul>
+      <li>Nothing is charged when you submit. We check every order and email your invoice, usually within one business day.</li>
+      <li>Pay by card from the invoice, or by bank transfer quoting the invoice number.</li>
+      <li>Delivery is free within metropolitan Melbourne, and free elsewhere on 5 or more copies.</li>
+      <li>The Deluxe hardback is supplied on direct order only.</li>
+      <li>Not yet trading with us? Submit anyway, or email <a href="mailto:info@prahran.press">info@prahran.press</a>, and we'll set up your account.</li>
+    </ul>
+  </div>
+</main>
+
+<script>
+  // Set after deploying the Worker (see README).
+  const API = "https://prahran-trade-orders.2bzbk74ry7.workers.dev";
+  // Optional Cloudflare Turnstile site key; leave empty to skip.
+  const TURNSTILE_SITE_KEY = "0x4AAAAAAFSIChVZl3j-ZPCs";
+
+  const $ = id => document.getElementById(id);
+  const money = c => "$" + (c / 100).toFixed(2);
+  let items = [], discountPct = 50;
+
+  function mode() { return document.querySelector('input[name=mode]:checked').value; }
+
+  function render() {
+    const box = $("items");
+    box.innerHTML = "";
+    for (const it of items) {
+      const off = mode() === "consignment" && !it.consignable;
+      const row = document.createElement("div");
+      row.className = "item" + (off ? " disabled" : "");
+      row.innerHTML =
+        `<div><div class="title"></div><div class="meta"></div></div>
+         <input type="number" min="0" max="200" step="1" inputmode="numeric" aria-label="">`;
+      row.querySelector(".title").textContent = `${it.title} — ${it.edition}`;
+      row.querySelector(".meta").textContent =
+        `ISBN ${it.isbn} · RRP ${money(it.rrp_cents)}` + (off ? " · direct order only" : ` · trade ${money(it.trade_cents)}`);
+      const q = row.querySelector("input");
+      q.dataset.id = it.id;
+      q.setAttribute("aria-label", `Quantity, ${it.edition}`);
+      q.value = (box.dataset[it.id] && !off) ? box.dataset[it.id] : "";
+      q.disabled = off;
+      q.addEventListener("input", () => { box.dataset[it.id] = q.value; total(); });
+      box.appendChild(row);
+    }
+    total();
+  }
+
+  function lines() {
+    return [...document.querySelectorAll("#items input")]
+      .map(q => ({ id: q.dataset.id, qty: parseInt(q.value, 10) || 0 }))
+      .filter(l => l.qty > 0 && !document.querySelector(`input[data-id="${l.id}"]`).disabled);
+  }
+
+  function total() {
+    const ls = lines();
+    $("totalRow").hidden = !items.length;
+    if (mode() === "consignment") {
+      $("totalLabel").textContent = "Copies on consignment";
+      $("total").textContent = ls.reduce((n, l) => n + l.qty, 0);
+    } else {
+      $("totalLabel").textContent = "Trade total";
+      // Square applies the discount to the whole order, so round once at the end to match the invoice.
+      const rrp = ls.reduce((n, l) => n + l.qty * items.find(i => i.id === l.id).rrp_cents, 0);
+      $("total").textContent = money(Math.round(rrp * (100 - discountPct) / 100));
+    }
+  }
+
+  function show(text, ok) { const m = $("msg"); m.textContent = text; m.className = "msg " + (ok ? "ok" : "err"); }
+
+  document.querySelectorAll('input[name=mode]').forEach(r => r.addEventListener("change", render));
+
+  fetch(API + "/items").then(r => r.json()).then(d => {
+    if (!d.ok) throw new Error();
+    items = d.items; discountPct = d.discount_pct || 50; render();
+  }).catch(() => {
+    $("items").innerHTML = '<p class="ui">The order list is unavailable right now. Please email <a href="mailto:info@prahran.press">info@prahran.press</a>.</p>';
+  });
+
+  if (TURNSTILE_SITE_KEY) {
+    const s = document.createElement("script");
+    s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js"; s.async = true; s.defer = true;
+    document.head.appendChild(s);
+    $("turnstile").innerHTML = `<div class="cf-turnstile" data-sitekey="${TURNSTILE_SITE_KEY}" style="margin-bottom:16px"></div>`;
+  }
+
+  $("order").addEventListener("submit", async e => {
+    e.preventDefault();
+    const email = $("email").value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return show("Please enter your shop's ordering email address.", false);
+    const ls = lines();
+    if (!ls.length) return show("Please enter a quantity for at least one edition.", false);
+    if (mode() === "consignment" && ls.reduce((n, l) => n + l.qty, 0) < 3) return show("Consignment starts at 3 copies.", false);
+
+    const btn = $("submit"); btn.disabled = true; btn.textContent = "Sending…";
+    try {
+      const tsInput = document.querySelector('[name="cf-turnstile-response"]');
+      const r = await fetch(API + "/order", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, po: $("po").value, notes: $("notes").value, mode: mode(), lines: ls, website: $("website").value, turnstile: tsInput ? tsInput.value : "" })
+      });
+      const d = await r.json();
+      if (d.ok) { show(d.message, true); $("order").querySelectorAll("input,button").forEach(x => x.disabled = true); btn.textContent = "Order sent"; }
+      else { show(d.error, false); btn.disabled = false; btn.textContent = "Place order"; if (window.turnstile) turnstile.reset(); }
+    } catch {
+      show("We couldn't send that just now. Please try again, or email info@prahran.press.", false);
+      btn.disabled = false; btn.textContent = "Place order";
+    }
+  });
+</script>
+</body>
+</html>
