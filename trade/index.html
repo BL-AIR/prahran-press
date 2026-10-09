@@ -23,8 +23,8 @@
   .card h2 { font-weight:500; font-size:22px; margin:0 0 16px; }
   label, .ui { font-family:Inter,system-ui,sans-serif; font-size:14px; }
   label { display:block; font-weight:500; margin-bottom:6px; }
-  input[type=email], input[type=text], textarea { width:100%; font:16px Inter,system-ui,sans-serif; padding:10px 12px; border:1px solid var(--border); background:#fff; color:var(--text); }
-  input:focus, textarea:focus { outline:2px solid var(--accent-light); outline-offset:1px; }
+  input[type=email], input[type=text], input[type=tel], select, textarea { width:100%; font:16px Inter,system-ui,sans-serif; padding:10px 12px; border:1px solid var(--border); background:#fff; color:var(--text); }
+  input:focus, select:focus, textarea:focus { outline:2px solid var(--accent-light); outline-offset:1px; }
   .field { margin-bottom:16px; }
   .hint { font-family:Inter,system-ui,sans-serif; font-size:13px; color:var(--text-muted); margin-top:4px; }
   .modes { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
@@ -54,6 +54,11 @@
   .terms { font-size:16px; color:var(--text-muted); }
   .terms li { margin-bottom:6px; }
   .hp { position:absolute; left:-9999px; }
+  details.newshop { border:1px solid var(--border); background:var(--cream); padding:0 16px; margin-bottom:16px; }
+  details.newshop summary { cursor:pointer; padding:12px 0; font-family:Inter,system-ui,sans-serif; font-size:14px; font-weight:500; color:var(--accent); }
+  details.newshop[open] { padding-bottom:4px; }
+  .row3 { display:grid; grid-template-columns:2fr 1fr 1fr; gap:10px; }
+  @media (max-width:520px) { .row3 { grid-template-columns:1fr 1fr; } .row3 .field:first-child { grid-column:1 / -1; } }
   form { margin-bottom:32px; }
   @media (max-width:520px) { .modes { grid-template-columns:1fr; } body { font-size:18px; } }
 </style>
@@ -65,7 +70,7 @@
 
 <main>
   <h1>Trade Orders</h1>
-  <p class="lede">The full Prahran Publishing list, for bookshops with a trade account.</p>
+  <p class="lede">The full Prahran Publishing list, on trade terms for bookshops.</p>
 
   <form id="order" novalidate>
     <div class="card">
@@ -75,6 +80,32 @@
         <input id="email" type="email" autocomplete="email" required>
         <div class="hint">Use the address registered for your shop — it decides your trade terms and where the books are delivered.</div>
       </div>
+      <details class="newshop" id="newshop">
+        <summary>First order with us? Tell us about your shop</summary>
+        <div class="field">
+          <label for="shopName">Shop name</label>
+          <input id="shopName" type="text" autocomplete="organization" maxlength="100">
+        </div>
+        <div class="field">
+          <label for="contact">Contact name</label>
+          <input id="contact" type="text" autocomplete="name" maxlength="80">
+        </div>
+        <div class="field">
+          <label for="phone">Phone <span style="font-weight:400">(optional)</span></label>
+          <input id="phone" type="tel" autocomplete="tel" maxlength="30">
+        </div>
+        <div class="field">
+          <label for="street">Delivery address</label>
+          <input id="street" type="text" autocomplete="address-line1" maxlength="120" placeholder="Street address">
+        </div>
+        <div class="row3">
+          <div class="field"><label for="suburb">Suburb</label><input id="suburb" type="text" autocomplete="address-level2" maxlength="60"></div>
+          <div class="field"><label for="state">State</label>
+            <select id="state" autocomplete="address-level1"><option value=""></option><option>VIC</option><option>NSW</option><option>QLD</option><option>SA</option><option>WA</option><option>TAS</option><option>ACT</option><option>NT</option></select></div>
+          <div class="field"><label for="postcode">Postcode</label><input id="postcode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="4"></div>
+        </div>
+        <div class="hint" style="margin:-4px 0 12px">Already ordered from us? You can skip this.</div>
+      </details>
       <div class="field">
         <label for="po">Your order reference <span style="font-weight:400">(optional)</span></label>
         <input id="po" type="text" maxlength="40">
@@ -110,7 +141,7 @@
   <div class="card terms">
     <h2>Terms in brief</h2>
     <ul>
-      <li>Ordering on invoice needs a signed trade agreement. New to us? Submit your order and we'll email the agreement first; once it's signed we'll confirm the order.</li>
+      <li>Ordering on invoice needs a signed trade agreement. New to us? Just place your order with your shop's details; we'll email the agreement for you to sign, then send your invoice.</li>
       <li>Nothing is charged when you submit. We check every order and email your invoice, usually within one business day.</li>
       <li>Pay by card from the invoice, or by bank transfer quoting the invoice number.</li>
       <li>Delivery is free within metropolitan Melbourne, and free elsewhere on 5 or more copies.</li>
@@ -223,11 +254,15 @@
       const tsInput = document.querySelector('[name="cf-turnstile-response"]');
       const r = await fetch(API + "/order", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, po: $("po").value, notes: $("notes").value, mode: mode(), lines: ls, website: $("website").value, turnstile: tsInput ? tsInput.value : "" })
+        body: JSON.stringify({ email, po: $("po").value, notes: $("notes").value, mode: mode(), lines: ls, website: $("website").value, turnstile: tsInput ? tsInput.value : "",
+          shop: { name: $("shopName").value, contact: $("contact").value, phone: $("phone").value, street: $("street").value, suburb: $("suburb").value, state: $("state").value, postcode: $("postcode").value } })
       });
       const d = await r.json();
-      if (d.ok) { show(d.message, true); $("order").querySelectorAll("input,button").forEach(x => x.disabled = true); btn.textContent = "Order sent"; }
-      else { show(d.error, false); btn.disabled = false; btn.textContent = "Place order"; if (window.turnstile) turnstile.reset(); }
+      if (d.ok) { show(d.message, true); $("order").querySelectorAll("input,select,textarea,button").forEach(x => x.disabled = true); btn.textContent = "Order sent"; }
+      else {
+        show(d.error, false); btn.disabled = false; btn.textContent = "Place order"; if (window.turnstile && typeof window.turnstile.reset === "function") window.turnstile.reset();
+        if (d.need_details) { $("newshop").open = true; const first = ["shopName","street","suburb","state","postcode"].find(id => !$(id).value.trim()) || "shopName"; $(first).focus(); $("newshop").scrollIntoView({ behavior: "smooth", block: "start" }); }
+      }
     } catch {
       show("We couldn't send that just now. Please try again, or email trade.sales@prahran.press.", false);
       btn.disabled = false; btn.textContent = "Place order";
