@@ -60,6 +60,17 @@
   .row3 { display:grid; grid-template-columns:2fr 1fr 1fr; gap:10px; }
   @media (max-width:520px) { .row3 { grid-template-columns:1fr 1fr; } .row3 .field:first-child { grid-column:1 / -1; } }
   form { margin-bottom:32px; }
+  .done { text-align:center; padding:36px 24px 28px; }
+  .done .tick { width:56px; height:56px; border-radius:50%; background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; font:600 28px Inter,system-ui,sans-serif; }
+  .done h2 { font-size:30px; margin:0 0 10px; }
+  .done .lead { font-size:19px; margin:0 auto 22px; max-width:30em; }
+  .done table { width:100%; border-collapse:collapse; font-family:Inter,system-ui,sans-serif; font-size:14px; text-align:left; margin:0 0 18px; }
+  .done td { padding:8px 0; border-top:1px solid var(--border); vertical-align:top; }
+  .done td.q { text-align:right; white-space:nowrap; padding-left:12px; }
+  .done tr.sum td { border-top:1px solid var(--text); font-weight:600; }
+  .done .small { font-family:Inter,system-ui,sans-serif; font-size:14px; color:var(--text-muted); margin:6px 0; }
+  .done a { color:var(--accent); }
+  .done .again { display:inline-block; margin-top:14px; font-family:Inter,system-ui,sans-serif; font-size:14px; color:var(--accent); }
   @media (max-width:520px) { .modes { grid-template-columns:1fr; } body { font-size:18px; } }
 </style>
 </head>
@@ -71,6 +82,16 @@
 <main>
   <h1>Trade Orders</h1>
   <p class="lede">The full Prahran Publishing list, on trade terms for bookshops.</p>
+
+  <div class="card done" id="done" hidden>
+    <div class="tick" aria-hidden="true">✓</div>
+    <h2>Order received</h2>
+    <p class="lead" id="doneMsg"></p>
+    <table id="doneTable"></table>
+    <p class="small" id="doneRef"></p>
+    <p class="small">Questions? Email <a href="mailto:trade.sales@prahran.press">trade.sales@prahran.press</a>.</p>
+    <a class="again" href="/trade/">Place another order</a>
+  </div>
 
   <form id="order" novalidate>
     <div class="card">
@@ -223,6 +244,29 @@
     }
   }
 
+  function showDone(message, ls) {
+    $("doneMsg").textContent = message;
+    const t = $("doneTable"); t.innerHTML = "";
+    let copies = 0, rrp = 0;
+    for (const l of ls) {
+      const it = items.find(i => i.id === l.id); if (!it) continue;
+      copies += l.qty; rrp += l.qty * it.rrp_cents;
+      const tr = t.insertRow();
+      tr.insertCell().textContent = it.title + (it.edition ? " — " + it.edition : "");
+      const q = tr.insertCell(); q.className = "q"; q.textContent = "× " + l.qty;
+    }
+    const sum = t.insertRow(); sum.className = "sum";
+    sum.insertCell().textContent = mode() === "consignment" ? "Copies on consignment" : "Trade total (" + copies + (copies === 1 ? " copy)" : " copies)");
+    const sq = sum.insertCell(); sq.className = "q";
+    sq.textContent = mode() === "consignment" ? copies : money(rrp - Math.round(rrp * discountPct / 100));
+    const ref = $("po").value.trim();
+    $("doneRef").textContent = ref ? "Your reference: " + ref : "";
+    $("order").hidden = true;
+    $("done").hidden = false;
+    document.querySelector(".lede").hidden = true;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   function show(text, ok) { const m = $("msg"); m.textContent = text; m.className = "msg " + (ok ? "ok" : "err"); }
 
   document.querySelectorAll('input[name=mode]').forEach(r => r.addEventListener("change", render));
@@ -258,7 +302,7 @@
           shop: { name: $("shopName").value, contact: $("contact").value, phone: $("phone").value, street: $("street").value, suburb: $("suburb").value, state: $("state").value, postcode: $("postcode").value } })
       });
       const d = await r.json();
-      if (d.ok) { show(d.message, true); $("order").querySelectorAll("input,select,textarea,button").forEach(x => x.disabled = true); btn.textContent = "Order sent"; }
+      if (d.ok) { showDone(d.message, ls); }
       else {
         show(d.error, false); btn.disabled = false; btn.textContent = "Place order"; if (window.turnstile && typeof window.turnstile.reset === "function") window.turnstile.reset();
         if (d.need_details) { $("newshop").open = true; const first = ["shopName","street","suburb","state","postcode"].find(id => !$(id).value.trim()) || "shopName"; $(first).focus(); $("newshop").scrollIntoView({ behavior: "smooth", block: "start" }); }
