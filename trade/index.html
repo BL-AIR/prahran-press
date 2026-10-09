@@ -38,6 +38,12 @@
   .item .meta { font-family:Inter,system-ui,sans-serif; font-size:13px; color:var(--text-muted); }
   .item input { width:76px; text-align:center; font:16px Inter,system-ui,sans-serif; padding:8px; border:1px solid var(--border); }
   .item.disabled { opacity:.45; }
+  .book { border-top:1px solid var(--border); padding:14px 0 4px; }
+  .book:first-child { border-top:0; padding-top:0; }
+  .book .btitle { font-size:20px; line-height:1.3; }
+  .book .bauthor { font-family:Inter,system-ui,sans-serif; font-size:13px; color:var(--text-muted); }
+  .book .item { border-top:0; padding:8px 0; }
+  .book .item .ed { font-family:Inter,system-ui,sans-serif; font-size:14px; }
   .total { display:flex; justify-content:space-between; font-family:Inter,system-ui,sans-serif; font-size:15px; border-top:1px solid var(--text); padding-top:12px; margin-top:4px; }
   button { background:var(--accent); color:#fff; border:0; font:500 16px Inter,system-ui,sans-serif; letter-spacing:.024em; padding:14px 28px; cursor:pointer; width:100%; }
   button:hover { background:var(--accent-light); }
@@ -59,7 +65,7 @@
 
 <main>
   <h1>Trade Orders</h1>
-  <p class="lede">For bookshops with a Prahran Publishing trade account.</p>
+  <p class="lede">The full Prahran Publishing list, for bookshops with a trade account.</p>
 
   <form id="order" novalidate>
     <div class="card">
@@ -86,7 +92,7 @@
         <label class="mode"><input type="radio" name="mode" value="firm" checked>Direct order
           <small>50% off RRP · invoice on 14-day terms · returnable within 90 days</small></label>
         <label class="mode"><input type="radio" name="mode" value="consignment">Consignment
-          <small>Minimum 3 copies · settled quarterly · paperbacks only</small></label>
+          <small>Minimum 3 copies · settled quarterly · paperbacks</small></label>
       </div>
     </div>
 
@@ -108,7 +114,7 @@
       <li>Nothing is charged when you submit. We check every order and email your invoice, usually within one business day.</li>
       <li>Pay by card from the invoice, or by bank transfer quoting the invoice number.</li>
       <li>Delivery is free within metropolitan Melbourne, and free elsewhere on 5 or more copies.</li>
-      <li>The Deluxe hardback is supplied on direct order only.</li>
+      <li>Every Prahran Publishing title is available on these terms. Editions marked “direct order only” cannot be taken on consignment.</li>
       <li>Prefer to pay by card now? Order from our <a href="/">online shop</a> instead.</li>
     </ul>
   </div>
@@ -129,23 +135,39 @@
   function render() {
     const box = $("items");
     box.innerHTML = "";
+    // Group editions under their title, keeping the order the Worker sends.
+    const groups = [];
     for (const it of items) {
-      const off = mode() === "consignment" && !it.consignable;
-      const row = document.createElement("div");
-      row.className = "item" + (off ? " disabled" : "");
-      row.innerHTML =
-        `<div><div class="title"></div><div class="meta"></div></div>
-         <input type="number" min="0" max="200" step="1" inputmode="numeric" aria-label="">`;
-      row.querySelector(".title").textContent = `${it.title} — ${it.edition}`;
-      row.querySelector(".meta").textContent =
-        `ISBN ${it.isbn} · RRP ${money(it.rrp_cents)}` + (off ? " · direct order only" : ` · trade ${money(it.trade_cents)}`);
-      const q = row.querySelector("input");
-      q.dataset.id = it.id;
-      q.setAttribute("aria-label", `Quantity, ${it.edition}`);
-      q.value = (box.dataset[it.id] && !off) ? box.dataset[it.id] : "";
-      q.disabled = off;
-      q.addEventListener("input", () => { box.dataset[it.id] = q.value; total(); });
-      box.appendChild(row);
+      let g = groups.find(x => x.title === it.title);
+      if (!g) { g = { title: it.title, author: it.author, eds: [] }; groups.push(g); }
+      g.eds.push(it);
+    }
+    for (const g of groups) {
+      const book = document.createElement("div");
+      book.className = "book";
+      book.innerHTML = '<div class="btitle"></div><div class="bauthor"></div>';
+      book.querySelector(".btitle").textContent = g.title;
+      book.querySelector(".bauthor").textContent = g.author || "";
+      for (const it of g.eds) {
+        const off = mode() === "consignment" && !it.consignable;
+        const row = document.createElement("div");
+        row.className = "item" + (off ? " disabled" : "");
+        row.innerHTML =
+          `<div><div class="ed"></div><div class="meta"></div></div>
+           <input type="number" min="0" max="200" step="1" inputmode="numeric" aria-label="">`;
+        row.querySelector(".ed").textContent = it.edition || "";
+        if (!it.edition) row.querySelector(".ed").remove();
+        row.querySelector(".meta").textContent =
+          `ISBN ${it.isbn} · RRP ${money(it.rrp_cents)}` + (off ? " · direct order only" : ` · trade ${money(it.trade_cents)}`);
+        const q = row.querySelector("input");
+        q.dataset.id = it.id;
+        q.setAttribute("aria-label", `Quantity, ${g.title}${it.edition ? ", " + it.edition : ""}`);
+        q.value = (box.dataset[it.id] && !off) ? box.dataset[it.id] : "";
+        q.disabled = off;
+        q.addEventListener("input", () => { box.dataset[it.id] = q.value; total(); });
+        book.appendChild(row);
+      }
+      box.appendChild(book);
     }
     total();
   }
