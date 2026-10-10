@@ -17,14 +17,22 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root { --bg:#F7F4EF; --bg-card:#FFFFFF; --text:#1C1C1C; --text-muted:#6B6255; --accent:#2A4232; --accent-light:#3D5A47; --border:#DDD8CE; --cream:#EDE9E1; --error:#8A2C1E; }
+  :root { --espresso:#3B2A21; --eggshell:#F2F2DA; --eggshell-soft:#D9D3BD; --bg:#F7F4EF; --bg-card:#FFFFFF; --text:#1C1C1C; --text-muted:#6B6255; --accent:#2A4232; --accent-light:#3D5A47; --border:#DDD8CE; --cream:#EDE9E1; --error:#8A2C1E; }
   * { box-sizing:border-box; }
   body { margin:0; background:var(--bg); color:var(--text); font-family:"EB Garamond",Georgia,serif; font-size:19px; line-height:1.6; }
-  header { text-align:center; padding:40px 16px 8px; }
-  header a { color:inherit; text-decoration:none; }
-  .press-logo { width:96px; height:auto; }
-  .press-name { font-size:15px; letter-spacing:.3em; text-transform:uppercase; margin-top:8px; }
-  main { max-width:680px; margin:0 auto; padding:16px 16px 64px; }
+  header.masthead { background:var(--espresso); color:var(--eggshell); text-align:center; padding:36px 16px 30px; }
+  header.masthead a { color:inherit; text-decoration:none; }
+  .press-logo { width:96px; height:auto; display:block; margin:0 auto; filter:drop-shadow(0 2px 6px rgba(0,0,0,.35)); }
+  .press-name { font-size:15px; letter-spacing:.3em; text-transform:uppercase; margin-top:12px; }
+  header.masthead h1 { color:var(--eggshell); margin:18px 0 2px; }
+  header.masthead .lede { color:var(--eggshell-soft); margin:0; }
+  .steps { display:flex; justify-content:center; gap:10px; font-family:Inter,system-ui,sans-serif; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-muted); margin:4px 0 20px; }
+  .steps .on { color:var(--accent); font-weight:500; }
+  .btnrow { display:grid; grid-template-columns:auto 1fr; gap:12px; }
+  button.secondary { background:transparent; color:var(--accent); border:1px solid var(--accent); width:auto; padding:14px 22px; }
+  button.secondary:hover { background:var(--cream); }
+  #step1 .msg, #step2 .msg { margin:0 0 16px; }
+  main { max-width:680px; margin:0 auto; padding:20px 16px 64px; }
   h1 { font-weight:400; font-size:34px; text-align:center; margin:16px 0 4px; }
   .lede { text-align:center; color:var(--text-muted); font-style:italic; margin:0 0 32px; }
   .card { background:var(--bg-card); border:1px solid var(--border); padding:24px; margin-bottom:24px; }
@@ -86,13 +94,14 @@
 </style>
 </head>
 <body>
-<header>
+<header class="masthead">
   <a href="/"><img class="press-logo" src="/logo.png" alt="Prahran Publishing"><div class="press-name">Prahran Publishing</div></a>
+  <h1>Trade Orders</h1>
+  <p class="lede">The full Prahran Publishing list, on trade terms for bookshops.</p>
 </header>
 
 <main>
-  <h1>Trade Orders</h1>
-  <p class="lede">The full Prahran Publishing list, on trade terms for bookshops.</p>
+  <div class="steps" id="steps" aria-hidden="true"><span id="st1" class="on">1 · Your shop</span><span>—</span><span id="st2">2 · Your order</span></div>
 
   <div class="card done" id="done" hidden>
     <div class="tick" aria-hidden="true">✓</div>
@@ -105,6 +114,7 @@
   </div>
 
   <form id="order" novalidate>
+   <div id="step1">
     <div class="card">
       <h2>Your shop</h2>
       <div class="field">
@@ -149,8 +159,26 @@
       <input class="hp" type="text" id="website" tabindex="-1" autocomplete="off" aria-hidden="true">
     </div>
 
+    <div id="turnstile" style="margin-bottom:16px"></div>
+    <div class="msg" id="msg1" role="status"></div>
+    <button type="submit" id="next">Next</button>
+
+    <div class="card terms" style="margin-top:32px">
+      <h2>Terms in brief</h2>
+      <ul>
+        <li>Ordering on invoice needs a signed trade agreement. New to us? Just place your order with your shop's details; we'll email the agreement for you to sign, then send your invoice.</li>
+        <li>Nothing is charged when you submit. We check every order and email your invoice, usually within one business day.</li>
+        <li>Pay by card from the invoice, or by bank transfer quoting the invoice number.</li>
+        <li>Delivery is free within metropolitan Melbourne, and free elsewhere on 5 or more copies.</li>
+        <li>Every Prahran Publishing title is available on these terms. Editions marked “direct order only” cannot be taken on consignment.</li>
+        <li>Prefer to pay by card now? Order from our <a href="/">online shop</a> instead.</li>
+      </ul>
+    </div>
+   </div>
+
+   <div id="step2" hidden>
     <div class="card">
-      <h2>How would you like to stock it?</h2>
+      <h2 id="step2heading" tabindex="-1">How would you like to stock it?</h2>
       <div class="modes ui">
         <label class="mode"><input type="radio" name="mode" value="firm" checked>Direct order
           <small>50% off RRP · invoice on 14-day terms · returnable within 90 days</small></label>
@@ -166,22 +194,13 @@
     </div>
 
     <label class="optin" for="tradeNews"><input type="checkbox" id="tradeNews"><span>Send me Trade News from Prahran Publishing<small>New titles, trade offers and availability. We'll email you to confirm first; unsubscribe any time.</small></span></label>
-    <div id="turnstile"></div>
-    <button type="submit" id="submit">Place order</button>
     <div class="msg" id="msg" role="status"></div>
+    <div class="btnrow">
+      <button type="button" class="secondary" id="back">Back</button>
+      <button type="submit" id="submit">Place order</button>
+    </div>
+   </div>
   </form>
-
-  <div class="card terms">
-    <h2>Terms in brief</h2>
-    <ul>
-      <li>Ordering on invoice needs a signed trade agreement. New to us? Just place your order with your shop's details; we'll email the agreement for you to sign, then send your invoice.</li>
-      <li>Nothing is charged when you submit. We check every order and email your invoice, usually within one business day.</li>
-      <li>Pay by card from the invoice, or by bank transfer quoting the invoice number.</li>
-      <li>Delivery is free within metropolitan Melbourne, and free elsewhere on 5 or more copies.</li>
-      <li>Every Prahran Publishing title is available on these terms. Editions marked “direct order only” cannot be taken on consignment.</li>
-      <li>Prefer to pay by card now? Order from our <a href="/">online shop</a> instead.</li>
-    </ul>
-  </div>
 </main>
 
 <script>
@@ -296,11 +315,38 @@
     $("doneRef").textContent = ref ? "Your reference: " + ref : "";
     $("order").hidden = true;
     $("done").hidden = false;
-    document.querySelector(".lede").hidden = true;
+    $("steps").hidden = true;
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  function show(text, ok) { const m = $("msg"); m.textContent = text; m.className = "msg " + (ok ? "ok" : "err"); }
+  function show(text, ok, id) { const m = $(id || "msg"); m.textContent = text; m.className = "msg " + (ok ? "ok" : "err"); }
+  function clearMsg(id) { const m = $(id); m.textContent = ""; m.className = "msg"; }
+
+  // ---- Two pages: 1 = your shop + human check, 2 = mode, books, place order
+  let tsToken = "";
+  function goStep(n, push) {
+    $("step1").hidden = n !== 1; $("step2").hidden = n !== 2;
+    $("st1").className = n === 1 ? "on" : ""; $("st2").className = n === 2 ? "on" : "";
+    if (push && n === 2) { try { history.pushState({ tradeStep: 2 }, ""); } catch (e) {} }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (n === 2) setTimeout(() => $("step2heading").focus({ preventScroll: true }), 50);
+  }
+  function backToStep1(text, focusId) {
+    if (history.state && history.state.tradeStep === 2) { try { history.replaceState(null, ""); } catch (e) {} }
+    goStep(1);
+    if (text) show(text, false, "msg1");
+    if (focusId) setTimeout(() => $(focusId).focus(), 60);
+  }
+  function tryNext() {
+    const email = $("email").value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { show("Please enter your shop's ordering email address.", false, "msg1"); $("email").focus(); return; }
+    if (TURNSTILE_SITE_KEY && !tsToken) { show("Please complete the security check above.", false, "msg1"); return; }
+    clearMsg("msg1");
+    track("trade_step2");
+    goStep(2, true);
+  }
+  $("back").addEventListener("click", () => { if (history.state && history.state.tradeStep === 2) history.back(); else goStep(1); });
+  window.addEventListener("popstate", () => { if (!$("step2").hidden) goStep(1); });
 
   document.querySelectorAll('input[name=mode]').forEach(r => r.addEventListener("change", render));
   $("order").addEventListener("input", () => { if (!started) { started = true; track("trade_form_start"); } });
@@ -313,16 +359,28 @@
     $("items").innerHTML = '<p class="ui">The order list is unavailable right now. Please email <a href="mailto:trade.sales@prahran.press">trade.sales@prahran.press</a>.</p>';
   });
 
+  // Cloudflare Turnstile, rendered explicitly so Next knows when the check has passed.
+  let tsWidget = null;
+  window.onTurnstileLoad = () => {
+    tsWidget = window.turnstile.render("#turnstile", {
+      sitekey: TURNSTILE_SITE_KEY,
+      callback: t => { tsToken = t; if (/security check/.test($("msg1").textContent)) clearMsg("msg1"); },
+      "expired-callback": () => { tsToken = ""; },
+      "error-callback": () => { tsToken = ""; }
+    });
+  };
+  function resetTurnstile() { tsToken = ""; try { if (window.turnstile && tsWidget !== null) window.turnstile.reset(tsWidget); } catch (e) {} }
   if (TURNSTILE_SITE_KEY) {
     const s = document.createElement("script");
-    s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js"; s.async = true; s.defer = true;
+    s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad"; s.async = true; s.defer = true;
     document.head.appendChild(s);
-    $("turnstile").innerHTML = `<div class="cf-turnstile" data-sitekey="${TURNSTILE_SITE_KEY}" style="margin-bottom:16px"></div>`;
   }
 
   $("order").addEventListener("submit", async e => {
     e.preventDefault();
+    if (!$("step1").hidden) return tryNext();
     const email = $("email").value.trim();
+    if (TURNSTILE_SITE_KEY && !tsToken) return backToStep1("Please complete the security check again, then press Next.");
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return show("Please enter your shop's ordering email address.", false);
     const ls = lines();
     if (!ls.length) return show("Please enter a quantity for at least one edition.", false);
@@ -334,10 +392,9 @@
     track("trade_order_submit", { trade_mode: mode(), copies });
     const btn = $("submit"); btn.disabled = true; btn.textContent = "Sending…";
     try {
-      const tsInput = document.querySelector('[name="cf-turnstile-response"]');
       const r = await fetch(API + "/order", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, po: $("po").value, notes: $("notes").value, mode: mode(), lines: ls, website: $("website").value, turnstile: tsInput ? tsInput.value : "",
+        body: JSON.stringify({ email, po: $("po").value, notes: $("notes").value, mode: mode(), lines: ls, website: $("website").value, turnstile: tsToken,
           shop: { name: $("shopName").value, contact: $("contact").value, phone: $("phone").value, street: $("street").value, suburb: $("suburb").value, state: $("state").value, postcode: $("postcode").value } })
       });
       const d = await r.json();
@@ -349,8 +406,16 @@
       }
       else {
         track("trade_order_error", { reason: d.need_details ? "missing_shop_details" : String(d.error || "").slice(0, 90) });
-        show(d.error, false); btn.disabled = false; btn.textContent = "Place order"; if (window.turnstile && typeof window.turnstile.reset === "function") window.turnstile.reset();
-        if (d.need_details) { $("newshop").open = true; const first = ["shopName","street","suburb","state","postcode"].find(id => !$(id).value.trim()) || "shopName"; $(first).focus(); $("newshop").scrollIntoView({ behavior: "smooth", block: "start" }); }
+        btn.disabled = false; btn.textContent = "Place order"; resetTurnstile();
+        if (d.need_details) {
+          $("newshop").open = true;
+          const first = ["shopName","street","suburb","state","postcode"].find(id => !$(id).value.trim()) || "shopName";
+          backToStep1(d.error + " Then complete the security check and press Next.", first);
+        } else if (/security check/i.test(d.error || "")) {
+          backToStep1("Please complete the security check again, then press Next.");
+        } else {
+          show(d.error, false);
+        }
       }
     } catch {
       show("We couldn't send that just now. Please try again, or email trade.sales@prahran.press.", false);
