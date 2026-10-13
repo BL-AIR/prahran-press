@@ -549,6 +549,7 @@
 <p class="book-description" style="margin-top: 0.85rem; font-style: italic; font-family: 'EB Garamond', Georgia, serif; font-size: 1rem;">Available 15 October 2026.</p>
 <div class="book-formats" style="margin-top: 1.5rem;">
 <a class="buy-btn" href="https://prahran-publishing.square.site/product/the-art-of-surrender/O4XWYVSEJQCMGW22SDDLY5D7" rel="noopener" target="_blank">Pre-order &mdash; $39.95</a>
+<a class="buy-btn" href="https://prahran-publishing.square.site/product/the-art-of-surrender-deluxe-edition-/W5QSZUT2GIX5ROGJ4ZUNZSGZ" rel="noopener" target="_blank">Pre-order Deluxe Hardback &mdash; $89.95</a>
 </div>
 </div>
 </div>
@@ -747,7 +748,8 @@ document.addEventListener('DOMContentLoaded', function () {
             var price = priceMatch ? parseFloat(priceMatch[1]) : 0;
 
             var variant = 'Paperback';
-            if (/script/i.test(text))    variant = 'Script Edition';
+            if (/hardback/i.test(text))  variant = 'Deluxe Hardback';
+            else if (/script/i.test(text)) variant = 'Script Edition';
             else if (/box set/i.test(text)) variant = 'Box Set';
 
             if (typeof gtag === 'function') {
