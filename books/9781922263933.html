@@ -72,7 +72,7 @@
           "price": "89.95",
           "priceCurrency": "AUD",
           "availability": "https://schema.org/PreOrder",
-          "url": "https://prahran-publishing.square.site/product/the-art-of-surrender/O4XWYVSEJQCMGW22SDDLY5D7"
+          "url": "https://prahran-publishing.square.site/product/the-art-of-surrender-deluxe-edition-/W5QSZUT2GIX5ROGJ4ZUNZSGZ"
         },
         {
           "@type": "Offer",
@@ -414,6 +414,7 @@
                 <div class="buy-row">
                     <span class="buy-format-label">Print</span>
                     <a class="buy-btn" id="direct-order" href="https://prahran-publishing.square.site/product/the-art-of-surrender/O4XWYVSEJQCMGW22SDDLY5D7" target="_blank" rel="noopener">Pre-order Direct</a>
+                    <a class="buy-btn" id="deluxe-order" href="https://prahran-publishing.square.site/product/the-art-of-surrender-deluxe-edition-/W5QSZUT2GIX5ROGJ4ZUNZSGZ" target="_blank" rel="noopener">Pre-order Deluxe Hardback</a>
                 </div>
                 <div class="buy-row">
                     <span class="buy-format-label">eBook</span>
@@ -533,6 +534,8 @@
     if (h) h.textContent = 'Order';
     var d = document.getElementById('direct-order');
     if (d) d.innerHTML = d.innerHTML.replace('Pre-order', 'Order');
+    var dx = document.getElementById('deluxe-order');
+    if (dx) dx.innerHTML = dx.innerHTML.replace('Pre-order', 'Order');
     var n = document.getElementById('release-note');
     if (n) n.textContent = 'Available now.';
     document.querySelectorAll('.store-btn').forEach(function (a) {
