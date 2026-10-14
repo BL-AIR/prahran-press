@@ -8,7 +8,14 @@
     "l00": "No fixed location",
     "l01": "Unassigned - allocate in the register",
     "l02": "Unassigned - allocate in the register",
-    "l03": "Jeffreys Books, Malvern"
+    "l03": "Jeffreys Books, Malvern",
+    "l04": "Unassigned - allocate in the register",
+    "l05": "Unassigned - allocate in the register",
+    "l06": "Unassigned - allocate in the register",
+    "l07": "Unassigned - allocate in the register",
+    "l08": "Unassigned - allocate in the register",
+    "l09": "Unassigned - allocate in the register",
+    "l10": "Unassigned - allocate in the register"
   },
   "titles": {
     "t01": {
@@ -35,6 +42,27 @@
         "b1/l02": {
           "to": null
         },
+        "b1/l04": {
+          "to": null
+        },
+        "b1/l05": {
+          "to": null
+        },
+        "b1/l06": {
+          "to": null
+        },
+        "b1/l07": {
+          "to": null
+        },
+        "b1/l08": {
+          "to": null
+        },
+        "b1/l09": {
+          "to": null
+        },
+        "b1/l10": {
+          "to": null
+        },
         "b2/l00": {
           "to": null
         },
@@ -46,6 +74,27 @@
         },
         "b2/l03": {
           "to": "https://jeffreysbooks.com.au/p/the-art-of-surrender"
+        },
+        "b2/l04": {
+          "to": null
+        },
+        "b2/l05": {
+          "to": null
+        },
+        "b2/l06": {
+          "to": null
+        },
+        "b2/l07": {
+          "to": null
+        },
+        "b2/l08": {
+          "to": null
+        },
+        "b2/l09": {
+          "to": null
+        },
+        "b2/l10": {
+          "to": null
         },
         "b3/l00": {
           "to": null
@@ -59,6 +108,27 @@
         "b3/l03": {
           "to": null
         },
+        "b3/l04": {
+          "to": null
+        },
+        "b3/l05": {
+          "to": null
+        },
+        "b3/l06": {
+          "to": null
+        },
+        "b3/l07": {
+          "to": null
+        },
+        "b3/l08": {
+          "to": null
+        },
+        "b3/l09": {
+          "to": null
+        },
+        "b3/l10": {
+          "to": null
+        },
         "b4/l00": {
           "to": "https://prahran.press/books/9781922263988/bonus/chapters.html"
         },
@@ -67,6 +137,27 @@
         },
         "b4/l02": {
           "to": "https://prahran.press/books/9781922263988/bonus/chapters.html"
+        },
+        "b4/l04": {
+          "to": null
+        },
+        "b4/l05": {
+          "to": null
+        },
+        "b4/l06": {
+          "to": null
+        },
+        "b4/l07": {
+          "to": null
+        },
+        "b4/l08": {
+          "to": null
+        },
+        "b4/l09": {
+          "to": null
+        },
+        "b4/l10": {
+          "to": null
         },
         "bcf/l00": {
           "to": "https://prahran.press/downloads/the-art-of-surrender-book-club-facilitator-notes.pdf"
