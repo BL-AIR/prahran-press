@@ -8,7 +8,7 @@
     "l00": "No fixed location",
     "l01": "Unassigned - allocate in the register",
     "l02": "Unassigned - allocate in the register",
-    "l03": "Unassigned - allocate in the register"
+    "l03": "Jeffreys Books, Malvern"
   },
   "titles": {
     "t01": {
@@ -45,7 +45,7 @@
           "to": null
         },
         "b2/l03": {
-          "to": null
+          "to": "https://jeffreysbooks.com.au/p/the-art-of-surrender"
         },
         "b3/l00": {
           "to": null
