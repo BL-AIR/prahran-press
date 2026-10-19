@@ -1,7 +1,10 @@
 /* Prahran Publishing — light / dark theme
    Light is the house default (the warm paper palette each page defines inline).
-   Dark swaps the same eight variables, so every page follows without being rewritten:
-   Deep green-black ground, warm paper type, sage links, forest-green buttons.
+   Dark swaps the same eight variables, so every page follows without being rewritten.
+   Every dark value comes from the Prahran Publishing Design System (Claude Design):
+   masthead overlay green-black #0F140F as the ground, stamp charcoal #25292B for cards,
+   masthead inks #F7F2EA / #C8BFA8 for type, duck egg #D3E6DF / #EEF5F1 for links,
+   bottle green #2A4232 / #3D5A47 for buttons, stamp gold #D6BC7C for the toggle, rust rule #C8956A for notes.
    Dark applies when the visitor's system is dark, unless they chose Light with the toggle;
    the toggle sets data-theme on <html> and the choice is remembered on this device (theme.js). */
 
@@ -10,34 +13,33 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --bg: #141916;
-    --bg-card: #1D2520;
-    --text: #ECE7DC;
-    --text-muted: #B5AD9B;
-    --accent: #A9CBB3;
-    --accent-light: #C4DDCB;
-    --border: #34403A;
-    --cream: #252F29;
+    --bg: #0F140F;
+    --bg-card: #25292B;
+    --text: #F7F2EA;
+    --text-muted: #C8BFA8;
+    --accent: #D3E6DF;
+    --accent-light: #EEF5F1;
+    --border: rgba(247, 242, 234, 0.18);
+    --cream: #25292B;
   }
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #141916;
-  --bg-card: #1D2520;
-  --text: #ECE7DC;
-  --text-muted: #B5AD9B;
-  --accent: #A9CBB3;
-  --accent-light: #C4DDCB;
-  --border: #34403A;
-  --cream: #252F29;
+  --bg: #0F140F;
+  --bg-card: #25292B;
+  --text: #F7F2EA;
+  --text-muted: #C8BFA8;
+  --accent: #D3E6DF;
+  --accent-light: #EEF5F1;
+  --border: rgba(247, 242, 234, 0.18);
+  --cream: #25292B;
 }
 
 /* ---------- Dark: things the variables don't reach ----------
    The two blocks below are identical on purpose: one for "system is dark and no choice made",
    one for "visitor chose dark". Keep them in step. */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) header::before { background: rgba(8, 11, 9, 0.7); }
-  /* Solid buttons keep a forest-green fill with light type (the accent variable is now a pale sage). */
+  /* Solid buttons keep the bottle-green fill with white type (the accent variable is now pale duck egg, for links and outlines). */
   :root:not([data-theme="light"]) .buy-btn:not(.secondary),
   :root:not([data-theme="light"]) .submit-btn,
   :root:not([data-theme="light"]) .list-cta-btn,
@@ -51,15 +53,13 @@
   :root:not([data-theme="light"]) .list-cta-btn:hover,
   :root:not([data-theme="light"]) .btn:hover,
   :root:not([data-theme="light"]) .btn-solid:hover,
-  :root:not([data-theme="light"]) button:not(.theme-toggle):hover { background: #4E7359; color: #fff; }
-  :root:not([data-theme="light"]) .limited-edition-label { background: #2E211A; color: #E7B08A; border-color: #8A5A3C; }
-  :root:not([data-theme="light"]) .chapter-spoiler { color: #E58A96; }
+  :root:not([data-theme="light"]) button:not(.theme-toggle):hover { background: #2A4232; color: #fff; outline: 1px solid #D3E6DF; outline-offset: -1px; }
+  :root:not([data-theme="light"]) .chapter-spoiler { color: #C8956A; }
   :root:not([data-theme="light"]) input[type=email], :root:not([data-theme="light"]) input[type=text],
   :root:not([data-theme="light"]) input[type=tel], :root:not([data-theme="light"]) select,
   :root:not([data-theme="light"]) textarea { background: var(--bg-card); color: var(--text); }
   :root:not([data-theme="light"]) .msg.err { background: var(--bg-card); }
 }
-:root[data-theme="dark"] header::before { background: rgba(8, 11, 9, 0.7); }
 :root[data-theme="dark"] .buy-btn:not(.secondary),
 :root[data-theme="dark"] .submit-btn,
 :root[data-theme="dark"] .list-cta-btn,
@@ -73,9 +73,8 @@
 :root[data-theme="dark"] .list-cta-btn:hover,
 :root[data-theme="dark"] .btn:hover,
 :root[data-theme="dark"] .btn-solid:hover,
-:root[data-theme="dark"] button:not(.theme-toggle):hover { background: #4E7359; color: #fff; }
-:root[data-theme="dark"] .limited-edition-label { background: #2E211A; color: #E7B08A; border-color: #8A5A3C; }
-:root[data-theme="dark"] .chapter-spoiler { color: #E58A96; }
+:root[data-theme="dark"] button:not(.theme-toggle):hover { background: #2A4232; color: #fff; outline: 1px solid #D3E6DF; outline-offset: -1px; }
+:root[data-theme="dark"] .chapter-spoiler { color: #C8956A; }
 :root[data-theme="dark"] input[type=email], :root[data-theme="dark"] input[type=text],
 :root[data-theme="dark"] input[type=tel], :root[data-theme="dark"] select,
 :root[data-theme="dark"] textarea { background: var(--bg-card); color: var(--text); }
@@ -92,8 +91,8 @@
   color: #F7F2EA; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.55));
   transition: color 0.2s ease, background-color 0.2s ease;
 }
-.theme-toggle:hover { color: #E4BE6A; background: rgba(0,0,0,0.25); }
-.theme-toggle:focus-visible { outline: 2px solid #E4BE6A; outline-offset: 2px; }
+.theme-toggle:hover { color: #D6BC7C; background: rgba(0,0,0,0.25); }
+.theme-toggle:focus-visible { outline: 2px solid #D6BC7C; outline-offset: 2px; }
 .theme-toggle svg { width: 20px; height: 20px; }
 .theme-toggle .i-sun { display: none; }
 :root[data-theme="dark"] .theme-toggle .i-sun { display: block; }
