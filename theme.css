@@ -41,6 +41,8 @@
 @media (prefers-color-scheme: dark) {
   /* Solid hairline under the masthead (a translucent one lets the banner photo show through). */
   :root:not([data-theme="light"]) header { border-bottom-color: #25292B; }
+  /* Trade page masthead: its own espresso brown clashes with the green-black ground; use the stamp charcoal. */
+  :root:not([data-theme="light"]) header.masthead { background: #25292B; }
   /* Solid buttons keep the bottle-green fill with white type (the accent variable is now pale duck egg, for links and outlines). */
   :root:not([data-theme="light"]) .buy-btn:not(.secondary),
   :root:not([data-theme="light"]) .submit-btn,
@@ -63,6 +65,7 @@
   :root:not([data-theme="light"]) .msg.err { background: var(--bg-card); }
 }
 :root[data-theme="dark"] header { border-bottom-color: #25292B; }
+:root[data-theme="dark"] header.masthead { background: #25292B; }
 :root[data-theme="dark"] .buy-btn:not(.secondary),
 :root[data-theme="dark"] .submit-btn,
 :root[data-theme="dark"] .list-cta-btn,
