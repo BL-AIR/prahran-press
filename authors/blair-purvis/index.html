@@ -46,6 +46,12 @@
 <!-- Cookie consent: must load before Google Tag Manager -->
 <script src="/consent.js"></script>
 <link rel="stylesheet" href="/consent.css">
+<!-- Google Analytics 4 (loads directly; the GA4 tag in Tag Manager is paused). Runs after consent.js, so it respects the visitor's choice. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M64RTG88Y3"></script>
+<script>
+  gtag('js', new Date());
+  gtag('config', 'G-M64RTG88Y3');
+</script>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
