@@ -20,14 +20,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
 
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M64RTG88Y3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-M64RTG88Y3');
-    </script>
+<!-- Cookie consent: must load before Google Tag Manager -->
+<script src="/consent.js"></script>
+<link rel="stylesheet" href="/consent.css">
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -35,9 +30,7 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-T4FVHTD');</script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/fonts/fonts.css">
 
     <style>
         *, *::before, *::after {
@@ -280,7 +273,11 @@
             font-size: 0.8rem;
             color: var(--border);
         }
-    </style>
+        .cookie-table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.85rem; }
+    .cookie-table th, .cookie-table td { text-align: left; vertical-align: top; padding: 0.45rem 0.5rem; border-bottom: 1px solid var(--border); }
+    .cookie-table th { font-weight: 500; }
+    @media (max-width: 600px) { .cookie-table { display: block; overflow-x: auto; } }
+</style>
 <meta name="theme-color" content="#F7F4EF" media="(prefers-color-scheme: light)"/>
 <meta name="theme-color" content="#0F140F" media="(prefers-color-scheme: dark)"/>
 <script>try{var t=localStorage.getItem("prahran-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
@@ -337,17 +334,28 @@
 
     <div class="policy-section">
         <h2>Website Analytics</h2>
-        <p>This website uses Google Analytics 4 (GA4) and Google Tag Manager (GTM) to help us understand how visitors find and use our site. These tools collect anonymised data about pages visited, session duration, device type, and approximate location. Google Analytics data is processed by Google in accordance with their privacy policy. IP addresses are anonymised before storage.</p>
-        <p>We also use Microsoft Clarity, a behaviour analytics tool that records anonymised session data — including mouse movements, clicks, and scroll patterns — to help us identify usability issues and improve the reading experience on this site. Microsoft Clarity does not collect personally identifiable information. You can learn more at <a href="https://clarity.microsoft.com/privacy" target="_blank" rel="noopener">clarity.microsoft.com/privacy</a>.</p>
-        <p>If you prefer not to be tracked by Google Analytics, you may install the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-out Browser Add-on</a>.</p>
+        <p>With your permission, this website uses Google Analytics 4, through Google Tag Manager, to understand how visitors find and use the site: which pages and books are viewed, how long visits last, the type of device and approximate location (city level). Google processes this data under its own privacy policy.</p>
+        <p>Also with your permission, we use Microsoft Clarity, which records how pages are used &mdash; clicks, scrolling and mouse movement &mdash; so we can find and fix parts of the site that are hard to use. Clarity masks text you type and does not collect your name or contact details. See <a href="https://clarity.microsoft.com/privacy" target="_blank" rel="noopener">clarity.microsoft.com/privacy</a>.</p>
+        <p>If you decline, Google Analytics receives only an anonymous signal that a page was viewed, with no cookie and nothing that links one visit to the next. Clarity does not run at all.</p>
     </div>
 
     <hr class="policy-divider">
 
-    <div class="policy-section">
+    <div class="policy-section" id="cookies">
         <h2>Cookies</h2>
-        <p>Our website uses cookies — small text files stored on your device — to support analytics and to remember your preferences. The cookies set by GA4, GTM, and Microsoft Clarity are analytics cookies; they do not identify you personally.</p>
-        <p>You can control cookies through your browser settings. Disabling cookies may affect some website functionality, but will not prevent you from reading our catalogue.</p>
+        <p>Cookies are small files a website stores in your browser. When you first visit, we ask which kinds you allow, and nothing optional runs until you choose. You can change your mind at any time with <a href="/privacy.html#cookies" data-cookie-settings>Cookie settings</a>, a link at the foot of every page. We ask again after 12 months, or sooner if we add a new tool.</p>
+        <table class="cookie-table">
+            <thead><tr><th>Category</th><th>Tool</th><th>What it stores</th><th>How long</th></tr></thead>
+            <tbody>
+                <tr><td>Essential (always on)</td><td>This website</td><td>Your cookie choice and your light/dark display setting, kept in your browser only</td><td>12 months / until cleared</td></tr>
+                <tr><td>Essential (always on)</td><td>Cloudflare Turnstile (trade order form only)</td><td>A security check that stops automated spam orders</td><td>The visit</td></tr>
+                <tr><td>Statistics</td><td>Google Analytics (<code>_ga</code>, <code>_ga_*</code>)</td><td>A random ID that tells one visit from the next</td><td>Up to 2 years</td></tr>
+                <tr><td>Statistics</td><td>Microsoft Clarity (<code>_clck</code>, <code>_clsk</code>)</td><td>A random ID linking the pages of one visit</td><td>Up to 1 year</td></tr>
+                <tr><td>Marketing</td><td>Google Ads (<code>_gcl_au</code>)</td><td>Whether a visit came from one of our advertisements</td><td>90 days</td></tr>
+            </tbody>
+        </table>
+        <p>Buying a book takes you to our Square online shop, which sets its own essential cookies to run the checkout under Square&rsquo;s privacy policy.</p>
+        <p>You can also block or delete cookies in your browser settings. The catalogue works fully without optional cookies.</p>
     </div>
 
     <hr class="policy-divider">
@@ -414,7 +422,7 @@
         <p>Privacy enquiries, access requests, and complaints should be directed to <a href="mailto:info@prahran.press">info@prahran.press</a>. We aim to acknowledge all privacy-related correspondence within five business days.</p>
     </div>
 
-    <p class="effective-date">This policy was last updated 3 May 2026. Prahran Publishing reserves the right to amend this policy at any time. The current version is always available at <a href="https://prahran.press/privacy.html">prahran.press/privacy.html</a>.</p>
+    <p class="effective-date">This policy was last updated 24 October 2026. Prahran Publishing reserves the right to amend this policy at any time. The current version is always available at <a href="https://prahran.press/privacy.html">prahran.press/privacy.html</a>.</p>
 
 </main>
 
@@ -427,6 +435,7 @@
         Sales Enquiries: <a href="mailto:sales@prahran.press">sales@prahran.press</a>
     </div>
     <div class="footer-contact" style="margin-top: 0.4rem;">ABN: 19 018 340 643</div>
+    <div class="footer-contact" style="margin-top:0.75rem; font-size:0.8rem;"><a href="/privacy.html#cookies" data-cookie-settings>Cookie settings</a></div>
     <p class="copyright">&copy; 2026 Prahran Publishing. All rights reserved.</p>
 </footer>
 
